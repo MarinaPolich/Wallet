@@ -1,18 +1,60 @@
 import { createPortal } from 'react-dom';
 import { useEffect, useState } from 'react';
 import {
-  Form,
+  Btn,
+  ButtonAdd,
+  ButtonCancel,
   ButtonClose,
+  LabelIncome,
+  Marker,
   Modal,
   ModalContent,
+  ModalForm,
+  ModalHead,
+  Operation,
+  RadioButton,
+  RadioField,
 } from './ModalAddTransaction.styled';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import { Formik, Field, ErrorMessage } from 'formik';
+import * as yup from 'yup';
 import iconSet from './selection.json';
 import IcomoonReact from 'icomoon-react';
+import styled from 'styled-components';
 
 const modalRoot = document.querySelector('#modal-root');
+const initialValues = {
+  operation: 'Expense',
+  transaction: '',
+  sum: '',
+  date: new Date(),
+  comment: '',
+};
+
+const schema = yup.object().shape({
+  operation: yup.string().required(),
+  sum: yup.number().required('Enter amount'),
+  date: yup
+    .date()
+    .required()
+    .default(() => new Date()),
+  transaction: yup.string().required(),
+  comment: yup.string(),
+});
+
+const ErrorText = styled.p`
+  color: red;
+`;
+
+const FromError = ({ name }) => {
+  return (
+    <ErrorMessage
+      name={name}
+      render={message => <ErrorText>{message}</ErrorText>}
+    />
+  );
+};
 
 export const ModalAddTransaction = ({ closeModal }) => {
   const [startDate, setStartDate] = useState(new Date());
@@ -38,36 +80,73 @@ export const ModalAddTransaction = ({ closeModal }) => {
     }
   };
 
+  const handleSubmit = (values, { resetForm }) => {
+    console.log(values);
+    resetForm();
+  };
+
   return createPortal(
     <Modal onClick={handleBackdropClose}>
       <ModalContent>
-        <h1>Add transaction</h1>
-        <Form>
-          <label>
-            Income
-            <input type="radio" name="transaction" value="Income" />
-          </label>
-          <label>
-            <input type="radio" name="transaction" value="Expense" />
-            Expense
-          </label>
-          <select>
-            <option placeholder="Select a category"></option>
-          </select>
-          <label>
-            <input type="text" name="sum" placeholder="0.00" />
-          </label>
-          <DatePicker
-            selected={startDate}
-            onChange={date => setStartDate(date)}
-            dateFormat="dd.MM.yyyy"
-          />
-          <label>
-            <input type="text" name="comment" placeholder="Comment" />
-          </label>
-          <button>ADD</button>
-          <button>CANCEL</button>
-        </Form>
+        <ModalHead>Add transaction</ModalHead>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={schema}
+          onSubmit={handleSubmit}
+        >
+          {date => {
+            console.log(date.values.operation);
+            return (
+              <ModalForm>
+                <Operation>
+                  <LabelIncome>
+                    Income
+                    <RadioField type="radio" name="operation" value="Income" />
+                    <FromError name="income" />
+                  </LabelIncome>
+                  <label>
+                    <RadioField type="radio" name="operation" value="Expense" />
+                    <FromError name="expense" />
+                    Expense
+                  </label>
+                  <Marker aria-hidden="true"></Marker>
+                </Operation>
+                {date.values.operation === 'Expense' && (
+                  <Field as="select" name="transaction">
+                    <option value="">Select a category</option>
+                  </Field>
+                )}
+
+                <label htmlFor="sum"></label>
+                <div>
+                  <Field type="number" name="sum" placeholder="0.00" />
+                  <FromError name="sum" />
+                  <div>
+                    <DatePicker
+                      type="date"
+                      name="date"
+                      selected={startDate}
+                      onChange={date => setStartDate(date)}
+                      dateFormat="dd.MM.yyyy"
+                    />
+                    <FromError name="date" />
+                  </div>
+                </div>
+                <label htmlFor="comment"></label>
+                <div>
+                  <Field type="text" name="comment" placeholder="Comment" />
+                  <FromError name="comment" />
+                </div>
+                <Btn>
+                  <ButtonAdd type="submit">ADD</ButtonAdd>
+                  <ButtonCancel type="button" onClick={closeModal}>
+                    CANCEL
+                  </ButtonCancel>
+                </Btn>
+              </ModalForm>
+            );
+          }}
+        </Formik>
         <ButtonClose onClick={closeModal}>Close</ButtonClose>
         <IcomoonReact iconSet={iconSet} color="#444" size={20} icon="close" />
       </ModalContent>
