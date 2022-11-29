@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'CirceBold';
+    src: url('../assets/fonts/circe-bold.ttf') format('ttf');
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    font-variant: normal;
+}
+
+@font-face {
+    font-family: 'Circe';
+    src: url('../assets/fonts/circe.ttf') format('ttf');
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    font-variant: normal;
+}
