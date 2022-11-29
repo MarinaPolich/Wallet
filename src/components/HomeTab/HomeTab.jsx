@@ -1,8 +1,8 @@
-import MainTable from 'components/MainTable/MainTable';
+import Table from 'components/Table/Table';
 
 
 const HomeTab = () => {
-  return <MainTable />;
+  return <Table />;
 };
 
 export default HomeTab;
