@@ -31,7 +31,7 @@ const dispatch = useDispatch()
           <Outlet />
         </Suspense>
       </div>
-      <ButtonAddTransaction />
+      <ButtonAddTransactions />
     </div>
   );
 };
