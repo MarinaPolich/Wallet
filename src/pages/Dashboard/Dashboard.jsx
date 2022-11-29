@@ -6,20 +6,30 @@ import { Header } from 'components/Header/Header';
 import { Loader } from 'components/Loader/Loader';
 import { Navigation } from 'components/Navigation/Navigation';
 import { ButtonAddTransactions } from 'components/ButtonAddTransaction/ButtonAddTransaction';
+import { IsDesktopOrTablet } from 'components/Container/Tablet';
+import { Box, AppBarBox, NavBox } from './Dashboard.styled';
 
 const Dashboard = () => {
   return (
     <div>
       <Header />
-      <Navigation />
-      <Balance />
-      <Currency />
-      <div>
-        <Suspense fallback={<Loader />}>
-          <Outlet />
-        </Suspense>
-      </div>
-      <ButtonAddTransactions />
+      <Box>
+        <AppBarBox>
+          <NavBox>
+            <Navigation />
+            <Balance />
+          </NavBox>
+          <IsDesktopOrTablet>
+            <Currency />
+          </IsDesktopOrTablet>
+        </AppBarBox>
+        <div>
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
+        </div>
+        <ButtonAddTransactions />
+      </Box>
     </div>
   );
 };
