@@ -11,6 +11,7 @@ const Dashboard = lazy(() => import('pages/Dashboard/Dashboard'));
 
 export const App = () => {
   const isMobile = useMobile();
+  
   return (
     <Routes>
       <Route path="login" element={<Login />} />

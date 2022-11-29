@@ -11,7 +11,9 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/auth-slice';
-
+import { financeReducer } from './finance/finance-slice';
+import { categoriesReducer } from "./categories/categories-slice"
+ 
 const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {
@@ -29,6 +31,8 @@ const authPersistConfig = {
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
+    finance: financeReducer,
+    categories: categoriesReducer,
   },
   middleware,
   devTools: process.env.NODE_ENV === 'development',

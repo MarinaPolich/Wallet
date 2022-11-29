@@ -6,8 +6,20 @@ import { Header } from 'components/Header/Header';
 import { Loader } from 'components/Loader/Loader';
 import { Navigation } from 'components/Navigation/Navigation';
 import { ButtonAddTransaction } from 'components/ButtonAddTransaction/ButtonAddTransaction';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux'
+import { getAllCategoriesThunk } from 'redux/categories/categories-operations';
 
 const Dashboard = () => {
+const dispatch = useDispatch()
+
+
+
+  useEffect(()=>{
+    dispatch(getAllCategoriesThunk());
+
+  },[dispatch])
+
   return (
     <div>
       <Header />
