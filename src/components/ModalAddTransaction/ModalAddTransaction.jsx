@@ -6,6 +6,7 @@ import {
   Modal,
   ModalContent,
 } from './ModalAddTransaction.styled';
+
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 

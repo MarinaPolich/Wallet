@@ -6,10 +6,11 @@ import { Header } from 'components/Header/Header';
 import { Loader } from 'components/Loader/Loader';
 import { Navigation } from 'components/Navigation/Navigation';
 import { ButtonAddTransactions } from 'components/ButtonAddTransaction/ButtonAddTransaction';
+import { Container } from './Dashboard.styled';
 
 const Dashboard = () => {
   return (
-    <div>
+    <Container>
       <Header />
       <Navigation />
       <Balance />
@@ -20,7 +21,7 @@ const Dashboard = () => {
         </Suspense>
       </div>
       <ButtonAddTransactions />
-    </div>
+    </Container>
   );
 };
 
