@@ -6,6 +6,7 @@ import { Header } from 'components/Header/Header';
 import { Loader } from 'components/Loader/Loader';
 import { Navigation } from 'components/Navigation/Navigation';
 import { ButtonAddTransaction } from 'components/ButtonAddTransaction/ButtonAddTransaction';
+import DiagramTab from 'components/DiagramTab/DiagramTab';
 
 const Dashboard = () => {
   return (
@@ -20,6 +21,7 @@ const Dashboard = () => {
         </Suspense>
       </div>
       <ButtonAddTransaction />
+      <DiagramTab/>
     </div>
   );
 };
