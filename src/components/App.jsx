@@ -1,13 +1,19 @@
+
 import Dashboard from 'pages/Dashboard/Dashboard';
 import Login from 'pages/Login';
 import Registration from 'pages/Registration';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-//import { lazy } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+
 import { refreshUser } from 'redux/auth/operations';
 import DiagramTab from './DiagramTab/DiagramTab';
 import HomeTab from './HomeTab/HomeTab';
+
+import { useMobile } from 'hooks/useMobile';
+import { lazy } from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import { Currency } from './Currency/Currency';
+
 
 // const HomeTab = lazy(() => import('components/HomeTab/HomeTab'));
 // const Registration = lazy(() => import('pages/Registration'));
@@ -16,12 +22,16 @@ import HomeTab from './HomeTab/HomeTab';
 // const Dashboard = lazy(() => import('pages/Dashboard/Dashboard'));
 
 export const App = () => {
+  const isMobile = useMobile();
 
 const dispatch = useDispatch();
 
 useEffect(() => {
   dispatch(refreshUser());  
 }, []);
+
+
+
 
   return (
     <Routes>
@@ -30,6 +40,7 @@ useEffect(() => {
       <Route path="/" element={<Dashboard />}>
         <Route path="home" element={<HomeTab />} />
         <Route path="diagram" element={<DiagramTab />} />
+        {isMobile && <Route path="currency" element={<Currency />} />}
         <Route path="" element={<Navigate to="home" />} />
       </Route>
       <Route path="*" element={<h1>NotFound</h1>} />
