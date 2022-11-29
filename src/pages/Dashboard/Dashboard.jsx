@@ -5,7 +5,7 @@ import { Currency } from 'components/Currency/Currency';
 import { Header } from 'components/Header/Header';
 import { Loader } from 'components/Loader/Loader';
 import { Navigation } from 'components/Navigation/Navigation';
-import { ButtonAddTransaction } from 'components/ButtonAddTransaction/ButtonAddTransaction';
+import { ButtonAddTransactions } from 'components/ButtonAddTransaction/ButtonAddTransaction';
 
 const Dashboard = () => {
   return (
@@ -19,7 +19,7 @@ const Dashboard = () => {
           <Outlet />
         </Suspense>
       </div>
-      <ButtonAddTransaction />
+      <ButtonAddTransactions />
     </div>
   );
 };
