@@ -24,8 +24,6 @@ import {
   SelectField,
 } from './ModalAddTransaction.styled';
 
-import DatePicker from 'react-datepicker';
-
 import 'react-datepicker/dist/react-datepicker.css';
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';

@@ -15,11 +15,9 @@ import {
   Wrapper,
   Title,
 } from './DiagramTab.styled';
-import { useSelector } from 'react-redux';
 import image from '../../assets/VwCN.gif';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-import { VscChevronDown } from 'react-icons/vsc';
 
 ChartJS.register(ArcElement, Tooltip);
 
@@ -177,7 +175,7 @@ const DiagramTab = () => {
               />
             </div>
           </div>
-          <div style={{marginTop: "25px"}}>
+          <div style={{ marginTop: '25px' }}>
             <StyledForm>
               <Wrapper>
                 <StyledSelect name="year">
