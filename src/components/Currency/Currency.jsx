@@ -8,7 +8,7 @@ export const Currency = () => {
   const currency = useSelector(selectCurrency);
   const loading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
-
+  console.log({ loading });
   useEffect(() => {
     dispatch(fetchCurrency());
   }, [dispatch]);
@@ -23,7 +23,7 @@ export const Currency = () => {
         </tr>
       </Thead>
       <Tbody>
-        {!loading && (
+        {!loading && currency?.length > 0 && (
           <>
             <tr>
               <Td>USD</Td>
