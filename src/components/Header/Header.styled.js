@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import SVG from 'react-inlinesvg';
 import { device } from 'stylesheet/breakpoints';
-import { Exit } from '@emotion-icons/ionicons-outline';
 
 export const HeaderBox = styled.header`
   display: flex;
@@ -59,7 +58,7 @@ export const BoxOut = styled.div`
 `;
 
 export const NameUser = styled.span`
-  padding-right: 8px;
+  padding: 0 0 0 8px;
   position: relative;
 
   @media ${device.tabDesk} {
@@ -78,7 +77,7 @@ export const NameUser = styled.span`
 export const ButtonExit = styled.button`
   display: flex;
   flex-wrap: nowrap;
-  align-items: center;
+  align-items: unset;
   background-color: transparent;
   border: none;
   color: var(--gray-4);
@@ -89,9 +88,10 @@ export const ButtonExit = styled.button`
   }
 `;
 
-export const ExitIcon = styled(Exit)`
-  width: 20px;
+export const ExitIcon = styled(SVG)`
+  width: 18px;
   height: 20px;
+  fill: var(--gray-4);
 
   @media ${device.tabDesk} {
     margin-right: 8px;

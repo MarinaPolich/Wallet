@@ -2,8 +2,11 @@ import styled from 'styled-components';
 import { device } from 'stylesheet/breakpoints';
 
 export const Container = styled.div`
+  position: relative;
   width: 100%;
+  height: 100vh;
   margin: 0 auto;
+  overflow: hidden;
 `;
 
 export const Box = styled.div`
