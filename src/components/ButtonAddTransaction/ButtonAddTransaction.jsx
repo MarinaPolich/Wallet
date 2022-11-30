@@ -1,6 +1,8 @@
 import { ModalAddTransaction } from 'components/ModalAddTransaction/ModalAddTransaction';
 import { useState } from 'react';
-import { Button, SpanBtn } from './ButtonAddTransaction.styled';
+
+import { Button, CloseIcon, SpanBtn } from './ButtonAddTransaction.styled';
+import { close } from 'assets/media/icons';
 
 export const ButtonAddTransactions = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,7 +13,9 @@ export const ButtonAddTransactions = () => {
   return (
     <>
       <Button type="button" onClick={toggleModal}>
-        <SpanBtn>+</SpanBtn>
+        <SpanBtn>
+          <CloseIcon src={close} width={20} height={20} title="Close" />
+        </SpanBtn>
       </Button>
       {isModalOpen && <ModalAddTransaction closeModal={toggleModal} />}
     </>

@@ -9,6 +9,10 @@ import { ButtonAddTransaction } from 'components/ButtonAddTransaction/ButtonAddT
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 import { getAllCategoriesThunk } from 'redux/categories/categories-operations';
+import { IsDesktopOrTablet } from 'components/Container/Tablet';
+import { Box, AppBarBox, NavBox } from './Dashboard.styled';
+import { Container } from './Dashboard.styled';
+
 
 const Dashboard = () => {
 const dispatch = useDispatch()
@@ -21,18 +25,26 @@ const dispatch = useDispatch()
   },[dispatch])
 
   return (
-    <div>
-      <Header />
-      <Navigation />
-      <Balance />
-      <Currency />
-      <div>
-        <Suspense fallback={<Loader />}>
-          <Outlet />
-        </Suspense>
-      </div>
-      <ButtonAddTransactions />
-    </div>
+    <Container>
+      <Header name="Name" />
+      <Box>
+        <AppBarBox>
+          <NavBox>
+            <Navigation />
+            <Balance />
+          </NavBox>
+          <IsDesktopOrTablet>
+            <Currency />
+          </IsDesktopOrTablet>
+        </AppBarBox>
+        <div>
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
+        </div>
+        <ButtonAddTransactions />
+      </Box>
+    </Container>
   );
 };
 
