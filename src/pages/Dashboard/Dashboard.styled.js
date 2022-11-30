@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import { device } from 'stylesheet/breakpoints';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  width: 100%;
+  margin: 0 auto;
+`;
 
 export const Box = styled.div`
   padding: 12px 20px;

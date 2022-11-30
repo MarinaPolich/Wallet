@@ -10,11 +10,10 @@ import { IsDesktopOrTablet } from 'components/Container/Tablet';
 import { Box, AppBarBox, NavBox } from './Dashboard.styled';
 import { Container } from './Dashboard.styled';
 
-
 const Dashboard = () => {
   return (
     <Container>
-      <Header />
+      <Header name="Name" />
       <Box>
         <AppBarBox>
           <NavBox>
@@ -32,9 +31,7 @@ const Dashboard = () => {
         </div>
         <ButtonAddTransactions />
       </Box>
-
     </Container>
-
   );
 };
 
