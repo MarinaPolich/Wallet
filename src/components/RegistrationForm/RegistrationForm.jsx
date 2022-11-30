@@ -12,27 +12,28 @@ export const RegistrationForm = () => {
   };
   const RegistrationSchema = Yup.object().shape({
     email: Yup.string().email().required('*Required'),
-   password: Yup.string()
-     .min(6, 'Password is too short, at least 6!')
-     .max(12, 'Password is too long, at maximum 12!')
-     .required('Required'),
-   username: Yup.string().required('Required')
-     .min(1, 'Too Short!')
+    password: Yup.string()
+      .min(6, 'Password is too short, at least 6!')
+      .max(12, 'Password is too long, at maximum 12!')
+      .required('Required'),
+    username: Yup.string()
+      .required('Required')
+      .min(1, 'Too Short!')
       .max(12, 'Too Long!'),
     confirm: Yup.string()
-            .required('*Required')
-            .oneOf(
-              [Yup.ref('password'), null],
-              'Your passwords are different, try harder!'
-            ),
- });
+      .required('*Required')
+      .oneOf(
+        [Yup.ref('password'), null],
+        'Your passwords are different, try harder!'
+      ),
+  });
   return (
     <Formik
       initialValues={{ email: '', password: '', confirm: '', username: '' }}
       validationSchema={RegistrationSchema}
       onSubmit={handelSubmit}
     >
-      {({ handleSubmit, handleChange, values, errors, touched  }) => (
+      {({ handleSubmit, handleChange, values, errors, touched }) => (
         <form onSubmit={handleSubmit}>
           {' '}
           <label>
@@ -45,7 +46,7 @@ export const RegistrationForm = () => {
               placeholder="E-mail"
             />{' '}
           </label>
-             {errors.email && touched.email ? (  <div>{errors.email}</div>) : null}
+          {errors.email && touched.email ? <div>{errors.email}</div> : null}
           <label>
             {' '}
             <input
@@ -56,7 +57,9 @@ export const RegistrationForm = () => {
               placeholder="Password"
             />
           </label>
-             {errors.password && touched.password ? (  <div>{errors.password}</div>) : null}
+          {errors.password && touched.password ? (
+            <div>{errors.password}</div>
+          ) : null}
           <label>
             {' '}
             <input
@@ -67,7 +70,9 @@ export const RegistrationForm = () => {
               placeholder="Confirm password"
             />
           </label>
-             {errors.confirm && touched.confirm ? (  <div>{errors.confirm}</div>) : null}
+          {errors.confirm && touched.confirm ? (
+            <div>{errors.confirm}</div>
+          ) : null}
           <label>
             {' '}
             <input
@@ -78,7 +83,9 @@ export const RegistrationForm = () => {
               placeholder="First name "
             />
           </label>
-             {errors.username && touched.username ? (  <div>{errors.username}</div>) : null}
+          {errors.username && touched.username ? (
+            <div>{errors.username}</div>
+          ) : null}
           <button type="submit">Register</button>
           <Link to="/login">Log In</Link>
         </form>

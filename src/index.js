@@ -12,7 +12,7 @@ import 'stylesheet/fonts.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter basename="/wallet">
+      <BrowserRouter basename="/Wallet">
         <GlobalStyle />
         <App />
       </BrowserRouter>

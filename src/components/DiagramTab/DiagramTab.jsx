@@ -22,7 +22,7 @@ import { Doughnut } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip);
 
 const colors = [
-  '#FED057',
+  '#fed057',
   '#FFD8D0',
   '#FF6596',
   '#C5BAFF',
@@ -210,7 +210,7 @@ const DiagramTab = () => {
               {summary.categoriesSummary
                 .filter(el => el.total < 0)
                 .map(({ name, total }, i) => (
-                  <Category key="name" col={colors[i]}>
+                  <Category key={name} col={colors[i]}>
                     <div>{name}</div> <div>{-total}</div>
                   </Category>
                 ))}
