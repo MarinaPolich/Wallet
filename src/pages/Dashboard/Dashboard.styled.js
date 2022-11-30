@@ -1,17 +1,16 @@
-import { desktop, tablet } from 'constants/responsive';
 import styled from 'styled-components';
-
+import { device } from 'stylesheet/breakpoints';
 
 export const Container = styled.div``;
 
 export const Box = styled.div`
   padding: 12px 20px;
 
-  @media (min-width: 768px) {
+  @media ${device.tablet} {
     padding: 32px;
   }
 
-  @media (min-width: 1280px) {
+  @media ${device.desktop} {
     display: flex;
 
     padding: 40px 16px 40px 0;
@@ -21,12 +20,12 @@ export const Box = styled.div`
 export const AppBarBox = styled.div`
   margin-bottom: 32px;
 
-  @media (min-width: 768px) {
+  @media ${device.tablet} {
     display: flex;
     margin-bottom: 20px;
   }
 
-  @media (min-width: 1280px) {
+  @media ${device.desktop} {
     height: 100vh;
     flex-direction: column;
     padding-left: 16px;
@@ -39,11 +38,11 @@ export const AppBarBox = styled.div`
 `;
 
 export const NavBox = styled.div`
-  @media (min-width: 768px) {
+  @media ${device.tablet} {
     margin-right: 32px;
   }
 
-  @media (min-width: 1280px) {
+  @media ${device.desktop} {
     margin-right: 0;
     margin-bottom: 32px;
   }
