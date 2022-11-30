@@ -4,6 +4,7 @@ import { lazy } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { refreshUser } from 'redux/auth/auth-operations';
+
 import { Currency } from './Currency/Currency';
 import { RestrictedRoute } from './RestrictedRoute';
 
@@ -16,14 +17,22 @@ const Dashboard = lazy(() => import('pages/Dashboard/Dashboard'));
 export const App = () => {
   const isMobile = useMobile();
   const dispatch = useDispatch();
-    useEffect(() => {
+  useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
   return (
     <Routes>
-      <Route path="login" element={<RestrictedRoute redirectTo="/home" component={<Login />} />} />
-      <Route path="registration" element={<RestrictedRoute redirectTo="/home" component={<Registration />} />}/>
+      <Route
+        path="login"
+        element={<RestrictedRoute redirectTo="/home" component={<Login />} />}
+      />
+      <Route
+        path="registration"
+        element={
+          <RestrictedRoute redirectTo="/home" component={<Registration />} />
+        }
+      />
       <Route path="/" element={<Dashboard />}>
         <Route path="home" element={<HomeTab />} />
         <Route path="diagram" element={<DiagramTab />} />
