@@ -5,24 +5,33 @@ import { Currency } from 'components/Currency/Currency';
 import { Header } from 'components/Header/Header';
 import { Loader } from 'components/Loader/Loader';
 import { Navigation } from 'components/Navigation/Navigation';
-import { ButtonAddTransaction } from 'components/ButtonAddTransaction/ButtonAddTransaction';
-import DiagramTab from 'components/DiagramTab/DiagramTab';
+import { ButtonAddTransactions } from 'components/ButtonAddTransaction/ButtonAddTransaction';
+import { IsDesktopOrTablet } from 'components/Container/Tablet';
+import { Box, AppBarBox, NavBox } from './Dashboard.styled';
+import { Container } from './Dashboard.styled';
 
 const Dashboard = () => {
   return (
-    <div>
-      <Header />
-      <Navigation />
-      <Balance />
-      <Currency />
-      <div>
-        <Suspense fallback={<Loader />}>
-          <Outlet />
-        </Suspense>
-      </div>
-      <ButtonAddTransaction />
-      <DiagramTab/>
-    </div>
+    <Container>
+      <Header name="Name" />
+      <Box>
+        <AppBarBox>
+          <NavBox>
+            <Navigation />
+            <Balance />
+          </NavBox>
+          <IsDesktopOrTablet>
+            <Currency />
+          </IsDesktopOrTablet>
+        </AppBarBox>
+        <div>
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
+        </div>
+        <ButtonAddTransactions />
+      </Box>
+    </Container>
   );
 };
 
