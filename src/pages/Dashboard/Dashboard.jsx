@@ -6,11 +6,20 @@ import { Header } from 'components/Header/Header';
 import { Loader } from 'components/Loader/Loader';
 import { Navigation } from 'components/Navigation/Navigation';
 import { ButtonAddTransactions } from 'components/ButtonAddTransaction/ButtonAddTransaction';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getAllCategoriesThunk } from 'redux/categories/categories-operations';
 import { IsDesktopOrTablet } from 'components/Container/Tablet';
 import { Box, AppBarBox, NavBox } from './Dashboard.styled';
 import { Container } from './Dashboard.styled';
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllCategoriesThunk());
+  }, [dispatch]);
+
   return (
     <Container>
       <Header name="Name" />

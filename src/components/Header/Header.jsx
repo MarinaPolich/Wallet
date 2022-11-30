@@ -9,7 +9,7 @@ import {
   NameUser,
 } from './Header.styled';
 import SVG from 'react-inlinesvg';
-import { logo, logoText } from 'assets/media/icons';
+import { exit, logo, logoText } from 'assets/media/icons';
 import { Mobile } from 'components/Container/Mobile';
 import { Tablet } from 'components/Container/Tablet';
 import { Desktop } from 'components/Container/Desktop';
@@ -43,7 +43,7 @@ export const Header = () => {
       <BoxOut>
         <NameUser>{name.username}</NameUser>
         <ButtonExit  onClick={()=>dispatch(logOut())}>
-          <ExitIcon />
+          <ExitIcon src={exit} width={18} height={18} title="Exit" />
           <Tablet>
             <span>Exit</span>
           </Tablet>

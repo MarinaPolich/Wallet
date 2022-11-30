@@ -11,6 +11,8 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/auth-slice';
+import { financeReducer } from './finance/finance-slice';
+import { categoriesReducer } from "./categories/categories-slice"
 import { currencyReducer } from './currency/slice';
 
 const middleware = [
@@ -35,6 +37,8 @@ const bankPersistConfig = {
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
+    finance: financeReducer,
+    categories: categoriesReducer,
     bank: persistReducer(bankPersistConfig, currencyReducer),
   },
   middleware,

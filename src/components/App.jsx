@@ -17,6 +17,7 @@ const Dashboard = lazy(() => import('pages/Dashboard/Dashboard'));
 export const App = () => {
   const isMobile = useMobile();
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
