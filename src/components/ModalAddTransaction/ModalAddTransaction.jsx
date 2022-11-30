@@ -12,7 +12,6 @@ import {
   ModalForm,
   ModalHead,
   Operation,
-  RadioButton,
   RadioField,
 } from './ModalAddTransaction.styled';
 
