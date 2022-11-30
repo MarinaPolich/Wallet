@@ -1,4 +1,6 @@
+import { desktop, tablet } from 'constants/responsive';
 import styled from 'styled-components';
+
 
 export const Container = styled.div``;
 
