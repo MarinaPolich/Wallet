@@ -40,7 +40,8 @@ export const logOut = createAsyncThunk(
       await axios.delete('/api/auth/sign-out');
       clearAuthHeader();
     } catch (error) {
-      return rejectWithValue(error.message);
+     return  rejectWithValue(error.message);
+     
     }
   }
 );

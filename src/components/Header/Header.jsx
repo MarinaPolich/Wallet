@@ -13,8 +13,13 @@ import { exit, logo, logoText } from 'assets/media/icons';
 import { Mobile } from 'components/Container/Mobile';
 import { Tablet } from 'components/Container/Tablet';
 import { Desktop } from 'components/Container/Desktop';
+import { logOut } from 'redux/auth/auth-operations';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from 'redux/auth/auth-selector';
 
-export const Header = ({ name }) => {
+export const Header = () => {
+  const dispatch = useDispatch()
+  const name= useSelector(getUser)
   return (
     <HeaderBox>
       <LinkLogo>
@@ -36,8 +41,8 @@ export const Header = ({ name }) => {
         </Desktop>
       </LinkLogo>
       <BoxOut>
-        <NameUser>{name}</NameUser>
-        <ButtonExit>
+        <NameUser>{name.username}</NameUser>
+        <ButtonExit  onClick={()=>dispatch(logOut())}>
           <ExitIcon src={exit} width={18} height={18} title="Exit" />
           <Tablet>
             <span>Exit</span>
