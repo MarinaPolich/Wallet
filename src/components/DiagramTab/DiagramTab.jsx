@@ -1,11 +1,40 @@
-import { Chart } from 'components/Chart/Chart';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-import { StyledForm, StyledSelect } from './DiagramTab.styled';
+import {
+  Category,
+  HeaderText,
+  Gif,
+  Statistic,
+  StyledForm,
+  StyledSelect,
+  TableHeader,
+  Total,
+  Balance,
+  StyledVscChevronDown,
+  Wrapper,
+  Title,
+} from './DiagramTab.styled';
 import { useSelector } from 'react-redux';
+import image from '../../assets/VwCN.gif';
+import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
+import { VscChevronDown } from 'react-icons/vsc';
 
+ChartJS.register(ArcElement, Tooltip);
 
+const colors = [
+  '#FED057',
+  '#FFD8D0',
+  '#FF6596',
+  '#C5BAFF',
+  '#6E78E8',
+  '#81E1FF',
+  '#00AD84',
+  '#4A56E2',
+  '#FD9498',
+  '#A6A6A6',
+];
 const period = [
   {
     id: '8603ab35-46cf-4389-968b-a82351241453',
@@ -89,15 +118,32 @@ const period = [
   },
 ];
 
-
 const DiagramTab = () => {
-  const [summary, setSummary] = useState({});
-  console.log("state ======", summary);
+  const [summary, setSummary] = useState(null);
+  console.log('summary.categoriesSummary ======', summary);
   //const period = useSelector(state => state.transaction.transaction);
   const years = new Set(period.map(el => el.transactionDate.slice(0, 4)));
   const monthes = new Set(period.map(el => el.transactionDate.slice(5, 7)));
-  console.log(years.keys(), monthes.keys());
 
+  const length = summary?.categoriesSummary.filter(el => el.total < 0).length;
+
+  console.log(colors.slice(0, length));
+  const data = {
+    labels: summary?.categoriesSummary
+      .filter(el => el.total < 0)
+      .map(({ name }) => name),
+    datasets: [
+      {
+        label: 'expense',
+        data: summary?.categoriesSummary
+          .filter(el => el.total < 0)
+          .map(({ total }) => -total),
+        backgroundColor: colors.slice(0, length),
+        borderColor: colors.slice(0, length),
+        borderWidth: 1,
+      },
+    ],
+  };
   useEffect(() => {
     async function getStats() {
       try {
@@ -110,27 +156,84 @@ const DiagramTab = () => {
         console.log(error);
       }
     }
-    getStats().then((data => setSummary(data)));
+    getStats().then(data => setSummary(data));
   }, []);
+
+  //DiagramTab.forceUpdate();
 
   return (
     <>
-      <StyledForm>
-        <StyledSelect name="year">
-          <option>""</option>
-          {() => {
-            let str = "";
-            for (let el of years) str += `<option key='el'>${el}</option>`;
-            return str;
-          }}
-        </StyledSelect>
-        <StyledSelect name="month">
-          <option>""</option>
-          {monthes.keys().map(el => `<option key='el'>${el}</option>`)}
-        </StyledSelect>
-      </StyledForm>
-      <Chart />
+      {!summary ? (
+        <Gif src={image} alt="" />
+      ) : (
+        <Statistic>
+          <div>
+            <Title>Statistic</Title>
+            <div style={{ position: 'relative' }}>
+              <Balance>₴ {summary.periodTotal}</Balance>
+              <Doughnut
+                options={{ cutout: '70%', animation: { animateScale: true } }}
+                data={data}
+              />
+            </div>
+          </div>
+          <div style={{marginTop: "25px"}}>
+            <StyledForm>
+              <Wrapper>
+                <StyledSelect name="year">
+                  <option value="">Year</option>
+                  {Array.from(years).map(el => (
+                    <option key={el} value={el}>
+                      {el}
+                    </option>
+                  ))}
+                </StyledSelect>
+                <StyledVscChevronDown />
+              </Wrapper>
+              <Wrapper>
+                <StyledSelect name="month">
+                  <option value="">Month</option>
+                  {Array.from(monthes).map(el => (
+                    <option key={el} value={el}>
+                      {el}
+                    </option>
+                  ))}
+                </StyledSelect>
+                <StyledVscChevronDown />
+              </Wrapper>
+            </StyledForm>
+
+            <TableHeader>
+              <HeaderText>Category</HeaderText>
+              <HeaderText>Sum</HeaderText>
+            </TableHeader>
+
+            <ul>
+              {summary.categoriesSummary
+                .filter(el => el.total < 0)
+                .map(({ name, total }, i) => (
+                  <Category key="name" col={colors[i]}>
+                    <div>{name}</div> <div>{-total}</div>
+                  </Category>
+                ))}
+            </ul>
+            <Total>
+              <div style={{ fontWeight: 700 }}>Expenses:</div>
+              <div style={{ fontWeight: 700, color: '#FF6596' }}>
+                {-summary.expenseSummary}
+              </div>
+            </Total>
+            <Total>
+              <div style={{ fontWeight: 700 }}>Income:</div>
+              <div style={{ fontWeight: 700, color: '#24CCA7' }}>
+                {summary.incomeSummary}
+              </div>
+            </Total>
+          </div>
+        </Statistic>
+      )}
     </>
   );
 };
+
 export default DiagramTab;

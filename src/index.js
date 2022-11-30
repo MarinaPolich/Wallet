@@ -10,12 +10,12 @@ import 'stylesheet/vars.css';
 import 'stylesheet/fonts.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  //<React.StrictMode>
     <Provider store={store}>
       <BrowserRouter basename="/wallet">
         <GlobalStyle />
         <App />
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>
+//  </React.StrictMode>
 );
