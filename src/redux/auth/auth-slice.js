@@ -4,7 +4,7 @@ import { registration, logIn, logOut, refreshUser } from './auth-operations';
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: { name: null, email: null },
+    user: { username: null, email: null },
     token: null,
     isLoggedIn: false,
     isRefreshing: false,

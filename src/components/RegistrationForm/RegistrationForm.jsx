@@ -2,19 +2,37 @@ import React from 'react';
 import { Formik } from 'formik';
 import { registration } from '../../redux/auth/auth-operations';
 import { useDispatch } from 'react-redux';
+import * as Yup from 'yup';
+import { Link } from 'react-router-dom';
 export const RegistrationForm = () => {
   const dispatch = useDispatch();
-  const handelSubmit = ({ email, password, confirm, name }, { resetForm }) => {
-    dispatch(registration({ email, password, confirm, name }));
+  const handelSubmit = ({ email, password, username }, { resetForm }) => {
+    dispatch(registration({ email, password, username }));
     resetForm();
   };
-
+  const RegistrationSchema = Yup.object().shape({
+    email: Yup.string().email().required('*Required'),
+   password: Yup.string()
+     .min(6, 'Password is too short, at least 6!')
+     .max(12, 'Password is too long, at maximum 12!')
+     .required('Required'),
+   username: Yup.string().required('Required')
+     .min(1, 'Too Short!')
+      .max(12, 'Too Long!'),
+    confirm: Yup.string()
+            .required('*Required')
+            .oneOf(
+              [Yup.ref('password'), null],
+              'Your passwords are different, try harder!'
+            ),
+ });
   return (
     <Formik
-      initialValues={{ email: '', password: '', confirm: '', name: '' }}
+      initialValues={{ email: '', password: '', confirm: '', username: '' }}
+      validationSchema={RegistrationSchema}
       onSubmit={handelSubmit}
     >
-      {({ handleSubmit, handleChange, values }) => (
+      {({ handleSubmit, handleChange, values, errors, touched  }) => (
         <form onSubmit={handleSubmit}>
           {' '}
           <label>
@@ -27,6 +45,7 @@ export const RegistrationForm = () => {
               placeholder="E-mail"
             />{' '}
           </label>
+             {errors.email && touched.email ? (  <div>{errors.email}</div>) : null}
           <label>
             {' '}
             <input
@@ -37,59 +56,33 @@ export const RegistrationForm = () => {
               placeholder="Password"
             />
           </label>
+             {errors.password && touched.password ? (  <div>{errors.password}</div>) : null}
           <label>
             {' '}
             <input
-              type="confirm"
+              type="password"
               name="confirm"
               value={values.confirm}
               onChange={handleChange}
               placeholder="Confirm password"
             />
           </label>
+             {errors.confirm && touched.confirm ? (  <div>{errors.confirm}</div>) : null}
           <label>
             {' '}
             <input
               type="text"
-              name="name"
-              value={values.name}
+              name="username"
+              value={values.username}
               onChange={handleChange}
               placeholder="First name "
             />
           </label>
+             {errors.username && touched.username ? (  <div>{errors.username}</div>) : null}
           <button type="submit">Register</button>
-          <button type="submit">Log In</button>
+          <Link to="/login">Log In</Link>
         </form>
       )}
     </Formik>
   );
 };
-
-//const BasicExample = () => (
-//  <div>
-//    <h1>My Form</h1>
-//    <Formik
-//      initialValues={{ name: 'jared' }}
-//      onSubmit={(values, actions) => {
-//        setTimeout(() => {
-//          alert(JSON.stringify(values, null, 2));
-//          actions.setSubmitting(false);
-//        }, 1000);
-//      }}
-//    >
-//      {props => (
-//        <form onSubmit={props.handleSubmit}>
-//          <input
-//            type="text"
-//            onChange={props.handleChange}
-//            onBlur={props.handleBlur}
-//            value={props.values.name}
-//            name="name"
-//          />
-//          {props.errors.name && <div id="feedback">{props.errors.name}</div>}
-//          <button type="submit">Submit</button>
-//        </form>
-//      )}
-//    </Formik>
-//  </div>
-//);
