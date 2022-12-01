@@ -101,9 +101,10 @@ export const TableHeader = styled.div`
   display: flex;
   justify-content: space-between;
   height: 58px;
-  background-color: #ff9;
+  background-color: #fff;
   border-radius: 30px;
   margin-top: 20px;
+  
 `;
 export const HeaderText = styled.div`
   font-weight: 700;
@@ -111,6 +112,7 @@ export const HeaderText = styled.div`
   padding-left: 15px;
   padding-right: 15px;
   line-height: 58px;
+  cursor: pointer;
   @media screen and (min-width: 768.99px) {
     padding-left: 20px;
     padding-right: 20px;
