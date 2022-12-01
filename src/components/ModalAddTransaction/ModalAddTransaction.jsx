@@ -13,7 +13,6 @@ import {
   IconDate,
   LabelExpense,
   LabelIncome,
-  Marker,
   Modal,
   ModalContent,
   ModalForm,
@@ -22,7 +21,12 @@ import {
   RadioFieldExpense,
   RadioFieldIncome,
   SelectField,
+  ToggleRb,
+  CloseIcon,
+  Plus,
+  SvgDate,
 } from './ModalAddTransaction.styled';
+import { close } from 'assets/media/icons';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import { Formik, ErrorMessage } from 'formik';
@@ -45,7 +49,7 @@ const schema = yup.object().shape({
     .date()
     .required()
     .default(() => new Date()),
-  transaction: yup.string().required(),
+  transaction: yup.string().required('Select transaction type!'),
   comment: yup.string(),
 });
 
@@ -119,6 +123,14 @@ export const ModalAddTransaction = ({ closeModal }) => {
               <ModalForm>
                 <Operation>
                   <LabelIncome htmlFor="income">Income </LabelIncome>
+                  <Plus>
+                    <CloseIcon
+                      src={close}
+                      width={20}
+                      height={20}
+                      title="Close"
+                    />
+                  </Plus>
                   <div onChange={handleChange}>
                     <RadioFieldIncome
                       id="income"
@@ -135,17 +147,20 @@ export const ModalAddTransaction = ({ closeModal }) => {
                       value="Expense"
                     />
                   </div>
+                  <ToggleRb></ToggleRb>
                   <LabelExpense htmlFor="expense">Expense</LabelExpense>
-                  <Marker aria-hidden="true"></Marker>
                 </Operation>
 
                 {props.values.operation === 'Expense' && (
-                  <SelectField as="select" name="transaction">
-                    <option value="1">Select a category</option>
-                    <option value="2">1</option>
-                    <option value="3">2</option>
-                    <option value="4">3</option>
-                  </SelectField>
+                  <div>
+                    <SelectField as="select" name="transaction">
+                      <option value="1">Select a category</option>
+                      <option value="2">1</option>
+                      <option value="3">2</option>
+                      <option value="4">3</option>
+                    </SelectField>
+                    <FromError name="transaction" />
+                  </div>
                 )}
 
                 <AmountDate>
@@ -154,6 +169,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
                   <FromError name="sum" />
                   <DateContainer>
                     <DateField
+                      id="date"
                       type="date"
                       name="date"
                       selected={startDate}
@@ -161,8 +177,8 @@ export const ModalAddTransaction = ({ closeModal }) => {
                       dateFormat="dd.MM.yyyy"
                     />
                     <FromError name="date" />
-                    <IconDate>
-                      <svg
+                    <IconDate htmlFor="date">
+                      <SvgDate
                         width="18"
                         height="20"
                         viewBox="0 0 18 20"
@@ -173,7 +189,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
                           d="M6 9H4V11H6V9ZM10 9H8V11H10V9ZM14 9H12V11H14V9ZM16 2H15V0H13V2H5V0H3V2H2C0.89 2 0.00999999 2.9 0.00999999 4L0 18C0 19.1 0.89 20 2 20H16C17.1 20 18 19.1 18 18V4C18 2.9 17.1 2 16 2ZM16 18H2V7H16V18Z"
                           fill="#4A56E2"
                         />
-                      </svg>
+                      </SvgDate>
                     </IconDate>
                   </DateContainer>
                 </AmountDate>

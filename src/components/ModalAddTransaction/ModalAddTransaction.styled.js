@@ -1,6 +1,7 @@
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import { Form, Field } from 'formik';
 import DatePicker from 'react-datepicker';
+import SVG from 'react-inlinesvg';
 
 export const Modal = styled.div`
   height: 100vh;
@@ -33,7 +34,7 @@ export const ModalContent = styled.div`
 export const ModalHead = styled.h1`
   margin-top: 20px;
   margin-bottom: 40px;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins Regular';
   font-style: normal;
   font-weight: 400;
   font-size: 30px;
@@ -65,14 +66,24 @@ export const LabelIncome = styled.label`
   cursor: pointer;
   color: #24cca7;
   transition: 500ms;
-  &:hover {
-    color: red;
+  text-align: right;
+  &:hover,
+  :active {
+    color: #24cca7;
   }
 `;
 
 export const LabelExpense = styled.label`
-  color: #ff6596;
+  color: #e0e0e0;
   margin-left: 20px;
+  text-align: right;
+  position: relative;
+  cursor: pointer;
+  text-align: left;
+  &:hover,
+  :active {
+    color: #ff6596;
+  }
 `;
 
 // border: 1px solid #e0e0e0;
@@ -80,30 +91,77 @@ export const LabelExpense = styled.label`
 //   height: 40px;
 //   border-radius: 30px;
 
+export const ToggleRb = styled.div`
+  position: relative;
+  height: 40px;
+  width: 80px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 30px;
+  transition: all 500ms;
+`;
+
 export const RadioFieldIncome = styled(Field)`
-  width: 30px;
-  height: 30px;
-  &:checked {
-    color: red;
+  display: none;
+
+  &:checked + ${LabelIncome} {
+    color: dark;
   }
 `;
 
 export const RadioFieldExpense = styled(Field)`
-  width: 30px;
-  height: 30px;
+  display: none;
+  background-color: black;
+  &:checked ~ ${LabelIncome} {
+    color: dark;
+  }
+
+  &:checked {
+    color: ${e => {
+      console.log(e);
+      return 'red';
+    }};
+  }
+
+  &:checked ~ ${ToggleRb} {
+    left: 282px;
+  }
 `;
 
-export const Marker = styled.div`
-  position: relative;
-  background-color: $font-secondary-color;
-  width: 16px;
-  height: 16px;
+export const Plus = styled.div`
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  background-color: #24cca7;
+  left: 220px;
   border-radius: 50%;
-  z-index: 2;
-  pointer-events: none;
-  transform: translateX(1px);
-  transition: transform 250ms linear;
+  transition: all 500ms;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
+
+export const CloseIcon = styled(SVG)`
+  left: 20%;
+  width: 20px;
+  height: 20px;
+  fill: var(--white);
+`;
+
+// Toggle Changes
+
+// export const Marker = styled.div`
+//   position: relative;
+//   background-color: #e0e0e0;
+//   width: 16px;
+//   height: 16px;
+//   border-radius: 50%;
+//   z-index: 2;
+//   pointer-events: none;
+//   transform: translateX(1px);
+//   transition: transform 250ms linear;
+// `;
 
 // export const RadioButton = styled.div`
 //   display: flex;
@@ -155,6 +213,7 @@ export const ButtonAdd = styled.button`
     background-color: #ffffff;
     color: #24cca7;
     transition: 1000ms;
+    border: 1px solid #24cca7;
   }
 `;
 
@@ -178,10 +237,21 @@ export const DateContainer = styled.div`
   position: relative;
 `;
 
-export const IconDate = styled.span`
+export const IconDate = styled.label`
   position: absolute;
   top: 60%;
-  left: 75%;
+  left: 80%;
+  cursor: pointer;
+`;
+
+export const SvgDate = styled.svg`
+  transition: 500ms;
+  transform: scale(1);
+  :hover {
+    box-shadow: 0px 0px 23px -3px rgba(0, 0, 0, 0.75);
+    transition: 500ms;
+    transform: scale(1.1);
+  }
 `;
 
 export const AmountDate = styled.div`
@@ -191,7 +261,6 @@ export const AmountDate = styled.div`
   text-align: center;
   padding-right: 25px;
 `;
-
 // Field
 
 export const SelectField = styled(Field)`
@@ -225,6 +294,7 @@ export const AmountField = styled(Field)`
 export const DateField = styled(DatePicker)`
   outline: none;
   padding: 8px;
+  padding-left: 20px;
   margin-top: 40px;
   border: 1px solid #e0e0e0;
   border-top: none;
