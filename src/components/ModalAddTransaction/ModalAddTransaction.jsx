@@ -26,7 +26,7 @@ import {
   Plus,
   SvgDate,
 } from './ModalAddTransaction.styled';
-import { close } from 'assets/media/icons';
+import { close, minus } from 'assets/media/icons';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import { Formik, ErrorMessage } from 'formik';
@@ -121,33 +121,34 @@ export const ModalAddTransaction = ({ closeModal }) => {
             console.log(props.values.operation);
             return (
               <ModalForm>
-                <Operation>
+                <Operation onChange={handleChange}>
+                  <RadioFieldIncome
+                    id="income"
+                    type="radio"
+                    checked={props.values.operation === 'Income'}
+                    name="operation"
+                    value="Income"
+                  />
+                  <RadioFieldExpense
+                    id="expense"
+                    type="radio"
+                    checked={props.values.operation === 'Expense'}
+                    name="operation"
+                    value="Expense"
+                  />
                   <LabelIncome htmlFor="income">Income </LabelIncome>
-                  <Plus>
-                    <CloseIcon
-                      src={close}
-                      width={20}
-                      height={20}
-                      title="Close"
-                    />
-                  </Plus>
-                  <div onChange={handleChange}>
-                    <RadioFieldIncome
-                      id="income"
-                      type="radio"
-                      checked={props.values.operation === 'Income'}
-                      name="operation"
-                      value="Income"
-                    />
-                    <RadioFieldExpense
-                      id="expense"
-                      type="radio"
-                      checked={props.values.operation === 'Expense'}
-                      name="operation"
-                      value="Expense"
-                    />
-                  </div>
-                  <ToggleRb></ToggleRb>
+                  <ToggleRb>
+                    <Plus>
+                      <CloseIcon
+                        src={
+                          props.values.operation === 'Income' ? close : minus
+                        }
+                        width={20}
+                        height={20}
+                        title="Change"
+                      />
+                    </Plus>
+                  </ToggleRb>
                   <LabelExpense htmlFor="expense">Expense</LabelExpense>
                 </Operation>
 

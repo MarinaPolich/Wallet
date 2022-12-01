@@ -3,6 +3,8 @@ import { Form, Field } from 'formik';
 import DatePicker from 'react-datepicker';
 import SVG from 'react-inlinesvg';
 
+// const colorActiveLable = 'green';
+
 export const Modal = styled.div`
   height: 100vh;
   width: 100vw;
@@ -28,7 +30,7 @@ export const ModalContent = styled.div`
   width: 540px;
   height: 603px;
   border-radius: 20px;
-  background-color: #ffffff;
+  background-color: var(--white);
 `;
 
 export const ModalHead = styled.h1`
@@ -40,7 +42,7 @@ export const ModalHead = styled.h1`
   font-size: 30px;
   line-height: 1.5;
 
-  color: #000000;
+  color: var(--black);
 `;
 
 // FORM RADIOBUTTON
@@ -54,7 +56,7 @@ export const Operation = styled.div`
   justify-content: center;
   text-align: center;
   align-items: center;
-  font-family: 'Circe', sans-serif;
+  font-family: 'CirceBold', sans-serif;
   font-weight: 700;
   font-size: 16px;
   line-height: 1.5;
@@ -64,25 +66,27 @@ export const LabelIncome = styled.label`
   margin-right: 20px;
   position: relative;
   cursor: pointer;
-  color: #24cca7;
+  color: var(--gray-5);
   transition: 500ms;
   text-align: right;
+
   &:hover,
   :active {
-    color: #24cca7;
+    color: var(--btn-bg-color);
   }
 `;
 
 export const LabelExpense = styled.label`
-  color: #e0e0e0;
+  color: var(--gray-5);
   margin-left: 20px;
   text-align: right;
   position: relative;
   cursor: pointer;
   text-align: left;
+
   &:hover,
   :active {
-    color: #ff6596;
+    color: var(--error-color);
   }
 `;
 
@@ -95,51 +99,49 @@ export const ToggleRb = styled.div`
   position: relative;
   height: 40px;
   width: 80px;
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
+  background-color: var(--white);
+  border: 1px solid var(--gray-5);
   border-radius: 30px;
   transition: all 500ms;
-`;
-
-export const RadioFieldIncome = styled(Field)`
-  display: none;
-
-  &:checked + ${LabelIncome} {
-    color: dark;
-  }
-`;
-
-export const RadioFieldExpense = styled(Field)`
-  display: none;
-  background-color: black;
-  &:checked ~ ${LabelIncome} {
-    color: dark;
-  }
-
-  &:checked {
-    color: ${e => {
-      console.log(e);
-      return 'red';
-    }};
-  }
-
-  &:checked ~ ${ToggleRb} {
-    left: 282px;
-  }
 `;
 
 export const Plus = styled.div`
   position: absolute;
   width: 44px;
   height: 44px;
-  background-color: #24cca7;
-  left: 220px;
+  background-color: var(--btn-bg-color);
+  box-shadow: 0px 6px 15px rgba(36, 204, 167, 0.5);
+  top: -3px;
+  left: 0;
   border-radius: 50%;
   transition: all 500ms;
   z-index: 4;
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const RadioFieldIncome = styled(Field)`
+  display: none;
+
+  &:checked ~ ${LabelIncome} {
+    color: var(--btn-bg-color);
+  }
+`;
+
+export const RadioFieldExpense = styled(Field)`
+  display: none;
+
+  &:checked {
+    ~ ${LabelExpense} {
+      color: var(--error-color);
+    }
+    ~ ${ToggleRb} > ${Plus} {
+      left: 40px;
+      background-color: var(--error-color);
+      box-shadow: 0px 6px 15px rgba(255, 101, 150, 0.5);
+    }
+  }
 `;
 
 export const CloseIcon = styled(SVG)`
@@ -181,7 +183,7 @@ export const ButtonClose = styled.button`
   top: 0;
   right: 0;
   cursor: pointer;
-  background-color: #ffffff;
+  background-color: var(--white);
   border: none;
   margin: 20px;
 `;
@@ -201,8 +203,8 @@ export const Btn = styled.div`
 export const ButtonAdd = styled.button`
   width: 300px;
   height: 50px;
-  background-color: #24cca7;
-  color: #ffffff;
+  background-color: var(--btn-bg-color);
+  color: var(--white);
   border: none;
   border-radius: 20px;
   margin-bottom: 20px;
@@ -210,25 +212,25 @@ export const ButtonAdd = styled.button`
   transition: 1000ms;
 
   &:hover {
-    background-color: #ffffff;
-    color: #24cca7;
+    background-color: var(--white);
+    color: var(--btn-bg-color);
     transition: 1000ms;
-    border: 1px solid #24cca7;
+    border: 1px solid var(--btn-bg-color);
   }
 `;
 
 export const ButtonCancel = styled.button`
   width: 300px;
   height: 50px;
-  background-color: #ffffff;
-  border: 1px solid #4a56e2;
+  background-color: var(--white);
+  border: 1px solid var(--active-bg-color);
   border-radius: 20px;
-  color: #4a56e2;
+  color: var(--active-bg-color);
   cursor: pointer;
   transition: 1000ms;
   &:hover {
-    background-color: #4a56e2;
-    color: #ffffff;
+    background-color: var(--active-bg-color);
+    color: var(--white);
     transition: 1000ms;
   }
 `;
@@ -268,7 +270,7 @@ export const SelectField = styled(Field)`
   outline: none;
   padding: 8px;
   margin-top: 40px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--gray-5);
   border-top: none;
   border-left: none;
   border-right: none;
@@ -277,7 +279,7 @@ export const SelectField = styled(Field)`
 export const AmountField = styled(Field)`
   padding: 8px;
   margin-top: 40px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--gray-5);
   border-top: none;
   border-left: none;
   border-right: none;
@@ -296,7 +298,7 @@ export const DateField = styled(DatePicker)`
   padding: 8px;
   padding-left: 20px;
   margin-top: 40px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--gray-5);
   border-top: none;
   border-left: none;
   border-right: none;
@@ -307,7 +309,7 @@ export const CommentField = styled(Field)`
   padding: 8px;
   margin-top: 40px;
   margin-bottom: 40px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--gray-5);
   border-top: none;
   border-left: none;
   border-right: none;
@@ -317,6 +319,6 @@ export const CommentField = styled(Field)`
   font-size: 18px;
   line-height: 27px;
   &::placeholder {
-    color: #bdbdbd;
+    color: var(--gray-4);
   }
 `;
