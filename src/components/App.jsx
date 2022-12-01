@@ -1,11 +1,12 @@
 import { useMobile } from 'hooks/useMobile';
 import { useEffect } from 'react';
 import { lazy } from 'react';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { refreshUser } from 'redux/auth/auth-operations';
 import { Currency } from './Currency/Currency';
 import { RestrictedRoute } from './RestrictedRoute';
+import { PrivateRoute } from './PrivateRoute';
 const HomeTab = lazy(() => import('components/HomeTab/HomeTab'));
 const Registration = lazy(() => import('pages/Registration'));
 const Login = lazy(() => import('pages/Login'));
@@ -32,7 +33,10 @@ export const App = () => {
           <RestrictedRoute redirectTo="/home" component={<Registration />} />
         }
       />
-      <Route path="/" element={<Dashboard />}>
+      <Route
+        path="/"
+        element={<PrivateRoute redirectTo="/login" component={<Dashboard />} />}
+      >
         <Route path="home" element={<HomeTab />} />
         <Route path="diagram" element={<DiagramTab />} />
         {isMobile && <Route path="currency" element={<Currency />} />}
