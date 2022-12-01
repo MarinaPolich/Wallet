@@ -3,7 +3,19 @@ import { Formik } from 'formik';
 import { logIn } from '../../redux/auth/auth-operations';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
+import { logo, email, lock } from 'assets/media/icons';
+import {
+  Form,
+  Input,
+  Label,
+  Container,
+  Title,
+  Svg,
+  Button,
+  StyledLink,
+  LogoSvg,
+  TextError,
+} from './LoginForm.styled.js';
 export const LoginForm = () => {
   const dispatch = useDispatch();
   const handelSubmit = ({ email, password }, { resetForm }) => {
@@ -11,11 +23,11 @@ export const LoginForm = () => {
     resetForm();
   };
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email').required('Required'),
+    email: Yup.string().email('Invalid email').required('Enter email'),
     password: Yup.string()
       .min(6, 'Password is too short, at least 6!')
       .max(12, 'Password is too long, at maximum 12!')
-      .required('Required'),
+      .required('Enter passworg'),
   });
   return (
     <Formik
@@ -24,32 +36,44 @@ export const LoginForm = () => {
       onSubmit={handelSubmit}
     >
       {({ handleSubmit, handleChange, values, errors, touched }) => (
-        <form onSubmit={handleSubmit}>
-          <label>
-            <input
-              type="email"
-              name="email"
-              placeholder="E-mail"
-              value={values.email}
-              onChange={handleChange}
-            />
-          </label>
-          {errors.email && touched.email ? <div>{errors.email}</div> : null}
-          <label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={values.password}
-              onChange={handleChange}
-            />
-          </label>
-          {errors.password && touched.password ? (
-            <div>{errors.password}</div>
-          ) : null}
-          <button type="submit">Log In</button>
-          <Link to="/registration">Register</Link>
-        </form>
+        <Container>
+          <Title>
+            <LogoSvg src={logo} width={30} height={30} title="Logo" />
+            Wallet
+          </Title>
+          <Form onSubmit={handleSubmit}>
+            <Label>
+              <Svg src={email} width={30} height={28} title="Email" />
+              <Input
+                type="email"
+                name="email"
+                placeholder="E-mail"
+                value={values.email}
+                onChange={handleChange}
+              />
+              {errors.email && touched.email ? (
+                <TextError>{errors.email}</TextError>
+              ) : null}
+            </Label>
+
+            <Label>
+              <Svg src={lock} width={30} height={28} title="Lock" />
+              <Input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={values.password}
+                onChange={handleChange}
+              />
+              {errors.password && touched.password ? (
+                <TextError>{errors.password}</TextError>
+              ) : null}
+            </Label>
+
+            <Button type="submit">Log In</Button>
+            <StyledLink to="/registration">Register</StyledLink>
+          </Form>
+        </Container>
       )}
     </Formik>
   );
