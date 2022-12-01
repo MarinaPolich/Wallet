@@ -21,7 +21,6 @@ import { categoriesSelector, transactionsSelector } from 'redux/selectors';
 
 export default function Table() {
   const transactions = useSelector(transactionsSelector);
-
   const categories = useSelector(categoriesSelector);
   const reversed = arr => arr.map((_, index) => arr[arr.length - 1 - index]);
 

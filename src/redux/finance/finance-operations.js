@@ -13,7 +13,7 @@ export const getAllTransactionsThunk = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -28,9 +28,7 @@ export const addTransactionThunk = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
-
-
