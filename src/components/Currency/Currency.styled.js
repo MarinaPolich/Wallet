@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from 'stylesheet/breakpoints';
 
 export const Table = styled.table`
   width: 280px;
@@ -15,11 +16,13 @@ export const Table = styled.table`
 
   height: 174px;
 
-  @media (min-width: 768px) {
+  @media ${device.tablet} {
+    margin: 0;
     width: 336px;
   }
 
-  @media (min-width: 1280px) {
+  @media ${device.desktop} {
+    margin: 0;
     width: 393px;
     border-spacing: 40px solid var(--disable-bg-color);
     border-bottom: 143px solid var(--active-bg-color);
@@ -36,7 +39,7 @@ export const Th = styled.th`
   padding-top: 12px;
   padding-bottom: 12px;
 
-  @media (min-width: 1280px) {
+  @media ${device.desktop} {
     padding-top: 16px;
     padding-bottom: 16px;
   }
@@ -54,7 +57,7 @@ export const Td = styled.td`
   padding-bottom: 6px;
   padding-left: 20px;
 
-  @media (min-width: 1280px) {
+  @media ${device.desktop} {
     padding-top: 12px;
     padding-bottom: 12px;
     padding-left: 40px;
