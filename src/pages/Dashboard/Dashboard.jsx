@@ -27,7 +27,9 @@ const Dashboard = () => {
         <AppBarBox>
           <NavBox>
             <Navigation />
-            <Balance />
+            <IsDesktopOrTablet>
+              <Balance />
+            </IsDesktopOrTablet>
           </NavBox>
           <IsDesktopOrTablet>
             <Currency />
