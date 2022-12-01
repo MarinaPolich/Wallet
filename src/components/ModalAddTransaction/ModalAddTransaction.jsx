@@ -89,15 +89,17 @@ export const ModalAddTransaction = ({ closeModal }) => {
 
   const handleChangeDate = e => {
     setStartDate(e);
+    console.log('object :>> ', e);
     const day = e.toLocaleDateString();
     console.log(day);
   };
 
   const handleChange = e => {
-    console.log(e.target.value);
+    //console.log(e.target.value);
   };
 
   const handleSubmit = (values, { resetForm }) => {
+    values.date = values.date.toLocaleDateString();
     console.log(values);
     resetForm();
   };
