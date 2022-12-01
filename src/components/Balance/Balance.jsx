@@ -1,3 +1,10 @@
+import { Box, Title, Amount } from './Balance.styled';
+
 export const Balance = () => {
-  return <div>Balance</div>;
+  return (
+    <Box>
+      <Title>Your balance</Title>
+      <Amount>&#8372; 24000</Amount>
+    </Box>
+  );
 };
