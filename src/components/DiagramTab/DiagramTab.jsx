@@ -4,7 +4,6 @@ import { useState } from 'react';
 import {
   Category,
   HeaderText,
-  Gif,
   Statistic,
   StyledForm,
   StyledSelect,
@@ -15,7 +14,6 @@ import {
   Wrapper,
   Title,
 } from './DiagramTab.styled';
-import image from '../../assets/VwCN.gif';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
@@ -238,7 +236,6 @@ const DiagramTab = () => {
   return (
     <>
       {!summary ? (
-        // <Gif src={image} alt="" />
         <Loader />
       ) : (
         <Statistic>
