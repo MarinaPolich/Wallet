@@ -13,13 +13,13 @@ import { exit, logo, logoText } from 'assets/media/icons';
 import { Mobile } from 'components/Container/Mobile';
 import { Tablet } from 'components/Container/Tablet';
 import { Desktop } from 'components/Container/Desktop';
-import { logOut } from 'redux/auth/auth-operations';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getUser } from 'redux/auth/auth-selector';
-
+import { useState } from 'react';
+import {ModalLogout} from '../ModalLogout/ModalLogout'
 export const Header = () => {
-  const dispatch = useDispatch()
-  const name= useSelector(getUser)
+  const [out, setLogOut] = useState(false);
+  const name = useSelector(getUser);
   return (
     <HeaderBox>
       <LinkLogo>
@@ -42,7 +42,7 @@ export const Header = () => {
       </LinkLogo>
       <BoxOut>
         <NameUser>{name.username}</NameUser>
-        <ButtonExit  onClick={()=>dispatch(logOut())}>
+        <ButtonExit  onClick={()=>setLogOut(true)  }>
           <ExitIcon src={exit} width={18} height={18} title="Exit" />
           <Tablet>
             <span>Exit</span>
@@ -52,6 +52,7 @@ export const Header = () => {
           </Desktop>
         </ButtonExit>
       </BoxOut>
+      {out && <ModalLogout setLogOut={setLogOut} />}
     </HeaderBox>
   );
 };

@@ -1,11 +1,10 @@
 import { RegistrationForm } from 'components/RegistrationForm/RegistrationForm';
-
+import {Container} from './Registration.styled'
 const Registration = () => {
   return (
-    <div>
-      <h1>Registration</h1>
-      <RegistrationForm />
-    </div>
+    <Container>
+     <RegistrationForm />
+    </Container>
   );
 };
 
