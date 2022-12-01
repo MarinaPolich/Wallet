@@ -10,4 +10,7 @@ import statS from './statS.svg';
 import email from './email.svg';
 import lock from './lock.svg';
 import account from './account.svg';
-export { logo, logoText, close, exit, home, homeS, statistic, statS, currency, email, lock, account };
+import minus from './minus.svg';
+
+export { logo, logoText, close, exit, home, homeS, statistic, statS, currency, email, lock, account, minus, };
+

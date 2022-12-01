@@ -34,9 +34,9 @@ export const App = () => {
       />
       <Route path="/" element={<Dashboard />}>
         <Route path="home" element={<HomeTab />} />
-        <Route path="diagram" element={ <DiagramTab />} />
-        {isMobile && <Route path="currency" element={ <Currency />}/>}
-        <Route path="" element={<Navigate to="home" />} />
+        <Route path="diagram" element={<DiagramTab />} />
+        {isMobile && <Route path="currency" element={<Currency />} />}
+        <Route path="" element={<Navigate to="/home" />} />
       </Route>
 
       <Route path="*" element={<h1>NotFound</h1>} />

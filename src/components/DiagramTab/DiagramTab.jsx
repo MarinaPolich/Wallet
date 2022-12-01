@@ -4,7 +4,6 @@ import { useState } from 'react';
 import {
   Category,
   HeaderText,
-  Gif,
   Statistic,
   StyledForm,
   StyledSelect,
@@ -15,11 +14,11 @@ import {
   Wrapper,
   Title,
 } from './DiagramTab.styled';
-import image from '../../assets/VwCN.gif';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
 import { useRef } from 'react';
+import { Loader } from 'components/Loader/Loader';
 
 ChartJS.register(ArcElement, Tooltip);
 
@@ -216,7 +215,9 @@ const DiagramTab = () => {
       setSummary(state => ({
         ...state,
         categoriesSummary: [
-          ...state.categoriesSummary.sort((a, b) => (-a.total > -b.total ? 1 : -1)),
+          ...state.categoriesSummary.sort((a, b) =>
+            -a.total > -b.total ? 1 : -1
+          ),
         ],
       }));
     } else if (node.dataset.sort === 'i') {
@@ -224,7 +225,9 @@ const DiagramTab = () => {
       setSummary(state => ({
         ...state,
         categoriesSummary: [
-          ...state.categoriesSummary.sort((a, b) => (-a.total < -b.total ? 1 : -1)),
+          ...state.categoriesSummary.sort((a, b) =>
+            -a.total < -b.total ? 1 : -1
+          ),
         ],
       }));
     }
@@ -233,7 +236,7 @@ const DiagramTab = () => {
   return (
     <>
       {!summary ? (
-        <Gif src={image} alt="" />
+        <Loader />
       ) : (
         <Statistic>
           <div>
