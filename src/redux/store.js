@@ -12,7 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/auth-slice';
 import { financeReducer } from './finance/finance-slice';
-import { categoriesReducer } from "./categories/categories-slice"
+import { categoriesReducer } from './categories/categories-slice';
 import { currencyReducer } from './currency/slice';
 
 const middleware = [
@@ -42,7 +42,7 @@ export const store = configureStore({
     bank: persistReducer(bankPersistConfig, currencyReducer),
   },
   middleware,
-  devTools: process.env.NODE_ENV === 'development',
+  // devTools: process.env.NODE_ENV === 'development',
 });
 
 export const persistor = persistStore(store);

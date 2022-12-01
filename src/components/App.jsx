@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { refreshUser } from 'redux/auth/auth-operations';
 import { Currency } from './Currency/Currency';
-import { PublicLayout } from './PublicLayout/PublicLayout';
 import { RestrictedRoute } from './RestrictedRoute';
 
 const HomeTab = lazy(() => import('components/HomeTab/HomeTab'));
@@ -24,18 +23,16 @@ export const App = () => {
 
   return (
     <Routes>
-      <Route path="" element={<PublicLayout />}>
-        <Route
-          path="login"
-          element={<RestrictedRoute redirectTo="/home" component={<Login />} />}
-        />
-        <Route
-          path="registration"
-          element={
-            <RestrictedRoute redirectTo="/home" component={<Registration />} />
-          }
-        />
-      </Route>
+      <Route
+        path="login"
+        element={<RestrictedRoute redirectTo="/home" component={<Login />} />}
+      />
+      <Route
+        path="registration"
+        element={
+          <RestrictedRoute redirectTo="/home" component={<Registration />} />
+        }
+      />
       <Route path="/" element={<Dashboard />}>
         <Route path="home" element={<HomeTab />} />
         <Route path="diagram" element={<DiagramTab />} />
