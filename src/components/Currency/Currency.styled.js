@@ -3,7 +3,7 @@ import { device } from 'stylesheet/breakpoints';
 
 export const Table = styled.table`
   width: 280px;
-  border-spacing: 20px solid var(--disable-bg-color);
+  border-spacing: 0;
   border-radius: 30px;
   margin-left: auto;
   margin-right: auto;
@@ -24,7 +24,6 @@ export const Table = styled.table`
   @media ${device.desktop} {
     margin: 0;
     width: 393px;
-    border-spacing: 40px solid var(--disable-bg-color);
     border-bottom: 143px solid var(--active-bg-color);
   }
 `;
