@@ -31,6 +31,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTransaction } from 'redux/transaction/operations';
+import { getAllTransactionsThunk } from 'redux/finance/finance-operations';
 
 const modalRoot = document.querySelector('#modal-root');
 const initialValues = {
@@ -41,13 +44,6 @@ const initialValues = {
   comment: '',
 };
 
-// Select
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
-
 const schema = yup.object().shape({
   type: yup.string().required(),
   amount: yup.number().required('Enter amount'),
@@ -55,7 +51,7 @@ const schema = yup.object().shape({
     .date()
     .required()
     .default(() => new Date()),
-  categoryId: yup.object().required('Expense required'),
+  categoryId: yup.object(),
   comment: yup.string(),
 });
 
@@ -74,7 +70,14 @@ const FromError = ({ name }) => {
 
 export const ModalAddTransaction = ({ closeModal }) => {
   const [startDate, setStartDate] = useState(new Date());
+  const [select, setSelect] = useState('');
+  const dispatch = useDispatch();
+  const categoriesName = useSelector(state => state.categories.items);
   // const [transType, setTransType] = useState('EXPENSE');
+  // console.log(categoriesName.items);
+  useEffect(() => {
+    dispatch(getAllTransactionsThunk());
+  }, [dispatch]);
 
   // закрытие модалки по ескейпу
   useEffect(() => {
@@ -101,7 +104,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
   const handleChangeDate = e => {
     setStartDate(e);
     console.log('object :>> ', e);
-    const day = e.toLocaleDateString();
+    const day = e.toISOString(10).slice(0, 10);
     console.log(day);
   };
 
@@ -109,9 +112,14 @@ export const ModalAddTransaction = ({ closeModal }) => {
     //console.log(e.target.value);
   };
 
-  const handleSubmit = (values, { resetForm }) => {
-    values.transactionDate = values.transactionDate.toLocaleDateString();
+  const handleSubmit = (values, { resetForm, ...props }) => {
+    values.transactionDate = values.transactionDate.toISOString().slice(0, 10);
+    values.categoryId = select;
+    values.amount =
+      values.type === 'EXPENSE' ? '-' + values.amount : '' + values.amount;
+    console.log(values.categoryId);
     console.log(values);
+    dispatch(addTransaction(values));
     resetForm();
   };
 
@@ -135,7 +143,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
           onSubmit={handleSubmit}
         >
           {props => {
-            console.log(props);
+            // console.log(props.values);
             return (
               <ModalForm>
                 <Operation onChange={handleChange}>
@@ -172,10 +180,23 @@ export const ModalAddTransaction = ({ closeModal }) => {
                     <SelectField
                       name="categoryId"
                       onChange={option => {
-                        props.setFieldValue('categoryId', option);
+                        setSelect(option.value);
                       }}
-                      options={options}
+                      options={categoriesName?.map(({ name, id }) => ({
+                        value: id,
+                        label: name,
+                      }))}
                       placeholder={'Select a category'}
+                      styles={{
+                        control: (baseStyles, state) => ({
+                          ...baseStyles,
+                          outline: 'none',
+                          border: '1px solid var(--gray-5)',
+                          borderTop: 'none',
+                          borderLeft: 'none',
+                          borderRight: 'none',
+                        }),
+                      }}
                     />
                     <FromError name="categoryId" />
                   </div>
@@ -220,7 +241,17 @@ export const ModalAddTransaction = ({ closeModal }) => {
                   />
                 </div>
                 <Btn>
-                  <ButtonAdd type="submit">ADD</ButtonAdd>
+                  <ButtonAdd
+                    type="submit"
+                    onClick={() => {
+                      addTransaction();
+                      setTimeout(() => {
+                        closeModal();
+                      }, 100);
+                    }}
+                  >
+                    ADD
+                  </ButtonAdd>
                   <ButtonCancel type="button" onClick={closeModal}>
                     CANCEL
                   </ButtonCancel>
