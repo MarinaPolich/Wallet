@@ -5,6 +5,8 @@ const instance = axios.create({
   baseURL: 'https://api.monobank.ua',
 });
 
+// const apiURL = 'https://api.monobank.ua/bank/currency';
+
 export const fetchCurrency = createAsyncThunk(
   'bank/currency',
   async (_, thunkAPI) => {

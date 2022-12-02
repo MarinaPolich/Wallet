@@ -53,7 +53,7 @@ export const StyledForm = styled.form`
   }
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.label`
   position: relative;
   & + & {
     margin-top: 20px;
@@ -132,6 +132,7 @@ export const Category = styled.li`
   border-bottom: 1px solid #dcdcdf;
   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
   text-align: left;
+  cursor: pointer;
   div {
     margin-left: 5px;
   }

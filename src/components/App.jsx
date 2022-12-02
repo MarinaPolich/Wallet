@@ -39,7 +39,10 @@ export const App = () => {
       >
         <Route path="home" element={<HomeTab />} />
         <Route path="diagram" element={<DiagramTab />} />
-        {isMobile && <Route path="currency" element={<Currency />} />}
+        <Route
+          path="currency"
+          element={isMobile ? <Currency /> : <Navigate to="/home" />}
+        />
         <Route path="" element={<Navigate to="/home" />} />
       </Route>
 

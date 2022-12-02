@@ -21,8 +21,8 @@ const Dashboard = () => {
     dispatch(getAllCategoriesThunk());
   }, [dispatch]);
 
-  return (
-   token ? (<Container>
+  return token ? (
+    <Container>
       <Header name="Name" />
       <Box>
         <AppBarBox>
@@ -43,7 +43,9 @@ const Dashboard = () => {
         </div>
         <ButtonAddTransactions />
       </Box>
-    </Container>) : (<Login/>)
+    </Container>
+  ) : (
+    <Login />
   );
 };
 
