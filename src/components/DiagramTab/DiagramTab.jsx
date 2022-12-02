@@ -18,7 +18,7 @@ import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
 import { useRef } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { DiagramTabMoreInfor } from 'components/DiagramTabMoreInfor/DiagramTabMoreInfor';
 import { Loader } from 'components/Loader/Loader';
@@ -98,7 +98,6 @@ const DiagramTab = () => {
   async function handler(e) {
     e.preventDefault();
     if (yearNode.current.value === '' && monthNode.current.value !== '') {
-      const notify = () => toast('Enter year !');
       return;
     }
     if (yearNode.current.value === '' && monthNode.current.value === '') {
@@ -202,7 +201,6 @@ const DiagramTab = () => {
       caption: caption,
       data: transactionByExpenses,
     });
-    
   }
 
   return (
@@ -265,14 +263,12 @@ const DiagramTab = () => {
               {summary.categoriesSummary
                 .filter(el => el.total < 0)
                 .map(({ name, total }, i) => (
-
                   <Category
                     key="name"
                     col={colors[i]}
                     onClick={getMoreInfo}
                     data-name={name}
                   >
-
                     <div>{name}</div> <div>{-total}</div>
                   </Category>
                 ))}
