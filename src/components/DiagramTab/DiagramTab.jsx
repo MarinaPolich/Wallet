@@ -4,7 +4,6 @@ import { useState } from 'react';
 import {
   Category,
   HeaderText,
-  Gif,
   Statistic,
   StyledForm,
   StyledSelect,
@@ -15,7 +14,6 @@ import {
   Wrapper,
   Title,
 } from './DiagramTab.styled';
-import image from '../../assets/VwCN.gif';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
@@ -28,7 +26,7 @@ import { Loader } from 'components/Loader/Loader';
 ChartJS.register(ArcElement, Tooltip);
 
 const colors = [
-  '#FED057',
+  '#fed057',
   '#FFD8D0',
   '#FF6596',
   '#C5BAFF',
@@ -267,12 +265,14 @@ const DiagramTab = () => {
               {summary.categoriesSummary
                 .filter(el => el.total < 0)
                 .map(({ name, total }, i) => (
+
                   <Category
                     key="name"
                     col={colors[i]}
                     onClick={getMoreInfo}
                     data-name={name}
                   >
+
                     <div>{name}</div> <div>{-total}</div>
                   </Category>
                 ))}
