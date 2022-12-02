@@ -2,16 +2,18 @@ import styled from 'styled-components';
 
 export const Box = styled.div`
   position: fixed;
+  z-index:2;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0,0,0, .5);
 `;
 export const Report = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
+  z-index: 10;
   transform: translate(-50%, -50%);
   background-color: #ddd;
   width: 280px;

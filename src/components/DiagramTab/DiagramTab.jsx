@@ -11,8 +11,11 @@ import {
   Total,
   Balance,
   StyledVscChevronDown,
-  Wrapper,
+  WrapperYear,
+  WrapperMmonth,
   Title,
+  Table,
+  Diagram,
 } from './DiagramTab.styled';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
@@ -209,7 +212,7 @@ const DiagramTab = () => {
         <Loader />
       ) : (
         <Statistic>
-          <div style={{ marginLeft: '16px' }}>
+          <Diagram style={{ marginLeft: '16px' }}>
             <Title>Statistic</Title>
             <div style={{ position: 'relative' }}>
               <Balance>₴ {summary.periodTotal}</Balance>
@@ -218,10 +221,10 @@ const DiagramTab = () => {
                 data={data}
               />
             </div>
-          </div>
-          <div style={{ marginTop: '25px' }}>
+          </Diagram>
+          <Table>
             <StyledForm onSubmit={handler}>
-              <Wrapper>
+              <WrapperYear>
                 <StyledSelect name="year" ref={yearNode} onChange={handler}>
                   <option value="" key="0">
                     Year
@@ -233,9 +236,9 @@ const DiagramTab = () => {
                   ))}
                 </StyledSelect>
                 <StyledVscChevronDown />
-              </Wrapper>
+              </WrapperYear>
 
-              <Wrapper>
+              <WrapperMmonth>
                 <StyledSelect name="month" ref={monthNode} onChange={handler}>
                   <option value="" key="0">
                     Month
@@ -247,7 +250,7 @@ const DiagramTab = () => {
                   ))}
                 </StyledSelect>
                 <StyledVscChevronDown />
-              </Wrapper>
+              </WrapperMmonth>
             </StyledForm>
 
             <TableHeader>
@@ -285,7 +288,7 @@ const DiagramTab = () => {
                 {summary.incomeSummary}
               </div>
             </Total>
-          </div>
+          </Table>
           <ToastContainer />
           {showinfo.showinfo && (
             <DiagramTabMoreInfor
