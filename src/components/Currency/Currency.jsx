@@ -1,48 +1,65 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { RotatingLines } from 'react-loader-spinner';
 import { fetchCurrency } from 'redux/currency/operations';
 import { selectCurrency, selectIsLoading } from 'redux/currency/selectors';
-import { Table, Thead, Th, Tbody, Td } from './Currency.styled';
+import { Box, Table, Thead, Th, Tbody, LoadBox,Tr, Td } from './Currency.styled';
 
 export const Currency = () => {
   const currency = useSelector(selectCurrency);
   const loading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
-  console.log({ loading });
+
   useEffect(() => {
     dispatch(fetchCurrency());
   }, [dispatch]);
 
   return (
-    <Table>
-      <Thead>
-        <tr>
-          <Th>Currency</Th>
-          <Th>Purchase</Th>
-          <Th>Sale</Th>
-        </tr>
-      </Thead>
-      <Tbody>
-        {!loading && currency?.length > 0 && (
-          <>
-            <tr>
-              <Td>USD</Td>
-              <Td>{currency[0].rateBuy.toFixed(2)}</Td>
-              <Td>{currency[0].rateSell.toFixed(2)}</Td>
-            </tr>
-            <tr>
-              <Td>EUR</Td>
-              <Td>{currency[1].rateBuy.toFixed(2)}</Td>
-              <Td>{currency[1].rateSell.toFixed(2)}</Td>
-            </tr>
-            <tr>
-              <Td>RUB</Td>
-              <Td>{currency[2].rateBuy.toFixed(2)}</Td>
-              <Td>{currency[2].rateSell.toFixed(2)}</Td>
-            </tr>
-          </>
-        )}
-      </Tbody>
-    </Table>
+    <Box>
+      <Table>
+        <Thead>
+          <tr>
+            <Th>Currency</Th>
+            <Th>Purchase</Th>
+            <Th>Sale</Th>
+          </tr>
+        </Thead>
+        <Tbody>
+          {loading && currency?.length > 0 ? (
+            <Tr>
+              <td colSpan="3">
+                <LoadBox>
+                  <RotatingLines
+                    strokeColor="var(--white)"
+                    strokeWidth="5"
+                    animationDuration="0.75"
+                    width="35"
+                    visible={true}
+                  />
+                </LoadBox>
+              </td>
+            </Tr>
+          ) : (
+            <>
+              <Tr>
+                <Td>USD</Td>
+                <Td>{currency[0].rateBuy.toFixed(2)}</Td>
+                <Td>{currency[0].rateSell.toFixed(2)}</Td>
+              </Tr>
+              <Tr>
+                <Td>EUR</Td>
+                <Td>{currency[1].rateBuy.toFixed(2)}</Td>
+                <Td>{currency[1].rateSell.toFixed(2)}</Td>
+              </Tr>
+              <Tr>
+                <Td>RUB</Td>
+                <Td>{currency[2].rateBuy.toFixed(2)}</Td>
+                <Td>{currency[2].rateSell.toFixed(2)}</Td>
+              </Tr>
+            </>
+          )}
+        </Tbody>
+      </Table>
+    </Box>
   );
 };

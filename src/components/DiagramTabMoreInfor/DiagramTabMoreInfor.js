@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { createPortal } from 'react-dom';
 import {
   Table,
   Header,
@@ -16,8 +17,9 @@ import {
 
 export function DiagramTabMoreInfor({ showinfo, setShowinfo }) {
   console.log('showinfo ======', showinfo);
-  return ( 
-    <Box>
+
+  return createPortal(
+    (<Box>
       <Report>
         <Caption> {showinfo.caption}</Caption>
         <Table>
@@ -33,7 +35,7 @@ export function DiagramTabMoreInfor({ showinfo, setShowinfo }) {
                 <SpanCaption>Date</SpanCaption>
                 <SpanValue>
                   {moment(item.transactionDate).format('DD.MM.YY')}
-                </SpanValue>                
+                </SpanValue>
               </SpanCell>
               <SpanCell position={'left'}>
                 <SpanCaption>Comment</SpanCaption>
@@ -55,6 +57,7 @@ export function DiagramTabMoreInfor({ showinfo, setShowinfo }) {
           x
         </Btn>
       </Report>
-    </Box>
+    </Box>),
+    document.querySelector('#portal')
   );
 }
