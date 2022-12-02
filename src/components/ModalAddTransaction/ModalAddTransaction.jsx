@@ -13,7 +13,6 @@ import {
   IconDate,
   LabelExpense,
   LabelIncome,
-  Marker,
   Modal,
   ModalContent,
   ModalForm,
@@ -21,9 +20,13 @@ import {
   Operation,
   RadioFieldExpense,
   RadioFieldIncome,
+  ToggleRb,
+  CloseIcon,
+  Plus,
+  SvgDate,
   SelectField,
 } from './ModalAddTransaction.styled';
-
+import { close, minus } from 'assets/media/icons';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
@@ -31,21 +34,28 @@ import styled from 'styled-components';
 
 const modalRoot = document.querySelector('#modal-root');
 const initialValues = {
-  operation: 'Expense',
-  transaction: '',
-  sum: '',
-  date: new Date(),
+  transactionDate: new Date(),
+  type: 'EXPENSE',
+  categoryId: '',
+  amount: '',
   comment: '',
 };
 
+// Select
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' },
+];
+
 const schema = yup.object().shape({
-  operation: yup.string().required(),
-  sum: yup.number().required('Enter amount'),
-  date: yup
+  type: yup.string().required(),
+  amount: yup.number().required('Enter amount'),
+  transactionDate: yup
     .date()
     .required()
     .default(() => new Date()),
-  transaction: yup.string().required(),
+  categoryId: yup.object().required('Expense required'),
   comment: yup.string(),
 });
 
@@ -64,6 +74,7 @@ const FromError = ({ name }) => {
 
 export const ModalAddTransaction = ({ closeModal }) => {
   const [startDate, setStartDate] = useState(new Date());
+  // const [transType, setTransType] = useState('EXPENSE');
 
   // закрытие модалки по ескейпу
   useEffect(() => {
@@ -89,18 +100,30 @@ export const ModalAddTransaction = ({ closeModal }) => {
 
   const handleChangeDate = e => {
     setStartDate(e);
+    console.log('object :>> ', e);
     const day = e.toLocaleDateString();
     console.log(day);
   };
 
   const handleChange = e => {
-    console.log(e.target.value);
+    //console.log(e.target.value);
   };
 
   const handleSubmit = (values, { resetForm }) => {
+    values.transactionDate = values.transactionDate.toLocaleDateString();
     console.log(values);
     resetForm();
   };
+
+  // const handleSubmit = (values, { setFieldError, resetForm, ...props }) => {
+  //   values.transactionDate = values.transactionDate.toLocaleDateString();
+  //   if (values.type === 'EXPENSE' && values.categoryId === null) {
+  //     setFieldError('categoryId', 'categoryId is requyred');
+  //     return;
+  //   }
+  //   console.log(props);
+  //   resetForm();
+  // };
 
   return createPortal(
     <Modal onClick={handleBackdropClose}>
@@ -112,55 +135,68 @@ export const ModalAddTransaction = ({ closeModal }) => {
           onSubmit={handleSubmit}
         >
           {props => {
-            console.log(props.values.operation);
+            console.log(props);
             return (
               <ModalForm>
-                <Operation>
+                <Operation onChange={handleChange}>
+                  <RadioFieldIncome
+                    id="income"
+                    type="radio"
+                    checked={props.values.type === 'INCOME'}
+                    name="type"
+                    value="INCOME"
+                  />
+                  <RadioFieldExpense
+                    id="expense"
+                    type="radio"
+                    checked={props.values.type === 'EXPENSE'}
+                    name="type"
+                    value="EXPENSE"
+                  />
                   <LabelIncome htmlFor="income">Income </LabelIncome>
-                  <div onChange={handleChange}>
-                    <RadioFieldIncome
-                      id="income"
-                      type="radio"
-                      checked={props.values.operation === 'Income'}
-                      name="operation"
-                      value="Income"
-                    />
-                    <RadioFieldExpense
-                      id="expense"
-                      type="radio"
-                      checked={props.values.operation === 'Expense'}
-                      name="operation"
-                      value="Expense"
-                    />
-                  </div>
+                  <ToggleRb>
+                    <Plus>
+                      <CloseIcon
+                        src={props.values.type === 'INCOME' ? close : minus}
+                        width={20}
+                        height={20}
+                        title="Change"
+                      />
+                    </Plus>
+                  </ToggleRb>
                   <LabelExpense htmlFor="expense">Expense</LabelExpense>
-                  <Marker aria-hidden="true"></Marker>
                 </Operation>
 
-                {props.values.operation === 'Expense' && (
-                  <SelectField as="select" name="transaction">
-                    <option value="1">Select a category</option>
-                    <option value="2">1</option>
-                    <option value="3">2</option>
-                    <option value="4">3</option>
-                  </SelectField>
+                {props.values.type === 'EXPENSE' && (
+                  <div>
+                    <SelectField
+                      name="categoryId"
+                      onChange={option => {
+                        props.setFieldValue('categoryId', option);
+                      }}
+                      options={options}
+                      placeholder={'Select a category'}
+                    />
+                    <FromError name="categoryId" />
+                  </div>
                 )}
 
                 <AmountDate>
-                  <label htmlFor="sum"></label>
-                  <AmountField type="number" name="sum" placeholder="0.00" />
-                  <FromError name="sum" />
+                  <label htmlFor="amount"></label>
+                  <AmountField type="number" name="amount" placeholder="0.00" />
+                  <FromError name="amount" />
                   <DateContainer>
                     <DateField
+                      id="transactionDate"
                       type="date"
-                      name="date"
+                      name="transactionDate"
                       selected={startDate}
                       onChange={handleChangeDate}
                       dateFormat="dd.MM.yyyy"
                     />
-                    <FromError name="date" />
-                    <IconDate>
-                      <svg
+                    <FromError name="transactionDate" />
+                    <IconDate htmlFor="transactionDate">
+                      <SvgDate
                         width="18"
                         height="20"
                         viewBox="0 0 18 20"
@@ -171,7 +207,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
                           d="M6 9H4V11H6V9ZM10 9H8V11H10V9ZM14 9H12V11H14V9ZM16 2H15V0H13V2H5V0H3V2H2C0.89 2 0.00999999 2.9 0.00999999 4L0 18C0 19.1 0.89 20 2 20H16C17.1 20 18 19.1 18 18V4C18 2.9 17.1 2 16 2ZM16 18H2V7H16V18Z"
                           fill="#4A56E2"
                         />
-                      </svg>
+                      </SvgDate>
                     </IconDate>
                   </DateContainer>
                 </AmountDate>

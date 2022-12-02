@@ -1,22 +1,29 @@
+import { desktop, tablet } from 'constants/responsive';
 import styled from 'styled-components';
 import { device } from 'stylesheet/breakpoints';
 
 export const Container = styled.div`
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   margin: 0 auto;
-  overflow: hidden;
+  overflow: auto;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(25px);
 `;
 
 export const Box = styled.div`
+  width: 100%;
+  margin: 0 auto;
   padding: 12px 20px;
 
   @media ${device.tablet} {
+    width: ${tablet};
     padding: 32px;
   }
 
   @media ${device.desktop} {
+    width: ${desktop};
     display: flex;
 
     padding: 40px 16px 40px 0;

@@ -7,27 +7,30 @@ import { Loader } from 'components/Loader/Loader';
 import { Navigation } from 'components/Navigation/Navigation';
 import { ButtonAddTransactions } from 'components/ButtonAddTransaction/ButtonAddTransaction';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAllCategoriesThunk } from 'redux/categories/categories-operations';
 import { IsDesktopOrTablet } from 'components/Container/Tablet';
 import { Box, AppBarBox, NavBox } from './Dashboard.styled';
 import { Container } from './Dashboard.styled';
-
+import { getToken } from 'redux/auth/auth-selector';
+import Login from '../Login';
 const Dashboard = () => {
   const dispatch = useDispatch();
-
+  const token = useSelector(getToken);
   useEffect(() => {
     dispatch(getAllCategoriesThunk());
   }, [dispatch]);
 
-  return (
+  return token ? (
     <Container>
       <Header name="Name" />
       <Box>
         <AppBarBox>
           <NavBox>
             <Navigation />
-            <Balance />
+            <IsDesktopOrTablet>
+              <Balance />
+            </IsDesktopOrTablet>
           </NavBox>
           <IsDesktopOrTablet>
             <Currency />
@@ -41,6 +44,8 @@ const Dashboard = () => {
         <ButtonAddTransactions />
       </Box>
     </Container>
+  ) : (
+    <Login />
   );
 };
 

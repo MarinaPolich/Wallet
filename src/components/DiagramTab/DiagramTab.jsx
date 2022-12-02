@@ -17,12 +17,11 @@ import {
   Table,
   Diagram,
 } from './DiagramTab.styled';
-import image from '../../assets/VwCN.gif';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
 import { useRef } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { DiagramTabMoreInfor } from 'components/DiagramTabMoreInfor/DiagramTabMoreInfor';
 import { Loader } from 'components/Loader/Loader';
@@ -30,7 +29,7 @@ import { Loader } from 'components/Loader/Loader';
 ChartJS.register(ArcElement, Tooltip);
 
 const colors = [
-  '#FED057',
+  '#fed057',
   '#FFD8D0',
   '#FF6596',
   '#C5BAFF',
@@ -102,7 +101,6 @@ const DiagramTab = () => {
   async function handler(e) {
     e.preventDefault();
     if (yearNode.current.value === '' && monthNode.current.value !== '') {
-      const notify = () => toast('Enter year !');
       return;
     }
     if (yearNode.current.value === '' && monthNode.current.value === '') {

@@ -17,7 +17,6 @@ const currencySlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.currency = payload;
-        // state.date = new Date(document.lastModified);
       })
       .addCase(fetchCurrency.rejected, (state, { payload }) => {
         state.isLoading = false;
