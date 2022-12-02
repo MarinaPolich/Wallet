@@ -18,6 +18,7 @@ export const Table = styled.table`
   width: 100%;
   height: 174px;
   border-spacing: 20px solid var(--active-bg-color);
+
   border-radius: 30px;
   margin-left: auto;
   margin-right: auto;
@@ -41,7 +42,11 @@ export const Table = styled.table`
 
   @media ${device.desktop} {
     margin: 0;
+
+    width: 393px;
+
     border-spacing: 40px solid var(--active-bg-color);
+
     border-bottom: 143px solid var(--active-bg-color);
   }
 `;

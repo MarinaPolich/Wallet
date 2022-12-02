@@ -2,13 +2,16 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
+  Section,
   StyledTable,
   StyledTd,
   StyledTh,
-  StyledTr,
+  ThRight,
   THead,
-  THeadRow,
+  Tbody,
+  TypeTd,
   TSum,
+  BalanceTd,
 } from './Table.styled';
 
 import moment from 'moment';
@@ -46,41 +49,39 @@ export default function Table() {
     );
   };
   return (
-    <section>
+    <Section>
       <StyledTable>
         <THead>
-          <THeadRow>
-            <StyledTh position={'left'}>Date</StyledTh>
+          <tr>
+            <StyledTh>Date</StyledTh>
             <StyledTh>Type</StyledTh>
             <StyledTh>Category</StyledTh>
-            <StyledTh position={'left'}>Comment</StyledTh>
-            <StyledTh>Sum</StyledTh>
-            <StyledTh>Balance</StyledTh>
-          </THeadRow>
+            <StyledTh>Comment</StyledTh>
+            <ThRight>Sum</ThRight>
+            <ThRight>Balance</ThRight>
+          </tr>
         </THead>
-        <tbody>
+        <Tbody>
           {reversed(transactions).map(item => (
-            <StyledTr key={item.id}>
-              <StyledTd position={'left'}>
+            <tr key={item.id}>
+              <StyledTd>
                 {moment(item.transactionDate).format('DD.MM.YY')}
               </StyledTd>
-              <StyledTd position={'center'}>
-                {item.type === 'INCOME' ? '+' : '-'}
-              </StyledTd>
+              <TypeTd>{item.type === 'INCOME' ? '+' : '-'}</TypeTd>
               <StyledTd>{searchCategoryName(item.categoryId)}</StyledTd>
-              <StyledTd position={'left'}>{item.comment}</StyledTd>
+              <StyledTd>{item.comment}</StyledTd>
               <TSum income={item.type === 'INCOME'} position={'right'}>
-                {item.amount}
+                {item.amount.toFixed(2)}
               </TSum>
-              <StyledTd position={'right'}>{item.balanceAfter}</StyledTd>
-            </StyledTr>
+              <BalanceTd>{item.balanceAfter.toFixed(2)}</BalanceTd>
+            </tr>
           ))}
-        </tbody>
+        </Tbody>
       </StyledTable>
 
       <button onClick={addTransaction} type="button">
         +
       </button>
-    </section>
+    </Section>
   );
 }
