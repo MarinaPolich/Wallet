@@ -20,6 +20,10 @@ import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { useSelector } from 'react-redux';
 import { useRef } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { DiagramTabMoreInfor } from 'components/DiagramTabMoreInfor/DiagramTabMoreInfor';
+import { Loader } from 'components/Loader/Loader';
 
 ChartJS.register(ArcElement, Tooltip);
 
@@ -35,97 +39,25 @@ const colors = [
   '#FD9498',
   '#A6A6A6',
 ];
-// const period = [
-//   {
-//     id: '8603ab35-46cf-4389-968b-a82351241453',
-//     transactionDate: '2022-11-28',
-//     type: 'EXPENSE',
-//     comment: 'Product',
-//     amount: -50,
-//     balanceAfter: -50,
-//     categoryId: '27eb4b75-9a42-4991-a802-4aefe21ac3ce',
-//     userId: 'e7d8cef8-0398-4018-8b10-2f11f7dab0ec',
-//   },
-//   {
-//     id: '2fe70c59-d124-45fd-9dc8-ad1c02242e94',
-//     transactionDate: '2022-11-28',
-//     type: 'EXPENSE',
-//     comment: 'yet product',
-//     amount: -120,
-//     balanceAfter: -170,
-//     categoryId: '27eb4b75-9a42-4991-a802-4aefe21ac3ce',
-//     userId: 'e7d8cef8-0398-4018-8b10-2f11f7dab0ec',
-//   },
-//   {
-//     id: '91ec47e5-08e8-4f7e-98dc-eb62207544d9',
-//     transactionDate: '2022-11-28',
-//     type: 'INCOME',
-//     comment: 'salary',
-//     amount: 200,
-//     balanceAfter: 30,
-//     categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
-//     userId: 'e7d8cef8-0398-4018-8b10-2f11f7dab0ec',
-//   },
-//   {
-//     id: '6e47253e-786c-465c-988f-759ae38f6fc5',
-//     transactionDate: '2022-11-28',
-//     type: 'INCOME',
-//     comment: 'gain',
-//     amount: 150,
-//     balanceAfter: 180,
-//     categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
-//     userId: 'e7d8cef8-0398-4018-8b10-2f11f7dab0ec',
-//   },
-//   {
-//     id: '31138966-153f-4e05-9c7b-69ee95a9285b',
-//     transactionDate: '2022-11-28',
-//     type: 'EXPENSE',
-//     comment: 'car',
-//     amount: -40,
-//     balanceAfter: 140,
-//     categoryId: '3caa7ba0-79c0-40b9-ae1f-de1af1f6e386',
-//     userId: 'e7d8cef8-0398-4018-8b10-2f11f7dab0ec',
-//   },
-//   {
-//     id: '14360c6e-5f84-468b-8041-afe9e62b8512',
-//     transactionDate: '2022-11-28',
-//     type: 'EXPENSE',
-//     comment: 'Education',
-//     amount: -30,
-//     balanceAfter: 110,
-//     categoryId: '1272fcc4-d59f-462d-ad33-a85a075e5581',
-//     userId: 'e7d8cef8-0398-4018-8b10-2f11f7dab0ec',
-//   },
-//   {
-//     id: '51dd602b-83bf-4dd0-bcf8-3b57794c852a',
-//     transactionDate: '2022-11-28',
-//     type: 'EXPENSE',
-//     comment: 'movie',
-//     amount: -20,
-//     balanceAfter: 90,
-//     categoryId: 'c143130f-7d1e-4011-90a4-54766d4e308e',
-//     userId: 'e7d8cef8-0398-4018-8b10-2f11f7dab0ec',
-//   },
-//   {
-//     id: 'f8373b22-7a18-45b5-842a-18b06cbbf6ae',
-//     transactionDate: '2022-11-28',
-//     type: 'EXPENSE',
-//     comment: 'other',
-//     amount: -20,
-//     balanceAfter: 70,
-//     categoryId: '719626f1-9d23-4e99-84f5-289024e437a8',
-//     userId: 'e7d8cef8-0398-4018-8b10-2f11f7dab0ec',
-//   },
-// ];
 
 const DiagramTab = () => {
   const [summary, setSummary] = useState(null);
+  const [categories, setCategories] = useState(null);
+  const [showinfo, setShowinfo] = useState({
+    showinfo: false,
+    caption: '',
+    data: [],
+  });
   const yearNode = useRef();
   const monthNode = useRef();
-  console.log('summary.categoriesSummary ======', summary);
-  const period = useSelector(state => state.finance.transactions);
-  const years = new Set(period.map(el => el.transactionDate.slice(0, 4)));
-  const monthes = new Set(period.map(el => el.transactionDate.slice(5, 7)));
+  const transactions = useSelector(state => state.finance.transactions);
+  console.log(categories);
+  console.log(summary);
+  console.log(transactions);
+  const years = new Set(transactions.map(el => el.transactionDate.slice(0, 4)));
+  const monthes = new Set(
+    transactions.map(el => el.transactionDate.slice(5, 7))
+  );
 
   const length = summary?.categoriesSummary.filter(el => el.total < 0).length;
 
@@ -146,26 +78,40 @@ const DiagramTab = () => {
     ],
   };
   useEffect(() => {
-    async function getStats() {
+    async function getDataForState() {
       try {
-        //axios.defaults.baseURL = 'https://wallet.goit.ua';
-        //axios.defaults.headers.common.Authorization = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzaWQiOiJlNzc3ZjBhMi0wMjEwLTQ4NDYtYWIwMS1hMmQwMGExMWZmYzciLCJpYXQiOjE2Njk3MjA0OTYsImV4cCI6MTAwMDAwMDE2Njk3MjA0OTZ9.b8u-cBgeoILhDoP23uhxgOqcEm__wUmhMKsbLbQ3z54`;
-        const res = await axios.get('/api/transactions-summary');
-        return res.data;
+        const summary = await axios.get('/api/transactions-summary');
+        const categories = await axios.get('/api/transaction-categories');
+        return { summary: summary.data, categories: categories.data };
       } catch (error) {
         console.log(error);
       }
     }
-    getStats().then(data => setSummary(data));
+    getDataForState().then(({ summary, categories }) => {
+      setSummary(summary);
+      setCategories(categories);
+    });
   }, []);
+
+  //  i.categoryId = categories.find(el => el.name === i.name).id;
 
   //DiagramTab.forceUpdate();
 
   async function handler(e) {
     e.preventDefault();
+    if (yearNode.current.value === '' && monthNode.current.value !== '') {
+      const notify = () => toast('Enter year !');
+      return;
+    }
+    if (yearNode.current.value === '' && monthNode.current.value === '') {
+      try {
+        const res = await axios.get(`/api/transactions-summary`);
+        setSummary(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
-    if (yearNode.current.value === '' && monthNode.current.value === '') return;
-    if (yearNode.current.value === '' && monthNode.current.value !== '') return;
     if (yearNode.current.value !== '' && monthNode.current.value === '') {
       try {
         const res = await axios.get(
@@ -216,7 +162,9 @@ const DiagramTab = () => {
       setSummary(state => ({
         ...state,
         categoriesSummary: [
-          ...state.categoriesSummary.sort((a, b) => (-a.total > -b.total ? 1 : -1)),
+          ...state.categoriesSummary.sort((a, b) =>
+            -a.total > -b.total ? 1 : -1
+          ),
         ],
       }));
     } else if (node.dataset.sort === 'i') {
@@ -224,19 +172,48 @@ const DiagramTab = () => {
       setSummary(state => ({
         ...state,
         categoriesSummary: [
-          ...state.categoriesSummary.sort((a, b) => (-a.total < -b.total ? 1 : -1)),
+          ...state.categoriesSummary.sort((a, b) =>
+            -a.total < -b.total ? 1 : -1
+          ),
         ],
       }));
     }
+  }
+  function getMoreInfo(e) {
+    const categoryName = e.currentTarget.dataset.name;
+    const categoryId = categories.find(el => el.name === categoryName).id;
+    let transactionByExpenses = transactions.filter(
+      el => el.categoryId === categoryId
+    );
+    let caption = 'Exspenses by category ' + categoryName;
+
+    if (yearNode.current.value !== '') {
+      transactionByExpenses = transactionByExpenses.filter(
+        el => el.transactionDate.slice(0, 4) === yearNode.current.value
+      );
+      caption = caption + ' for a period: year ' + yearNode.current.value;
+    }
+    if (yearNode.current.value !== '' && monthNode.current.value !== '') {
+      transactionByExpenses = transactionByExpenses.filter(
+        el => el.transactionDate.slice(5, 7) === monthNode.current.value
+      );
+      caption = caption + ' month ' + monthNode.current.value;
+    }
+    setShowinfo({
+      showinfo: true,
+      caption: caption,
+      data: transactionByExpenses,
+    });
+    
   }
 
   return (
     <>
       {!summary ? (
-        <Gif src={image} alt="" />
+        <Loader />
       ) : (
         <Statistic>
-          <div>
+          <div style={{ marginLeft: '16px' }}>
             <Title>Statistic</Title>
             <div style={{ position: 'relative' }}>
               <Balance>₴ {summary.periodTotal}</Balance>
@@ -249,7 +226,7 @@ const DiagramTab = () => {
           <div style={{ marginTop: '25px' }}>
             <StyledForm onSubmit={handler}>
               <Wrapper>
-                <StyledSelect name="year" onChange={handler} ref={yearNode}>
+                <StyledSelect name="year" ref={yearNode} onChange={handler}>
                   <option value="" key="0">
                     Year
                   </option>
@@ -261,8 +238,9 @@ const DiagramTab = () => {
                 </StyledSelect>
                 <StyledVscChevronDown />
               </Wrapper>
+
               <Wrapper>
-                <StyledSelect name="month" onChange={handler} ref={monthNode}>
+                <StyledSelect name="month" ref={monthNode} onChange={handler}>
                   <option value="" key="0">
                     Month
                   </option>
@@ -289,7 +267,12 @@ const DiagramTab = () => {
               {summary.categoriesSummary
                 .filter(el => el.total < 0)
                 .map(({ name, total }, i) => (
-                  <Category key="name" col={colors[i]}>
+                  <Category
+                    key="name"
+                    col={colors[i]}
+                    onClick={getMoreInfo}
+                    data-name={name}
+                  >
                     <div>{name}</div> <div>{-total}</div>
                   </Category>
                 ))}
@@ -307,6 +290,13 @@ const DiagramTab = () => {
               </div>
             </Total>
           </div>
+          <ToastContainer />
+          {showinfo.showinfo && (
+            <DiagramTabMoreInfor
+              showinfo={showinfo}
+              setShowinfo={setShowinfo}
+            />
+          )}
         </Statistic>
       )}
     </>

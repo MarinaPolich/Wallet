@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const apiURL = 'https://api.monobank.ua/bank/currency';
 
+
 export const fetchCurrency = createAsyncThunk(
   'bank/currency',
   async (_, thunkAPI) => {
