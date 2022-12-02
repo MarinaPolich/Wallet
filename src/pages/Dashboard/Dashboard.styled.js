@@ -5,9 +5,9 @@ import { device } from 'stylesheet/breakpoints';
 export const Container = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   margin: 0 auto;
-  overflow: auto;
+  overflow: hidden;
   background-color: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(25px);
 `;
@@ -18,15 +18,15 @@ export const Box = styled.div`
   padding: 12px 20px;
 
   @media ${device.tablet} {
-    width: ${tablet};
-    padding: 32px;
+    width: ${tablet}px;
+    padding: 32px 40px 32px;
   }
 
   @media ${device.desktop} {
-    width: ${desktop};
+    width: ${desktop}px;
     display: flex;
 
-    padding: 40px 16px 40px 0;
+    padding: 40px 40px 40px 0;
   }
 `;
 

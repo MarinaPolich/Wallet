@@ -2,12 +2,14 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SVG from 'react-inlinesvg';
 import { device } from 'stylesheet/breakpoints';
+
 export const Container = styled.div`
-  background-color: white;
+  background-color: var(--white);
   width: 320px;
-  heigth: 100vh;
+  /* heigth: 100vh; */
   padding: 107px 20px;
-  @media ${device.tablet} {
+
+  @media ${device.tabDesk} {
     width: 533px;
     border-radius: 20px;
     padding: 40px 59px 62px 65px;
@@ -48,7 +50,8 @@ export const Input = styled.input`
   color: #bdbdbd;
   padding-left: 45px;
   padding-bottom: 8px;
-  @media ${device.tablet} {
+
+  @media ${device.tabDesk} {
     width: 410px;
   }
 `;
@@ -73,14 +76,14 @@ export const Button = styled.button`
   letter-spacing: 0.1em;
   text-transform: uppercase;
 
-  color: #ffffff;
+  color: var(--white);
   width: 280px;
   height: 50px;
   margin-bottom: 20px;
   background-color: #24cca7;
   border: none;
   border-radius: 20px;
-  @media ${device.tablet} {
+  @media ${device.tabDesk} {
     width: 300px;
   }
 `;
@@ -99,10 +102,10 @@ export const StyledLink = styled(Link)`
   color: #4a56e2;
   width: 280px;
   height: 50px;
-  background-color: #ffffff;
+  background-color: var(--white);
   border: 1px solid #4a56e2;
   border-radius: 20px;
-  @media ${device.tablet} {
+  @media ${device.tabDesk} {
     width: 300px;
   }
 `;

@@ -2,6 +2,15 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import SVG from 'react-inlinesvg';
 import { device } from 'stylesheet/breakpoints';
+import { desktop, tablet } from 'constants/responsive';
+
+export const Box = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  background-color: var(--white);
+`;
 
 export const HeaderBox = styled.header`
   display: flex;
@@ -9,14 +18,15 @@ export const HeaderBox = styled.header`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  background-color: var(--white);
   padding: 15px 20px;
 
   @media ${device.tablet} {
+    width: ${tablet}px;
     padding: 20px 32px;
   }
 
   @media ${device.desktop} {
+    width: ${desktop}px;
     padding: 20px 16px;
   }
 `;
