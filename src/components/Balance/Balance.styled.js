@@ -3,7 +3,7 @@ import { device } from 'stylesheet/breakpoints';
 
 export const Box = styled.div`
   width: 280px;
-  padding: 8px 32px 11px;
+  padding: 8px 32px;
   border-radius: 30px;
   margin-left: auto;
   margin-right: auto;
@@ -30,7 +30,7 @@ export const Title = styled.h2`
   font-family: 'Circe';
   font-weight: 400;
   font-size: 12px;
-  line-height: 1.5;
+  line-height: 1.3;
   text-transform: uppercase;
 
   margin-bottom: 11px;
