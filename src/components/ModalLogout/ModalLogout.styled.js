@@ -33,7 +33,7 @@ export const ExitTitle = styled.h1`
   font-weight: 700;
   line-height: 1.5;
   margin-bottom: 30px;
-  color: #4a56e2;
+  color: var(--black);
   margin-top: 10px;
   @media ${device.mobile} {
     font-size: 22px;
@@ -79,7 +79,7 @@ export const BtnNo = styled.button`
   font-weight: 700;
   font-size: 16px;
   line-height: 1.5;
-  background-color: #000000;
+  background-color: #f08080;
   border: none;
   color: var(--white);
   padding: 10px 50px;
@@ -89,12 +89,12 @@ export const BtnNo = styled.button`
   font-size: 16px;
   cursor: pointer;
   border-radius: 10px;
-  border: 1px solid #000000;
+  border: 1px solid #f08080;
   &:hover {
     background-color: var(--white);
-    color: #000000;
+    color: #f08080;
     transition: 500ms;
-    border: 1px solid #000000;
+    border: 1px solid #f08080;
   }
   @media ${device.mobile} {
     display: block;
