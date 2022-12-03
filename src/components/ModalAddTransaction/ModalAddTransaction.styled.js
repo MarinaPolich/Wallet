@@ -3,6 +3,7 @@ import { Form, Field } from 'formik';
 import DatePicker from 'react-datepicker';
 import SVG from 'react-inlinesvg';
 import Select from 'react-select';
+import { device } from 'stylesheet/breakpoints';
 
 // const colorActiveLable = 'green';
 
@@ -18,20 +19,18 @@ export const Modal = styled.div`
   text-align: center;
   justify-content: center;
   animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-  /* transform: scale(0); */
-
-  /* &.active {
-    transform: scale(1);
-  } */
 `;
 
 export const ModalContent = styled.div`
   position: relative;
   padding: 20px;
   width: 540px;
-  height: 603px;
+  height: 600px;
   border-radius: 20px;
   background-color: var(--white);
+  @media ${device.mobile} {
+    width: 320px;
+  }
 `;
 
 export const ModalHead = styled.h1`
@@ -44,12 +43,19 @@ export const ModalHead = styled.h1`
   line-height: 1.5;
 
   color: var(--black);
+  @media ${device.mobile} {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
 `;
 
 // FORM RADIOBUTTON
 
 export const ModalForm = styled(Form)`
   display: block;
+  @media ${device.mobile} {
+    width: 280px;
+  }
 `;
 
 export const Operation = styled.div`
@@ -187,6 +193,9 @@ export const ButtonClose = styled.button`
   background-color: var(--white);
   border: none;
   margin: 20px;
+  @media ${device.mobile} {
+    display: none;
+  }
 `;
 
 export const Btn = styled.div`
@@ -218,6 +227,9 @@ export const ButtonAdd = styled.button`
     transition: 1000ms;
     border: 1px solid var(--btn-bg-color);
   }
+  @media ${device.mobile} {
+    width: 280px;
+  }
 `;
 
 export const ButtonCancel = styled.button`
@@ -234,6 +246,9 @@ export const ButtonCancel = styled.button`
     color: var(--white);
     transition: 1000ms;
   }
+  @media ${device.mobile} {
+    width: 280px;
+  }
 `;
 
 export const DateContainer = styled.div`
@@ -245,6 +260,10 @@ export const IconDate = styled.label`
   top: 60%;
   left: 80%;
   cursor: pointer;
+  @media ${device.mobile} {
+    left: 95%;
+    top: 20%;
+  }
 `;
 
 export const SvgDate = styled.svg`
@@ -259,10 +278,12 @@ export const SvgDate = styled.svg`
 
 export const AmountDate = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   text-align: center;
-  padding-right: 25px;
+  @media ${device.mobile} {
+    display: block;
+  }
 `;
 // Field
 
@@ -272,11 +293,18 @@ export const SelectField = styled(Select)`
   margin-top: 40px;
   margin-left: 50px;
   margin-right: 50px;
+  @media ${device.mobile} {
+    width: 280px;
+    margin-left: 0;
+    margin-right: 0;
+  }
 `;
 
 export const AmountField = styled(Field)`
+  position: relative;
   padding: 8px;
   margin-top: 40px;
+  text-align: center;
   border: 1px solid var(--gray-5);
   border-top: none;
   border-left: none;
@@ -289,17 +317,25 @@ export const AmountField = styled(Field)`
     text-align: center;
     padding-bottom: 8px;
   }
+  @media ${device.mobile} {
+    width: 280px;
+    margin-bottom: 30px;
+  }
 `;
 
 export const DateField = styled(DatePicker)`
   outline: none;
   padding: 8px;
-  padding-left: 20px;
+  margin-left: 35px;
   margin-top: 40px;
   border: 1px solid var(--gray-5);
   border-top: none;
   border-left: none;
   border-right: none;
+  @media ${device.mobile} {
+    width: 280px;
+    margin-top: 0;
+  }
 `;
 
 export const CommentField = styled(Field)`
@@ -318,5 +354,10 @@ export const CommentField = styled(Field)`
   line-height: 27px;
   &::placeholder {
     color: var(--gray-4);
+  }
+  @media ${device.mobile} {
+    width: 280px;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
 `;

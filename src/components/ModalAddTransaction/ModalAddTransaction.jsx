@@ -7,9 +7,6 @@ import {
   ModalHead,
 } from './ModalAddTransaction.styled';
 import 'react-datepicker/dist/react-datepicker.css';
-import { FormModal } from 'components/FormModal/FormModal';
-
-const modalRoot = document.querySelector('#modal-root');
 
 export const ModalAddTransaction = ({ closeModal }) => {
   // const [transType, setTransType] = useState('EXPENSE');
@@ -41,7 +38,9 @@ export const ModalAddTransaction = ({ closeModal }) => {
     <Modal onClick={handleBackdropClose}>
       <ModalContent>
         <ModalHead>Add transaction</ModalHead>
+
         <FormModal closeModal={closeModal} />
+
         <ButtonClose onClick={closeModal}>
           <svg
             version="1.1"
