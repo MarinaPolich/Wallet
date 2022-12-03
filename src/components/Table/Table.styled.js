@@ -102,3 +102,16 @@ export const BalanceTd = styled.td`
 
   text-align: right;
 `;
+
+
+export const StyledDelButton = styled.button`
+border: none;
+display: inline-flex;
+align-items: center;
+`
+
+export const StyledSpan = styled.span`
+display: flex;
+justify-content: flex-end;
+align-items: center;
+`
