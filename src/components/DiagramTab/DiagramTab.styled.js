@@ -1,31 +1,24 @@
 import styled from 'styled-components';
 import { VscChevronDown } from 'react-icons/vsc';
 
-export const Gif = styled.img`
-  width: 100%;
-  display: block;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  @media screen and (min-width: 768.99px) {
-    width: 60%;
-  }
-  @media screen and (min-width: 1279.99px) {
-    width: 40%;
-  }
-`;
-
 export const Statistic = styled.div`
-  width: 280px;
-
   @media screen and (min-width: 768.99px) {
-    display: flex; gap: 32px;
-    width: 336px;
+    display: flex;
+    gap: 32px;
   }
   @media screen and (min-width: 1279.99px) {
-    width: 395px;
   }
 `;
+export const Diagram = styled.div`
+  width: 280px;
+  @media screen and (min-width: 768.99px) {
+    width: 236px;
+  }
+  @media screen and (min-width: 1279.99px) {
+    width: 288px;
+  }
+`;
+
 export const Title = styled.h2`
   font-size: 30px;
   font-weight: 400;
@@ -34,7 +27,6 @@ export const Title = styled.h2`
     margin-bottom: 20px;
   }
 `;
-
 export const Balance = styled.div`
   position: absolute;
   top: 50%;
@@ -43,46 +35,89 @@ export const Balance = styled.div`
   font-size: 18px;
   font-weight: 700;
 `;
-export const StyledForm = styled.form`
+export const Table = styled.div`
+  margin-top: 25px;
+  width: 280px;
   @media screen and (min-width: 768.99px) {
-    display: flex;
-    gap: 16px;
+    width: 336px;
   }
   @media screen and (min-width: 1279.99px) {
-    gap: 32px;
+    width: 396px;
   }
 `;
 
-export const Wrapper = styled.div`
+export const StyledForm = styled.form`
+  width: 280px;
+  height: 120px;
   position: relative;
-  & + & {
-    margin-top: 20px;
-  }
   @media screen and (min-width: 768.99px) {
-   
-    & + & {
-      margin-top: 0;
-    }
+    display: flex;
+    gap: 16px;
+    width: 336px;
+    height: 50px;
+  }
+  @media screen and (min-width: 1279.99px) {
+    gap: 32px;
+    width: 396px;
   }
 `;
+
+export const WrapperYear = styled.label`
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  border-radius: 30px;
+  width: 280px;
+  height: 50px;
+  @media screen and (min-width: 768.99px) {
+    width: 160px;
+  }
+  @media screen and (min-width: 1279.99px) {
+    width: 182px;
+  }
+`;
+
+export const WrapperMmonth = styled.label`
+  position: absolute;
+  top: 70px;
+  left: 0;
+  background-color: #fff;
+  border-radius: 30px;
+  width: 280px;
+  height: 50px;
+  @media screen and (min-width: 768.99px) {
+    width: 160px;
+    top: 0;
+    left: 176px;
+  }
+  @media screen and (min-width: 1279.99px) {
+    width: 182px;
+    top: 0;
+    left: 214px;
+  }
+`;
+
 export const StyledSelect = styled.select`
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
   appearance: none;
+  background-color: transparent;
   height: 50px;
   width: 100%;
   border-radius: 30px;
   padding-left: 20px;
   padding-right: 20px;
-  & + & {
-    margin-top: 20px;
-  }
+
   @media screen and (min-width: 768.99px) {
     width: 160px;
-    & + & {
-      margin-top: 0;
-    }
+    margin-top: 0;
   }
   @media screen and (min-width: 1279.99px) {
     width: 182px;
+    top: 0;
   }
 `;
 export const StyledVscChevronDown = styled(VscChevronDown)`
@@ -95,6 +130,7 @@ export const StyledVscChevronDown = styled(VscChevronDown)`
   ${StyledSelect}:focus + & {
     transform: translate(-20px, -50%) rotate(180deg);
   }
+  z-index: 0;
 `;
 
 export const TableHeader = styled.div`
@@ -104,7 +140,6 @@ export const TableHeader = styled.div`
   background-color: #fff;
   border-radius: 30px;
   margin-top: 20px;
-  
 `;
 export const HeaderText = styled.div`
   font-weight: 700;
@@ -132,6 +167,7 @@ export const Category = styled.li`
   border-bottom: 1px solid #dcdcdf;
   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
   text-align: left;
+  cursor: pointer;
   div {
     margin-left: 5px;
   }

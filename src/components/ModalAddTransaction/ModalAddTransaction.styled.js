@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Form, Field } from 'formik';
 import DatePicker from 'react-datepicker';
 import SVG from 'react-inlinesvg';
+import Select from 'react-select';
 
 // const colorActiveLable = 'green';
 
@@ -265,15 +266,12 @@ export const AmountDate = styled.div`
 `;
 // Field
 
-export const SelectField = styled(Field)`
-  width: 400px;
+export const SelectField = styled(Select)`
+  display: block;
   outline: none;
-  padding: 8px;
   margin-top: 40px;
-  border: 1px solid var(--gray-5);
-  border-top: none;
-  border-left: none;
-  border-right: none;
+  margin-left: 50px;
+  margin-right: 50px;
 `;
 
 export const AmountField = styled(Field)`

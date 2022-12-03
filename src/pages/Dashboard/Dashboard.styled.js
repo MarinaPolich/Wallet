@@ -1,3 +1,4 @@
+import { desktop, tablet } from 'constants/responsive';
 import styled from 'styled-components';
 import { device } from 'stylesheet/breakpoints';
 
@@ -7,19 +8,25 @@ export const Container = styled.div`
   height: 100vh;
   margin: 0 auto;
   overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(25px);
 `;
 
 export const Box = styled.div`
+  width: 100%;
+  margin: 0 auto;
   padding: 12px 20px;
 
   @media ${device.tablet} {
-    padding: 32px;
+    width: ${tablet}px;
+    padding: 32px 40px 32px;
   }
 
   @media ${device.desktop} {
+    width: ${desktop}px;
     display: flex;
 
-    padding: 40px 16px 40px 0;
+    padding: 40px 40px 40px 0;
   }
 `;
 

@@ -5,13 +5,16 @@ import { BsFillTrashFill, BsPencilSquare} from "react-icons/bs";
 import {
   StyledDelButton,
   StyledSpan,
+  Section,
   StyledTable,
   StyledTd,
   StyledTh,
-  StyledTr,
+  ThRight,
   THead,
-  THeadRow,
+  Tbody,
+  TypeTd,
   TSum,
+  BalanceTd,
 } from './Table.styled';
 
 import moment from 'moment';
@@ -33,8 +36,8 @@ export default function Table() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const toggleModal = () => {
-    setIsModalOpen(isModalOpen => !isModalOpen);
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   const openModal = (itemId) => {
@@ -51,6 +54,7 @@ export default function Table() {
 
   const searchCategoryName = id => {
     const category = categories.find(item => id === item.id);
+    console.log('category', category)
     return category?.name;
   };
   const dispatch = useDispatch();
@@ -65,40 +69,38 @@ export default function Table() {
 
 
   return (
-    <section>
+    <Section>
       <StyledTable>
         <THead>
-          <THeadRow>
-            <StyledTh position={'left'}>Date</StyledTh>
+          <tr>
+            <StyledTh>Date</StyledTh>
             <StyledTh>Type</StyledTh>
             <StyledTh>Category</StyledTh>
-            <StyledTh position={'left'}>Comment</StyledTh>
-            <StyledTh>Sum</StyledTh>
-            <StyledTh>Balance</StyledTh>
-          </THeadRow>
+            <StyledTh>Comment</StyledTh>
+            <ThRight>Sum</ThRight>
+            <ThRight>Balance</ThRight>
+          </tr>
         </THead>
-        <tbody>
+        <Tbody>
           {sortedTransactions.map(item => (
-            <StyledTr key={item.id}>
+            <tr key={item.id}>
               <StyledTd position={'left'}>
                 {moment(item.transactionDate).format('DD.MM.YY')}
               </StyledTd>
-              <StyledTd position={'center'}>
-                {item.type === 'INCOME' ? '+' : '-'}
-              </StyledTd>
+              <TypeTd>{item.type === 'INCOME' ? '+' : '-'}</TypeTd>
               <StyledTd>{searchCategoryName(item.categoryId)}</StyledTd>
-              <StyledTd position={'left'}>{item.comment}</StyledTd>
+              <StyledTd>{item.comment}</StyledTd>
               <TSum income={item.type === 'INCOME'} position={'right'}>
-                {item.amount}
+                {item.amount.toFixed(2)}
               </TSum>
-              <StyledTd position={'right'}><StyledSpan>{item.balanceAfter} <StyledDelButton type="button" onClick={()=> deleteTransaction(item.id)}><BsFillTrashFill color="#FF6596"/></StyledDelButton><StyledDelButton onClick={()=> openModal(item.id)}><BsPencilSquare color="#24CCA7"/></StyledDelButton></StyledSpan></StyledTd>
+              <BalanceTd position={'right'}><StyledSpan>{item.balanceAfter.toFixed(2)} <StyledDelButton type="button" onClick={()=> deleteTransaction(item.id)}><BsFillTrashFill color="#FF6596"/></StyledDelButton><StyledDelButton onClick={()=> openModal(item.id)}><BsPencilSquare color="#24CCA7"/></StyledDelButton></StyledSpan></BalanceTd>
 
-            </StyledTr>
+            </tr>
           ))}
-        </tbody>
+        </Tbody>
       </StyledTable>
 
-      { isModalOpen && <EditTransactionModal transactionData={transactions.find(item=>  item.id === editTransactionId)} closeModal={toggleModal} />}
-    </section>
+      { isModalOpen && <EditTransactionModal closeModal={closeModal} transactionData={transactions.find(item=>  item.id === editTransactionId)}  />}
+    </Section>
   );
 }

@@ -11,6 +11,27 @@ import email from './email.svg';
 import lock from './lock.svg';
 import account from './account.svg';
 import minus from './minus.svg';
+import ellipseLeft from './ellipse-left.svg';
+import ellipseRight from './ellipse-right.svg';
+import ellipseLeftD from './ellipse-leftD.svg';
+import ellipseRightD from './ellipse-rightD.svg';
 
-export { logo, logoText, close, exit, home, homeS, statistic, statS, currency, email, lock, account, minus, };
-
+export {
+  logo,
+  logoText,
+  close,
+  exit,
+  home,
+  homeS,
+  statistic,
+  statS,
+  currency,
+  email,
+  lock,
+  account,
+  minus,
+  ellipseLeft,
+  ellipseLeftD,
+  ellipseRight,
+  ellipseRightD,
+};

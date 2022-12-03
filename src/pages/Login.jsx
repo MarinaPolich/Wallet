@@ -1,10 +1,13 @@
 import { LoginForm } from 'components/LoginForm/LoginForm';
-import {Container} from './Login.styled'
+import { Container } from './Login.styled';
 const Login = () => {
   return (
-    <Container>
-      <LoginForm />
-    </Container>
+    <>
+      <div></div>
+      <Container>
+        <LoginForm />
+      </Container>
+    </>
   );
 };
 
