@@ -103,9 +103,9 @@ export const ModalAddTransaction = ({ closeModal }) => {
 
   const handleChangeDate = e => {
     setStartDate(e);
-    console.log('object :>> ', e);
-    const day = e.toISOString(10).slice(0, 10);
-    console.log(day);
+    // console.log('object :>> ', e);
+    // const day = e.toISOString(10).slice(0, 10);
+    // console.log(day);
   };
 
   const handleChange = e => {
@@ -117,7 +117,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
     values.categoryId = select;
     values.amount =
       values.type === 'EXPENSE' ? '-' + values.amount : '' + values.amount;
-    console.log(values.categoryId);
+    // console.log(values.categoryId);
     console.log(values);
     dispatch(addTransaction(values));
     resetForm();
@@ -245,9 +245,9 @@ export const ModalAddTransaction = ({ closeModal }) => {
                     type="submit"
                     onClick={() => {
                       addTransaction();
-                      setTimeout(() => {
-                        closeModal();
-                      }, 100);
+                      // setTimeout(() => {
+                      //   closeModal();
+                      // }, 100);
                     }}
                   >
                     ADD

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from 'stylesheet/breakpoints';
 
 export const ExitModal = styled.div`
   height: 100vh;
@@ -21,6 +22,9 @@ export const ExitModalContent = styled.div`
   height: 230px;
   border-radius: 10px;
   background-color: var(--white);
+  @media ${device.mobile} {
+    height: 300px;
+  }
 `;
 
 export const ExitTitle = styled.h1`
@@ -31,6 +35,12 @@ export const ExitTitle = styled.h1`
   margin-bottom: 30px;
   color: #4a56e2;
   margin-top: 10px;
+  @media ${device.mobile} {
+    font-size: 22px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
 `;
 
 export const BtnYes = styled.button`
@@ -53,8 +63,14 @@ export const BtnYes = styled.button`
   &:hover {
     background-color: var(--white);
     color: var(--btn-bg-color);
-    transition: 1000ms;
+    transition: 500ms;
     border: 1px solid var(--btn-bg-color);
+  }
+  @media ${device.mobile} {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 30px;
   }
 `;
 
@@ -63,7 +79,7 @@ export const BtnNo = styled.button`
   font-weight: 700;
   font-size: 16px;
   line-height: 1.5;
-  background-color: #f08080;
+  background-color: #000000;
   border: none;
   color: var(--white);
   padding: 10px 50px;
@@ -73,11 +89,16 @@ export const BtnNo = styled.button`
   font-size: 16px;
   cursor: pointer;
   border-radius: 10px;
-  border: 1px solid #f08080;
+  border: 1px solid #000000;
   &:hover {
     background-color: var(--white);
-    color: #f08080;
-    transition: 1000ms;
-    border: 1px solid red;
+    color: #000000;
+    transition: 500ms;
+    border: 1px solid #000000;
+  }
+  @media ${device.mobile} {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
   }
 `;
