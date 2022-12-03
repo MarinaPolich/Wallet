@@ -13,7 +13,7 @@ import {
   Button,
   StyledLink,
   LogoSvg,
-  TextError,
+  TextError,Test
 } from './RegistrationForm.styled.js';
 import { logo, email, lock, account } from 'assets/media/icons';
 export const RegistrationForm = () => {
@@ -93,7 +93,7 @@ export const RegistrationForm = () => {
                 value={values.confirm}
                 onChange={handleChange}
                 placeholder="Confirm password"
-              />
+              /><Test status={values.password === values.confirm}></Test>
               {errors.confirm && touched.confirm ? (
                 <TextError>{errors.confirm}</TextError>
               ) : null}
