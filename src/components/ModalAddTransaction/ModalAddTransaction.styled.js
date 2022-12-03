@@ -278,10 +278,9 @@ export const SvgDate = styled.svg`
 
 export const AmountDate = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   text-align: center;
-  padding-right: 25px;
   @media ${device.mobile} {
     display: block;
   }
@@ -302,8 +301,10 @@ export const SelectField = styled(Select)`
 `;
 
 export const AmountField = styled(Field)`
+  position: relative;
   padding: 8px;
   margin-top: 40px;
+  text-align: center;
   border: 1px solid var(--gray-5);
   border-top: none;
   border-left: none;
@@ -325,7 +326,7 @@ export const AmountField = styled(Field)`
 export const DateField = styled(DatePicker)`
   outline: none;
   padding: 8px;
-  padding-left: 20px;
+  margin-left: 35px;
   margin-top: 40px;
   border: 1px solid var(--gray-5);
   border-top: none;
