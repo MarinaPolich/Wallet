@@ -32,7 +32,7 @@ import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTransaction } from 'redux/transaction/operations';
+import { categories, addTransaction } from 'redux/transaction/operations';
 import { getAllTransactionsThunk } from 'redux/finance/finance-operations';
 import moment from 'moment';
 
@@ -47,13 +47,15 @@ const initialValues = {
 
 const schema = yup.object().shape({
   type: yup.string().required(),
-  amount: yup.number().required('Enter amount'),
+  amount: yup.number().required('Enter amount').max(100000).min(0),
   transactionDate: yup
     .date()
     .required()
-    .default(() => new Date()),
-  categoryId: yup.object(),
-  comment: yup.string(),
+    .default(function () {
+      return new Date();
+    }),
+  // categoryId: yup.mixed().required('Field must be filled'),
+  comment: yup.string().max(15),
 });
 
 const ErrorText = styled.p`
@@ -77,7 +79,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
   // const [transType, setTransType] = useState('EXPENSE');
   // console.log(categoriesName.items);
   useEffect(() => {
-    dispatch(getAllTransactionsThunk());
+    dispatch(categories());
   }, [dispatch]);
 
   // закрытие модалки по ескейпу
@@ -104,8 +106,8 @@ export const ModalAddTransaction = ({ closeModal }) => {
 
   const handleChangeDate = e => {
     setStartDate(e);
-    console.log('object :>> ', e);
-    const day = e.toISOString(10).slice(0, 10);
+    // console.log('object :>> ', e);
+    const day = e.toISOString().slice(0, 10);
     console.log(day);
   };
 
@@ -122,10 +124,15 @@ export const ModalAddTransaction = ({ closeModal }) => {
     values.categoryId = select;
     values.amount =
       values.type === 'EXPENSE' ? '-' + values.amount : '' + values.amount;
-    console.log(values.categoryId);
+    if (values.type === 'INCOME') {
+      values.categoryId = categoriesName.find(
+        ({ type }) => type === 'INCOME'
+      ).id;
+    }
     console.log(values);
     dispatch(addTransaction(values));
-    resetForm();
+    closeModal();
+    // resetForm();
   };
 
   // const handleSubmit = (values, { setFieldError, resetForm, ...props }) => {
@@ -187,30 +194,80 @@ export const ModalAddTransaction = ({ closeModal }) => {
                       onChange={option => {
                         setSelect(option.value);
                       }}
-                      options={categoriesName?.map(({ name, id }) => ({
-                        value: id,
-                        label: name,
-                      }))}
+                      options={categoriesName
+                        ?.filter(category => category.type === 'EXPENSE')
+                        .map(({ name, id }) => ({
+                          value: id,
+                          label: name,
+                        }))}
                       placeholder={'Select a category'}
+                      unstyled
                       styles={{
                         control: (baseStyles, state) => ({
                           ...baseStyles,
+                          display: 'flex',
+                          alignItems: 'center',
                           outline: 'none',
-                          border: '1px solid var(--gray-5)',
-                          borderTop: 'none',
-                          borderLeft: 'none',
-                          borderRight: 'none',
+                          border: 'none',
+                          borderBottom: '1px solid var(--gray-5)',
+                          borderRadius: '0',
+                          fontSize: '18px',
+                          lineHeight: '1.5',
+                          padding: '8px',
+                          textAlign: 'center',
+                        }),
+                        placeholder: baseStyles => ({
+                          ...baseStyles,
+                          color: 'var(--gray-4)',
+                        }),
+                        option: (baseStyles, { isFocused }) => ({
+                          ...baseStyles,
+                          backgroundColor: isFocused && 'var(--white)',
+                          fontWeight: isFocused && '700',
+                          color: isFocused && 'var(--car)',
+                          cursor: 'pointer',
+                          padding: '15px 0 15px',
+                        }),
+                        menu: baseStyles => ({
+                          ...baseStyles,
+                          backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                          backdropFilter: 'blur(25px)',
+                          boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.1)',
+                          borderRadius: '20px',
+                          textAlign: 'center',
                         }),
                       }}
                     />
-                    <FromError name="categoryId" />
+                    <span
+                      style={{
+                        position: 'absolute',
+                        top: '42%',
+                        left: '35%',
+                      }}
+                    >
+                      <FromError name="categoryId" />
+                    </span>
                   </div>
                 )}
 
                 <AmountDate>
-                  <label htmlFor="amount"></label>
                   <AmountField type="number" name="amount" placeholder="0.00" />
-                  <FromError name="amount" />
+                  {props.values.type === 'EXPENSE' ? (
+                    <label
+                      htmlFor="amount"
+                      style={{ position: 'absolute', top: '54%', left: '20%' }}
+                    >
+                      <FromError name="amount" />
+                    </label>
+                  ) : (
+                    <label
+                      htmlFor="amount"
+                      style={{ position: 'absolute', top: '40%', left: '20%' }}
+                    >
+                      <FromError name="amount" />
+                    </label>
+                  )}
+
                   <DateContainer>
                     <DateField
                       id="transactionDate"
@@ -246,17 +303,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
                   />
                 </div>
                 <Btn>
-                  <ButtonAdd
-                    type="submit"
-                    onClick={() => {
-                      addTransaction();
-                      setTimeout(() => {
-                        closeModal();
-                      }, 100);
-                    }}
-                  >
-                    ADD
-                  </ButtonAdd>
+                  <ButtonAdd type="submit">ADD</ButtonAdd>
                   <ButtonCancel type="button" onClick={closeModal}>
                     CANCEL
                   </ButtonCancel>
