@@ -34,6 +34,8 @@ import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import { editTransactionThunk } from 'redux/finance/finance-operations';
+import moment from 'moment';
+import { categoriesSelector } from 'redux/selectors';
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -62,7 +64,8 @@ const FromError = ({ name }) => {
 };
 
 export const EditTransactionModal = ({ closeModal, transactionData }) => {
-  console.log(transactionData);
+  const categories = useSelector(categoriesSelector);
+
   const [startDate, setStartDate] = useState(new Date());
   const initialValues = {
     operation: transactionData.type,
@@ -72,20 +75,7 @@ export const EditTransactionModal = ({ closeModal, transactionData }) => {
     comment: transactionData.comment,
   };
 
-  const dispatch = useDispatch()
-
-//   const obj = {
-//     amount: -1223,
-//     balanceAfter: 30517,
-//     categoryId: '27eb4b75-9a42-4991-a802-4aefe21ac3ce',
-//     comment: 'qweqwe',
-//     id: '9144dc36-c919-4dea-83e7-75d4d29c1ebf',
-//     transactionDate: '2022-12-02',
-//     type: 'EXPENSE',
-//     userId: 'e7d8cef8-0398-4018-8b10-2f11f7dab0ec',
-//   };
-
-  // закрытие модалки по ескейпу
+  const dispatch = useDispatch();
   useEffect(() => {
     const handleKeyDown = e => {
       if (e.code === 'Escape') {
@@ -109,19 +99,13 @@ export const EditTransactionModal = ({ closeModal, transactionData }) => {
 
   const handleChangeDate = e => {
     setStartDate(e);
-    const day = e.toLocaleDateString();
-  };
-
-  const handleChange = e => {
-    //console.log(e.target.value);
   };
 
   const handleSubmit = (values, { resetForm }) => {
-    // values.date = values.date.toLocaleDateString();
-console.log(values);
-dispatch(editTransactionThunk({id:transactionData.id,...values}));
+    const date = moment(startDate).format('YYYY-MM-DD');
 
-    // resetForm();
+    dispatch(editTransactionThunk({ id: transactionData.id, ...values, date }));
+    closeModal();
   };
 
   return createPortal(
@@ -134,30 +118,29 @@ dispatch(editTransactionThunk({id:transactionData.id,...values}));
           onSubmit={handleSubmit}
         >
           {props => {
-            console.log(props.values.operation);
             return (
               <ModalForm>
-                <Operation onChange={handleChange}>
+                <Operation>
                   <RadioFieldIncome
                     id="income"
                     type="radio"
                     checked={props.values.operation === 'INCOME'}
                     name="operation"
-                    value="Income"
+                    value="INCOME"
                   />
                   <RadioFieldExpense
                     id="expense"
                     type="radio"
                     checked={props.values.operation === 'EXPENSE'}
                     name="operation"
-                    value="Expense"
+                    value="EXPENSE"
                   />
                   <LabelIncome htmlFor="income">Income </LabelIncome>
                   <ToggleRb>
                     <Plus>
                       <CloseIcon
                         src={
-                          props.values.operation === 'Income' ? close : minus
+                          props.values.operation === 'INCOME' ? close : minus
                         }
                         width={20}
                         height={20}
@@ -168,13 +151,12 @@ dispatch(editTransactionThunk({id:transactionData.id,...values}));
                   <LabelExpense htmlFor="expense">Expense</LabelExpense>
                 </Operation>
 
-                {props.values.operation === 'Expense' && (
+                {props.values.operation === 'EXPENSE' && (
                   <div>
                     <SelectField as="select" name="transaction">
-                      <option value="1">Select a category</option>
-                      <option value="2">1</option>
-                      <option value="3">2</option>
-                      <option value="4">3</option>
+                      {categories.map(item => (
+                        <option value={item.id}>{item.name}</option>
+                      ))}
                     </SelectField>
                     <FromError name="transaction" />
                   </div>
