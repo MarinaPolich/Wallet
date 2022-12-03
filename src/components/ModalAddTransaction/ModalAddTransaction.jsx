@@ -34,6 +34,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTransaction } from 'redux/transaction/operations';
 import { getAllTransactionsThunk } from 'redux/finance/finance-operations';
+import moment from 'moment';
 
 const modalRoot = document.querySelector('#modal-root');
 const initialValues = {
@@ -113,7 +114,11 @@ export const ModalAddTransaction = ({ closeModal }) => {
   };
 
   const handleSubmit = (values, { resetForm, ...props }) => {
-    values.transactionDate = values.transactionDate.toISOString().slice(0, 10);
+    const date = moment(startDate).format('YYYY-MM-DD');
+    values.transactionDate = date;
+
+    // values.transactionDate = values.transactionDate.toISOString().slice(0, 10);
+
     values.categoryId = select;
     values.amount =
       values.type === 'EXPENSE' ? '-' + values.amount : '' + values.amount;

@@ -173,7 +173,7 @@ export const EditTransactionModal = ({ closeModal, transactionData }) => {
                       name="date"
                       selected={startDate}
                       onChange={handleChangeDate}
-                      dateFormat="yyyy.dd.MM"
+                      dateFormat="dd.MM.yyyy"
                     />
                     <FromError name="date" />
                     <IconDate htmlFor="date">
