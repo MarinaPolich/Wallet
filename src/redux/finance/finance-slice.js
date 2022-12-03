@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
   addTransactionThunk,
+  deleteTransactionThunk,
+  editTransactionThunk,
   getAllTransactionsThunk,
 } from './finance-operations';
 const initialState = {
@@ -41,7 +43,48 @@ const financeSlice = createSlice({
       .addCase(addTransactionThunk.rejected, (state, action) => {
         state.error = action.payload;
         state.isLoading = false;
+      })
+
+      .addCase(deleteTransactionThunk.pending, state => {
+        state.isLoading = true;
+      })
+
+      .addCase(deleteTransactionThunk.fulfilled, (state, action) => {
+        state.transactions = state.transactions.filter(transaction => transaction.id !== action.payload);
+        state.isLoading = false;
+        state.error = '';
+      })
+
+      .addCase(deleteTransactionThunk.rejected, (state, action) => {
+        state.error = action.payload;
+        state.isLoading = false;
+      })
+
+
+      .addCase(editTransactionThunk.pending, state => {
+        state.isLoading = true;
+      })
+
+      .addCase(editTransactionThunk.fulfilled, (state, action) => {
+        console.log('action.payload', action.payload)
+        
+        state.transactions = state.transactions.map(item => {
+            if(item.id === action.payload.id) {
+                return action.payload;
+            }
+            return item;
+        })
+        state.isLoading = false;
+        state.error = '';
+      })
+
+      .addCase(editTransactionThunk.rejected, (state, action) => {
+        state.error = action.payload;
+        state.isLoading = false;
       });
+
+
+      
   },
 });
 

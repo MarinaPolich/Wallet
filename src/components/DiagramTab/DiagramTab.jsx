@@ -267,7 +267,7 @@ const DiagramTab = () => {
                 .filter(el => el.total < 0)
                 .map(({ name, total }, i) => (
                   <Category
-                    key="name"
+                    key={name}
                     col={colors[i]}
                     onClick={getMoreInfo}
                     data-name={name}

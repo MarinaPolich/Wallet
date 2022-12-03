@@ -2,14 +2,20 @@ import styled from 'styled-components';
 import { device } from 'stylesheet/breakpoints';
 
 export const Section = styled.section`
+  @media ${device.tablet} {
+    max-height: calc(100vh - 340px);
+    overflow-y: auto;
+  }
   @media ${device.desktop} {
     padding-top: 46px;
-    padding-left: 69px;
+    padding-left: 20px; // 69
+    max-height: calc(100vh - 130px);
+    overflow-y: auto;
   }
 `;
 
 export const StyledTable = styled.table`
-  width: 704px;
+  width: 688px; // 704
   padding-left: 20px;
   padding-right: 20px;
   border-spacing: 0;
@@ -101,4 +107,16 @@ export const BalanceTd = styled.td`
   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
 
   text-align: right;
+`;
+
+export const StyledDelButton = styled.button`
+  border: none;
+  display: inline-flex;
+  align-items: center;
+`;
+
+export const StyledSpan = styled.span`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 `;

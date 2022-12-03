@@ -25,7 +25,6 @@ export const Box = styled.div`
   @media ${device.desktop} {
     width: ${desktop}px;
     display: flex;
-
     padding: 40px 40px 40px 0;
   }
 `;

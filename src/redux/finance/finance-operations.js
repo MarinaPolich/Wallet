@@ -32,3 +32,40 @@ export const addTransactionThunk = createAsyncThunk(
     }
   }
 );
+
+export const deleteTransactionThunk = createAsyncThunk(
+  'finance/deleteTransaction',
+  async (transactionId, thunkAPI) => {
+    try {
+      await axios.delete(
+        `https://wallet.goit.ua/api/transactions/${transactionId}`
+      );
+
+      return transactionId;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const editTransactionThunk = createAsyncThunk(
+  'finance/editTransaction',
+  async (transactionData, thunkAPI) => {
+    try {
+      const response = await axios.patch(
+        `https://wallet.goit.ua/api/transactions/${transactionData.id}`,
+        {
+          transactionDate: transactionData.date,
+          type: transactionData.operation,
+          categoryId: transactionData.transaction,
+          comment: transactionData.comment,
+          amount: transactionData.sum,
+        }
+      );
+      console.log('response.data :>> ', response.data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
