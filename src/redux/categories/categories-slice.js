@@ -30,6 +30,11 @@ const categoriesSlice = createSlice({
               state.isLoading = false;
               
             })
+
+
+          
+
+
       }})
   
             export const categoriesReducer = categoriesSlice.reducer;

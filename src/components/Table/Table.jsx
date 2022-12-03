@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { BsFillTrashFill, BsPencilSquare} from "react-icons/bs";
 
 import {
+  StyledDelButton,
+  StyledSpan,
   StyledTable,
   StyledTd,
   StyledTh,
@@ -13,16 +16,38 @@ import {
 
 import moment from 'moment';
 import {
-  addTransactionThunk,
+  
+  deleteTransactionThunk,
   getAllTransactionsThunk,
 } from 'redux/finance/finance-operations';
 import { useEffect } from 'react';
 import { categoriesSelector, transactionsSelector } from 'redux/selectors';
+import { sortByDate } from 'assets/helpers/sorters';
+import { EditTransactionModal } from 'components/EditTransactionModal/EditTransactionModal';
 
 export default function Table() {
+
+
+
+  const [editTransactionId, setEditTransactionId] = useState("");
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen(isModalOpen => !isModalOpen);
+  };
+
+  const openModal = (itemId) => {
+    setEditTransactionId(itemId)
+    setIsModalOpen(true);
+  }
+
   const transactions = useSelector(transactionsSelector);
+  const sortedTransactions = [...transactions].sort(sortByDate)
+
   const categories = useSelector(categoriesSelector);
-  const reversed = arr => arr.map((_, index) => arr[arr.length - 1 - index]);
+
+  
 
   const searchCategoryName = id => {
     const category = categories.find(item => id === item.id);
@@ -34,17 +59,11 @@ export default function Table() {
     dispatch(getAllTransactionsThunk());
   }, [dispatch]);
 
-  const addTransaction = () => {
-    dispatch(
-      addTransactionThunk({
-        transactionDate: '2022-11-02',
-        type: 'INCOME',
-        categoryId: '063f1132-ba5d-42b4-951d-44011ca46262',
-        comment: 'salary',
-        amount: 10500,
-      })
-    );
-  };
+  const deleteTransaction = (itemId) => {
+    dispatch(deleteTransactionThunk(itemId))
+  }
+
+
   return (
     <section>
       <StyledTable>
@@ -59,7 +78,7 @@ export default function Table() {
           </THeadRow>
         </THead>
         <tbody>
-          {reversed(transactions).map(item => (
+          {sortedTransactions.map(item => (
             <StyledTr key={item.id}>
               <StyledTd position={'left'}>
                 {moment(item.transactionDate).format('DD.MM.YY')}
@@ -72,15 +91,14 @@ export default function Table() {
               <TSum income={item.type === 'INCOME'} position={'right'}>
                 {item.amount}
               </TSum>
-              <StyledTd position={'right'}>{item.balanceAfter}</StyledTd>
+              <StyledTd position={'right'}><StyledSpan>{item.balanceAfter} <StyledDelButton type="button" onClick={()=> deleteTransaction(item.id)}><BsFillTrashFill color="#FF6596"/></StyledDelButton><StyledDelButton onClick={()=> openModal(item.id)}><BsPencilSquare color="#24CCA7"/></StyledDelButton></StyledSpan></StyledTd>
+
             </StyledTr>
           ))}
         </tbody>
       </StyledTable>
 
-      <button onClick={addTransaction} type="button">
-        +
-      </button>
+      { isModalOpen && <EditTransactionModal transactionData={transactions.find(item=>  item.id === editTransactionId)} closeModal={toggleModal} />}
     </section>
   );
 }

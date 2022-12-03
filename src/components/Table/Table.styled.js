@@ -10,7 +10,7 @@ export const THead = styled.thead``;
 export const THeadRow = styled.tr``;
 
 export const StyledTh = styled.th`
-  background-color: green;
+  background-color: white;
   padding: 16px 20px;
   max-width: 148px;
   text-align: ${props => props.position};
@@ -31,7 +31,6 @@ export const StyledTd = styled.td`
   text-align: ${props => props.position};
   padding: 14px 20px;
   max-width: 148px;
-
   border-bottom: 1px solid #dcdcdf;
   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
 `;
@@ -45,3 +44,16 @@ export const TSum = styled.td`
   max-width: 148px;
   padding: 14px 20px;
 `;
+
+
+export const StyledDelButton = styled.button`
+border: none;
+display: inline-flex;
+align-items: center;
+`
+
+export const StyledSpan = styled.span`
+display: flex;
+justify-content: flex-end;
+align-items: center;
+`
