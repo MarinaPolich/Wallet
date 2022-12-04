@@ -17,7 +17,8 @@ export const ButtonAddTransactions = () => {
           <CloseIcon src={close} width={20} height={20} title="Close" />
         </SpanBtn>
       </Button>
-      {isModalOpen && <ModalAddTransaction closeModal={toggleModal} />}
+      {isModalOpen && <ModalAddTransaction closeModal={toggleModal}
+       />}
     </>
   );
 };

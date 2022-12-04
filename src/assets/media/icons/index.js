@@ -15,6 +15,9 @@ import ellipseLeft from './ellipse-left.svg';
 import ellipseRight from './ellipse-right.svg';
 import ellipseLeftD from './ellipse-leftD.svg';
 import ellipseRightD from './ellipse-rightD.svg';
+import diagram from './diagram.svg';
+import diagramTab from './diagramTab.svg';
+import diagramMob from './diagramMob.svg';
 
 export {
   logo,
@@ -34,4 +37,7 @@ export {
   ellipseLeftD,
   ellipseRight,
   ellipseRightD,
+  diagram,
+  diagramTab,
+  diagramMob,
 };

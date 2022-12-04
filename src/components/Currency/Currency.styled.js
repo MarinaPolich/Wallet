@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { device } from 'stylesheet/breakpoints';
+import SVG from 'react-inlinesvg';
 
 export const Box = styled.div`
+  position: relative;
   display: inline-block;
   width: 280px;
 
@@ -29,24 +31,16 @@ export const Table = styled.table`
   background-color: var(--active-bg-color);
   color: var(--white);
 
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.2) -8.67%,
-    rgba(255, 255, 255, 0) 116.22%
-  );
-
   @media ${device.tablet} {
+    height: 182px;
     margin: 0;
     border-bottom: 22px solid var(--active-bg-color);
   }
 
   @media ${device.desktop} {
     margin: 0;
-
     width: 393px;
-
     border-spacing: 40px solid var(--active-bg-color);
-
     border-bottom: 143px solid var(--active-bg-color);
   }
 `;
@@ -95,4 +89,9 @@ export const Td = styled.td`
 
 export const Tr = styled.tr`
   border: 0;
+`;
+
+export const TableIcon = styled(SVG)`
+  position: absolute;
+  bottom: 0;
 `;

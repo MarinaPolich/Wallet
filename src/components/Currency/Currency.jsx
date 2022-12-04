@@ -12,8 +12,13 @@ import {
   LoadBox,
   Tr,
   Td,
+  TableIcon,
 } from './Currency.styled';
 import { CurrencyAllRate } from 'components/CurrencyAllRate/CurrencyAllRate';
+import { diagram, diagramTab, diagramMob } from 'assets/media/icons';
+import { Tablet } from 'components/Container/Tablet';
+import { Desktop } from 'components/Container/Desktop';
+import { Mobile } from 'components/Container/Mobile';
 
 export const Currency = () => {
   const currency = useSelector(selectCurrency);
@@ -74,6 +79,15 @@ export const Currency = () => {
         More info
       </button>
       {moreinfo && <CurrencyAllRate closeFunck={setMoreinfo} />}
+      <Mobile>
+        <TableIcon src={diagramMob} width={280} height={93} />
+      </Mobile>
+      <Tablet>
+        <TableIcon src={diagramTab} width={336} height={119} />
+      </Tablet>
+      <Desktop>
+        <TableIcon src={diagram} width={393} height={134} />
+      </Desktop>
     </Box>
   );
 };

@@ -2,15 +2,23 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SVG from 'react-inlinesvg';
 import { device } from 'stylesheet/breakpoints';
+
 export const Container = styled.div`
-  background-color: white;
-  width: 320px;
-  heigth: 100vh;
+  background-color: var(--white);
   padding: 107px 20px;
-  @media ${device.tablet} {
+  @media ${device.tabDesk} {
     width: 533px;
     border-radius: 20px;
     padding: 40px 59px 62px 65px;
+  }
+  @media ${device.mobile} {
+    width: 100vw;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 `;
 export const Title = styled.h2`
@@ -33,22 +41,25 @@ export const Form = styled.form`
   align-items: center;
 `;
 export const Label = styled.label`
-  margin-bottom: 32px;
+  margin-top: 32px;
+  &:first-child {
+    margin-top: 0;
+  }
 `;
 export const Input = styled.input`
   width: 280px;
   border: none;
   outline: 0;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--gray-5);
   font-family: 'Circe';
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 1.5;
-  color: #bdbdbd;
+  color: var(--gray-4);
   padding-left: 45px;
   padding-bottom: 8px;
-  @media ${device.tablet} {
+  @media ${device.tabDesk} {
     width: 410px;
   }
 `;
@@ -58,7 +69,7 @@ export const TextError = styled.p`
   font-weight: 400;
   font-size: 18px;
   line-height: 1.5;
-  color: #24cca7;
+  color: var(--btn-bg-color);
   margin-top: 5px;
 `;
 export const Svg = styled(SVG)`
@@ -73,14 +84,15 @@ export const Button = styled.button`
   letter-spacing: 0.1em;
   text-transform: uppercase;
 
-  color: #ffffff;
+  color: var(--white);
   width: 280px;
   height: 50px;
   margin-bottom: 20px;
-  background-color: #24cca7;
+  margin-top: 40px;
+  background-color: var(--btn-bg-color);
   border: none;
   border-radius: 20px;
-  @media ${device.tablet} {
+  @media ${device.tabDesk} {
     width: 300px;
   }
 `;
@@ -96,13 +108,27 @@ export const StyledLink = styled(Link)`
   align-items: center;
   justify-content: center;
 
-  color: #4a56e2;
+  color: var(--active-bg-color);
   width: 280px;
   height: 50px;
-  background-color: #ffffff;
+  background-color: var(--white);
   border: 1px solid #4a56e2;
+  border: 1px solid var(--active-bg-color);
   border-radius: 20px;
-  @media ${device.tablet} {
+  @media ${device.tabDesk} {
     width: 300px;
+  }
+`;
+export const Test = styled.div`
+  width: 280px;
+  margin-top: 8px;
+  border: 4px solid #e5f1ef;
+  box-shadow: 0px 1px 8px rgba(36, 204, 167, 0.5);
+  border-radius: 4px;
+  border: ${({ status }) => {
+    return status ? '4px solid var(--btn-bg-color)' : '4px solid red';
+  }};
+  @media ${device.tabDesk} {
+    width: 410px;
   }
 `;

@@ -1,10 +1,46 @@
 import { LoginForm } from 'components/LoginForm/LoginForm';
-import {Container} from './Login.styled'
+import { Container, ImgBox, Title, Box } from './Login.styled';
+import {
+  frameManDesk,
+  frameManDesk2x,
+  frameManDesk3x,
+  frameManTab,
+  frameManTab2x,
+  frameManTab3x,
+} from '../assets/media/images/index.js';
+import { Tablet } from 'components/Container/Tablet';
+import { Desktop } from 'components/Container/Desktop';
 const Login = () => {
   return (
-    <Container>
-      <LoginForm />
-    </Container>
+    <Box>
+      {/* {' '} */}
+      <ImgBox>
+        {/* {' '} */}
+        <Tablet>
+          <img
+            src={frameManTab}
+            alt="Finance"
+            width="260"
+            height="250"
+            srcSet={` ${frameManTab2x} 2x, ${frameManTab3x} 3x`}
+          />
+          <Title>Finance App</Title>
+        </Tablet>
+        <Desktop>
+          <img
+            src={frameManDesk}
+            alt="Finance"
+            width="435"
+            height="419"
+            srcSet={`${frameManDesk2x} 2x, ${frameManDesk3x} 3x`}
+          />
+          <Title>Finance App</Title>
+        </Desktop>{' '}
+      </ImgBox>
+      <Container>
+        <LoginForm />
+      </Container>
+    </Box>
   );
 };
 

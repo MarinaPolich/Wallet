@@ -15,6 +15,7 @@ body {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
+  background-color: var(--bg-color);
 
    @media ${device.tablet} {
     background: url(${ellipseRight}), url(${ellipseLeft}), linear-gradient(var(--bg-color), var(--bg-color));
