@@ -115,10 +115,10 @@ export const TableIcon = styled(SVG)`
   position: absolute;
   top: 50%;
   left: 0;
-  transform: translate(0, 10%);
+  transform: translate(0, -25%);
 
   @media ${device.tablet} {
-    transform: translate(0, -15%);
+    transform: translate(0, -35%);
   }
 
   @media ${device.desktop} {
