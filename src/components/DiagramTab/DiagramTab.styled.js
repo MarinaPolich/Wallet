@@ -6,6 +6,7 @@ export const Box = styled.div`
     padding-left: 69px;
   }
 `;
+
 export const Statistic = styled.div`
   display: flex;
   @media screen and (max-width: 768.99px) {
@@ -15,7 +16,6 @@ export const Statistic = styled.div`
 `;
 export const Diagram = styled.div`
   position: relative;
-  width: 280px;
   margin-left: 16px;
 
   @media screen and (min-width: 768.99px) {
@@ -56,13 +56,6 @@ export const Balance = styled.div`
 `;
 export const Table = styled.div`
   margin-top: 25px;
-  width: 280px;
-  @media screen and (min-width: 768.99px) {
-    width: 336px;
-  }
-  @media screen and (min-width: 1279.99px) {
-    width: 396px;
-  }
 `;
 
 export const StyledForm = styled.form`
@@ -180,6 +173,19 @@ export const HeaderText = styled.div`
     padding-right: 28px;
   }
 `;
+export const Data = styled.ul`
+  scrollbar-width: thin;
+  min-height: 100px;
+  @media screen and (min-width: 768.99px) {
+    max-height: calc(100vh - 590px);
+    overflow-y: auto;
+  }
+  @media screen and (min-width: 1279.99px) {
+    max-height: calc(100vh - 360px);
+    overflow-y: auto;
+  }
+`;
+
 export const Category = styled.li`
   display: flex;
   justify-content: start;

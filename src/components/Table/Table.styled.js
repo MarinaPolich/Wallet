@@ -71,8 +71,6 @@ export const StyledTd = styled.td`
   padding-left: 20px;
   border-bottom: 1px solid #dcdcdf;
   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
-
-  /* text-align: right; */
 `;
 
 export const TypeTd = styled.td`
@@ -80,7 +78,6 @@ export const TypeTd = styled.td`
   padding-bottom: 16px;
   border-bottom: 1px solid #dcdcdf;
   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
-
   text-align: center;
 `;
 
@@ -105,18 +102,6 @@ export const BalanceTd = styled.td`
   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
 
   text-align: right;
-`;
-
-export const StyledDelButton = styled.button`
-  border: none;
-  display: inline-flex;
-  align-items: center;
-`;
-
-export const StyledSpan = styled.span`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
 `;
 
 export const List = styled.ul`
@@ -147,7 +132,6 @@ export const ListItem = styled.li`
 
   &:not(:last-child) {
     border-bottom: 1px solid #dcdcdf;
-    /* transform: matrix(0, 1, 1, 0, 0, 0); */
   }
 `;
 
@@ -161,4 +145,77 @@ export const ListText = styled.span`
 export const ListSum = styled.span`
   color: ${props =>
     props.income ? 'var(--btn-bg-color)' : 'var(--error-color)'};
+`;
+
+export const ActionContainer = styled.div`
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  transition: all 250ms linear;
+`;
+
+export const StyledDelButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+
+  cursor: pointer;
+  transition: background-color 250ms linear;
+
+  @media ${device.mobile} {
+    &:not(:last-child) {
+      margin-right: 50px;
+    }
+  }
+
+  &:hover,
+  :focus {
+    background-color: var(--gray-5);
+  }
+
+  @media ${device.tabDesk} {
+    margin-right: 0;
+    padding: 14px 20px;
+    background-color: var(--bg-color);
+    transform: translateY(-70%);
+  }
+`;
+
+export const StyledSpan = styled.span`
+  background-color: transparent;
+`;
+
+export const TR = styled.tr`
+  position: relative;
+  transition: all 250ms linear;
+
+  @media ${device.tabDesk} {
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: rgba(0, 0, 0, 0.15);
+      ${ActionContainer} {
+        opacity: 1;
+      }
+    }
+  }
+`;
+
+export const ListItemBtn = styled.li`
+  display: flex;
+  justify-content: center;
+  padding-top: 12px;
+  padding-left: 20px;
+  padding-bottom: 8px;
+  padding-right: 20px;
+
+  font-family: 'Circe';
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.5;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #dcdcdf;
+  }
 `;

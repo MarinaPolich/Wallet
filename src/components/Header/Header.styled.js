@@ -5,6 +5,8 @@ import { device } from 'stylesheet/breakpoints';
 import { desktop, tablet } from 'constants/responsive';
 
 export const Box = styled.div`
+  position: fixed;
+  top: 0;
   display: flex;
   justify-content: center;
   width: 100%;

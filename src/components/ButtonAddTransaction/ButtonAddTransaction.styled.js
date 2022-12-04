@@ -3,7 +3,7 @@ import SVG from 'react-inlinesvg';
 import { device } from 'stylesheet/breakpoints';
 
 export const Button = styled.button`
-  position: absolute;
+  position: fixed;
   right: 20px;
   bottom: 20px;
   border-radius: 50%;
@@ -20,17 +20,6 @@ export const Button = styled.button`
   }
 `;
 export const SpanBtn = styled.span`
-  /* position: absolute;
-  top: 22%;
-  left: 25%;
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  margin: 0;
-  color: #ffffff;
-  font-size: 40px;
-  font-weight: 100; 
-  text-align: center; */
   display: flex;
   align-items: center;
   justify-content: center;

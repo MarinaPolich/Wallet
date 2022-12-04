@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BsFillTrashFill, BsPencilSquare } from 'react-icons/bs';
 import { Mobile } from 'components/Container/Mobile';
 import { IsDesktopOrTablet } from 'components/Container/Tablet';
-
 import {
   StyledDelButton,
   StyledSpan,
@@ -21,6 +20,9 @@ import {
   ListItem,
   ListText,
   ListSum,
+  ActionContainer,
+  TR,
+  ListItemBtn,
 } from './Table.styled';
 
 import moment from 'moment';
@@ -30,7 +32,8 @@ import {
 } from 'redux/finance/finance-operations';
 import { useEffect } from 'react';
 import { categoriesSelector, transactionsSelector } from 'redux/selectors';
-import { sortByDate } from 'helpers/sorters';
+// import { sortByDate } from 'helpers/sorters';
+
 import { EditTransactionModal } from 'components/EditTransactionModal/EditTransactionModal';
 
 export default function Table() {
@@ -48,13 +51,13 @@ export default function Table() {
   };
 
   const transactions = useSelector(transactionsSelector);
-  const sortedTransactions = [...transactions].sort(sortByDate);
+  const sortedTransactions = [...transactions].reverse(); //.sort(sortByDate);
 
   const categories = useSelector(categoriesSelector);
 
   const searchCategoryName = id => {
     const category = categories.find(item => id === item.id);
-    console.log('category', category);
+    // console.log('category', category);
     return category?.name;
   };
   const dispatch = useDispatch();
@@ -83,7 +86,7 @@ export default function Table() {
           </THead>
           <Tbody>
             {sortedTransactions.map(item => (
-              <tr key={item.id}>
+              <TR key={item.id}>
                 <StyledTd>
                   {moment(item.transactionDate).format('DD.MM.YY')}
                 </StyledTd>
@@ -94,20 +97,20 @@ export default function Table() {
                   {item.amount.toFixed(2)}
                 </TSum>
                 <BalanceTd>
-                  <StyledSpan>
-                    {item.balanceAfter.toFixed(2)}{' '}
+                  <StyledSpan>{item.balanceAfter.toFixed(2)} </StyledSpan>
+                  <ActionContainer>
+                    <StyledDelButton onClick={() => openModal(item.id)}>
+                      <BsPencilSquare size={30} color="#a6a6a6" />
+                    </StyledDelButton>
                     <StyledDelButton
                       type="button"
                       onClick={() => deleteTransaction(item.id)}
                     >
-                      <BsFillTrashFill color="#FF6596" />
+                      <BsFillTrashFill size={30} color="#a6a6a6" />
                     </StyledDelButton>
-                    <StyledDelButton onClick={() => openModal(item.id)}>
-                      <BsPencilSquare color="#24CCA7" />
-                    </StyledDelButton>
-                  </StyledSpan>
+                  </ActionContainer>
                 </BalanceTd>
-              </tr>
+              </TR>
             ))}
           </Tbody>
         </StyledTable>
@@ -140,6 +143,17 @@ export default function Table() {
             <ListItem>
               Balance <ListText>{item.balanceAfter.toFixed(2)}</ListText>
             </ListItem>
+            <ListItemBtn>
+              <StyledDelButton onClick={() => openModal(item.id)}>
+                <BsPencilSquare size={30} color="#a6a6a6" />
+              </StyledDelButton>
+              <StyledDelButton
+                type="button"
+                onClick={() => deleteTransaction(item.id)}
+              >
+                <BsFillTrashFill size={30} color="#a6a6a6" />
+              </StyledDelButton>
+            </ListItemBtn>
           </List>
         ))}
       </Mobile>

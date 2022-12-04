@@ -50,14 +50,13 @@ export const editTransactionThunk = createAsyncThunk(
       const response = await axios.patch(
         `/api/transactions/${transactionData.id}`,
         {
-          transactionDate: transactionData.date,
-          type: transactionData.operation,
-          categoryId: transactionData.transaction,
+          transactionDate: transactionData.transactionDate,
+          type: transactionData.type,
+          categoryId: transactionData.categoryId,
           comment: transactionData.comment,
-          amount: transactionData.sum,
+          amount: transactionData.amount,
         }
       );
-      console.log('response.data :>> ', response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

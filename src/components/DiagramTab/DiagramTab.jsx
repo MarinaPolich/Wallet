@@ -17,6 +17,7 @@ import {
   Title,
   Table,
   Diagram,
+  Data,
 } from './DiagramTab.styled';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
@@ -273,7 +274,7 @@ const DiagramTab = () => {
                 </HeaderText>
               </TableHeader>
 
-              <ul>
+              <Data>
                 {summary.categoriesSummary
                   .filter(el => el.total < 0)
                   .map(({ name, total }, i) => (
@@ -287,7 +288,7 @@ const DiagramTab = () => {
                       <div>{name}</div> <div>{-total}</div>
                     </Category>
                   ))}
-              </ul>
+              </Data>
               <Total>
                 <div style={{ fontWeight: 700 }}>Expenses:</div>
                 <div style={{ fontWeight: 700, color: '#FF6596' }}>

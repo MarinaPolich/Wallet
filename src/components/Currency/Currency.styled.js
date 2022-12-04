@@ -8,15 +8,24 @@ export const Box = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  padding-bottom: 10px;
   margin-left: auto;
   margin-right: auto;
 
+  height: 200px;
+  overflow: hidden;
+  background-color: var(--active-bg-color);
+  border-radius: 30px;
+
   @media ${device.tablet} {
     width: 336px;
+    height: 200px;
   }
 
   @media ${device.desktop} {
     width: 393px;
+    height: 393px;
   }
 `;
 
@@ -34,16 +43,16 @@ export const Table = styled.table`
   color: var(--white);
 
   @media ${device.tablet} {
-    height: 182px;
+    height: 174px;
     margin: 0;
-    border-bottom: 22px solid var(--active-bg-color);
+    border-bottom: 12px solid var(--active-bg-color);
   }
 
   @media ${device.desktop} {
     margin: 0;
     width: 393px;
     border-spacing: 40px solid var(--active-bg-color);
-    border-bottom: 143px solid var(--active-bg-color);
+    border-bottom: 1px solid var(--active-bg-color);
   }
 `;
 
@@ -92,18 +101,27 @@ export const Td = styled.td`
 export const Tr = styled.tr`
   border: 0;
 `;
+export const Btn = styled.button`
+  background-color: var(--disable-bg-color);
+  border: 0;
+  border-radius: 30px;
+  padding: 5px 10px;
+  color: #fff;
+  /* border-top-right-radius: 3px; */
+  cursor: pointer;
+`;
 
 export const TableIcon = styled(SVG)`
   position: absolute;
   top: 50%;
   left: 0;
-  transform: translate(0, -25%);
+  transform: translate(0, 10%);
 
   @media ${device.tablet} {
-    transform: translate(0, -35%);
+    transform: translate(0, -15%);
   }
 
   @media ${device.desktop} {
-    transform: translate(0, 20%);
+    transform: translate(0, 48%);
   }
 `;

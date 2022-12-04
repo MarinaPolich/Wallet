@@ -5,7 +5,6 @@ import { Currency } from 'components/Currency/Currency';
 import { Header } from 'components/Header/Header';
 import { Loader } from 'components/Loader/Loader';
 import { Navigation } from 'components/Navigation/Navigation';
-import { ButtonAddTransactions } from 'components/ButtonAddTransaction/ButtonAddTransaction';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCategoriesThunk } from 'redux/categories/categories-operations';
@@ -41,7 +40,6 @@ const Dashboard = () => {
             <Outlet />
           </Suspense>
         </div>
-        <ButtonAddTransactions />
       </Box>
     </Container>
   ) : (

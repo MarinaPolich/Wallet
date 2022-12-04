@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'; //
 import { useDispatch, useSelector } from 'react-redux';
 import { RotatingLines } from 'react-loader-spinner';
 import { fetchCurrency } from 'redux/currency/operations';
@@ -13,6 +13,7 @@ import {
   Tr,
   Td,
   TableIcon,
+  Btn,
 } from './Currency.styled';
 import { CurrencyAllRate } from 'components/CurrencyAllRate/CurrencyAllRate';
 import { diagram, diagramTab, diagramMob } from 'assets/media/icons';
@@ -28,7 +29,6 @@ export const Currency = () => {
   useEffect(() => {
     dispatch(fetchCurrency());
   }, [dispatch]);
-
   return (
     <Box>
       <Table>
@@ -40,7 +40,7 @@ export const Currency = () => {
           </tr>
         </Thead>
         <Tbody>
-          {loading && currency?.length > 0 ? (
+          {loading ? (
             <Tr>
               <td colSpan="3">
                 <LoadBox>
@@ -55,30 +55,33 @@ export const Currency = () => {
               </td>
             </Tr>
           ) : (
-            <>
-              <Tr>
-                <Td>USD</Td>
-                <Td>{currency[0].rateBuy.toFixed(2)}</Td>
-                <Td>{currency[0].rateSell.toFixed(2)}</Td>
-              </Tr>
-              <Tr>
-                <Td>EUR</Td>
-                <Td>{currency[1].rateBuy.toFixed(2)}</Td>
-                <Td>{currency[1].rateSell.toFixed(2)}</Td>
-              </Tr>
-              <Tr>
-                <Td>EUR/USD</Td>
-                <Td>{currency[2].rateBuy.toFixed(2)}</Td>
-                <Td>{currency[2].rateSell.toFixed(2)}</Td>
-              </Tr>
-            </>
+            currency?.length > 0 && (
+              <>
+                <Tr>
+                  <Td>USD</Td>
+                  <Td>{currency[0].rateBuy.toFixed(2)}</Td>
+                  <Td>{currency[0].rateSell.toFixed(2)}</Td>
+                </Tr>
+                <Tr>
+                  <Td>EUR</Td>
+                  <Td>{currency[1].rateBuy.toFixed(2)}</Td>
+                  <Td>{currency[1].rateSell.toFixed(2)}</Td>
+                </Tr>
+                <Tr>
+                  <Td>EUR/USD</Td>
+                  <Td>{currency[2].rateBuy.toFixed(2)}</Td>
+                  <Td>{currency[2].rateSell.toFixed(2)}</Td>
+                </Tr>
+              </>
+            )
           )}
         </Tbody>
       </Table>
-      <button type="button" onClick={() => setMoreinfo(true)}>
-        More info
-      </button>
+      <Btn type="button" onClick={() => setMoreinfo(true)}>
+        more info
+      </Btn>
       {moreinfo && <CurrencyAllRate closeFunck={setMoreinfo} />}
+
       <Mobile>
         <TableIcon src={diagramMob} width={280} height={93} />
       </Mobile>
