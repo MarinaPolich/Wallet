@@ -80,7 +80,7 @@ export const ToggleRb = styled.div`
   position: relative;
   height: 40px;
   width: 80px;
-  background-color: var(--white);
+  background-color: white;
   border: 1px solid var(--gray-5);
   border-radius: 30px;
   transition: all 500ms;
