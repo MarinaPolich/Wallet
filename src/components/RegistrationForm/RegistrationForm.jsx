@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik } from 'formik';
 import { registration } from '../../redux/auth/auth-operations';
 import { useDispatch } from 'react-redux';
+import PasswordStrengthBar from 'react-password-strength-bar';
 import * as Yup from 'yup';
 import {
   Form,
@@ -13,7 +14,7 @@ import {
   Button,
   StyledLink,
   LogoSvg,
-  TextError,Test
+  TextError
 } from './RegistrationForm.styled.js';
 import { logo, email, lock, account } from 'assets/media/icons';
 export const RegistrationForm = () => {
@@ -22,6 +23,11 @@ export const RegistrationForm = () => {
     dispatch(registration({ email, password, username }));
     resetForm();
   };
+ // const validForm = (value) => {
+ //  const good = { width: '100%', border: '4px solid var(--btn-bg-color)' }
+ //    console.log(value.length);
+ //    if (value.length === 6 ) return setValid(good);
+ // }
   const RegistrationSchema = Yup.object().shape({
     email: Yup.string().email().required('Enter email'),
     password: Yup.string()
@@ -81,6 +87,7 @@ export const RegistrationForm = () => {
                 onChange={handleChange}
                 placeholder="Password"
               />
+               <PasswordStrengthBar password={values.password} barColors={['#e0e0e0', 'red', 'orange', '#4a56e2', '#24cca7']}  minLength={6}  maxLength={12}/>
               {errors.password && touched.password ? (
                 <TextError>{errors.password}</TextError>
               ) : null}
@@ -93,11 +100,14 @@ export const RegistrationForm = () => {
                 value={values.confirm}
                 onChange={handleChange}
                 placeholder="Confirm password"
-              /><Test status={values.password === values.confirm}></Test>
+              />
+              <PasswordStrengthBar password={values.confirm} barColors={['#e0e0e0', 'red', 'orange', '#4a56e2', '#24cca7']} shortScoreWord={''} scoreWords={[]} minLength={6}  maxLength={12}/>
               {errors.confirm && touched.confirm ? (
                 <TextError>{errors.confirm}</TextError>
               ) : null}
             </Label>
+           
+            
             <Label>
               <Svg src={account} width={30} height={28} title="Account" />
               <Input
@@ -119,3 +129,4 @@ export const RegistrationForm = () => {
     </Formik>
   );
 };
+// <Test validate={validForm("cataaa")} status={valid}></Test>

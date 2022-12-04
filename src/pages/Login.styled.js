@@ -2,13 +2,14 @@ import styled from 'styled-components';
 import { device } from 'stylesheet/breakpoints';
 
 export const Box = styled.div`
+    height: 100vh;
   @media ${device.tablet} {
     padding: 60px 0 196px 0;
   }
   @media ${device.desktop} {
     display: flex;
-    justify-content: space-around;
-    padding: 136px 0 116px 0;
+    justify-content: space-evenly;
+    align-items: center;
   }
 `;
 
@@ -18,26 +19,30 @@ export const Container = styled.div`
   align-items: center;
 
   @media ${device.desktop} {
-    width: 533px;
+     width: 100%;
+    height: 100vh;
+      background-color: rgba(255, 255, 255, 0.4);
+
     // position: fixed;
     // top: 0;
     // right: 0;
     /* width: calc(100% * 0.57); */
-    background-color: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(25px);
   }
 `;
 
 export const ImgBox = styled.div`
   display: flex;
+   align-items: center;
+    justify-content: center;
   @media ${device.tablet} {
     flex-direction: row;
     margin-bottom: 50px;
-    align-items: center;
-    justify-content: center;
+   
   }
   @media ${device.desktop} {
     flex-direction: column;
+    width: 100%;
   }
 `;
 export const Title = styled.h2`
