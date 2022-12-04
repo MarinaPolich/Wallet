@@ -87,7 +87,7 @@ export const RegistrationForm = () => {
                 onChange={handleChange}
                 placeholder="Password"
               />
-               <PasswordStrengthBar password={values.password}  minLength={6}  maxLength={12}/>
+               <PasswordStrengthBar password={values.password} barColors={['#e0e0e0', 'red', 'orange', '#4a56e2', '#24cca7']}  minLength={6}  maxLength={12}/>
               {errors.password && touched.password ? (
                 <TextError>{errors.password}</TextError>
               ) : null}
@@ -101,7 +101,7 @@ export const RegistrationForm = () => {
                 onChange={handleChange}
                 placeholder="Confirm password"
               />
-              <PasswordStrengthBar password={values.confirm} shortScoreWord={''} scoreWords={[]} minLength={6}  maxLength={12}/>
+              <PasswordStrengthBar password={values.confirm} barColors={['#e0e0e0', 'red', 'orange', '#4a56e2', '#24cca7']} shortScoreWord={''} scoreWords={[]} minLength={6}  maxLength={12}/>
               {errors.confirm && touched.confirm ? (
                 <TextError>{errors.confirm}</TextError>
               ) : null}
