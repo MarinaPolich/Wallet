@@ -131,6 +131,7 @@ export const StyledVscChevronDown = styled(VscChevronDown)`
     transform: translate(-20px, -50%) rotate(180deg);
   }
   z-index: 0;
+ 
 `;
 
 export const TableHeader = styled.div`
@@ -148,6 +149,10 @@ export const HeaderText = styled.div`
   padding-right: 15px;
   line-height: 58px;
   cursor: pointer;
+  &:hover,
+  &:focus {
+    color: rgb(36, 204, 167);
+  }
   @media screen and (min-width: 768.99px) {
     padding-left: 20px;
     padding-right: 20px;
