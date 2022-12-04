@@ -7,12 +7,16 @@ export const Container = styled.div`
   width: 100%;
   height: 100vh;
   margin: 0 auto;
-  overflow: hidden;
   background-color: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(25px);
+
+  @media ${device.tabDesk} {
+    overflow: hidden;
+  }
 `;
 
 export const Box = styled.div`
+  position: relative;
   width: 100%;
   margin: 0 auto;
   padding: 12px 20px;

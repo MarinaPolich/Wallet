@@ -27,7 +27,7 @@ export const Currency = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchCurrency());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Box>
@@ -75,10 +75,7 @@ export const Currency = () => {
           )}
         </Tbody>
       </Table>
-      <button type="button" onClick={() => setMoreinfo(true)}>
-        More info
-      </button>
-      {moreinfo && <CurrencyAllRate closeFunck={setMoreinfo} />}
+
       <Mobile>
         <TableIcon src={diagramMob} width={280} height={93} />
       </Mobile>
@@ -88,6 +85,10 @@ export const Currency = () => {
       <Desktop>
         <TableIcon src={diagram} width={393} height={134} />
       </Desktop>
+      <button type="button" onClick={() => setMoreinfo(true)}>
+        More info
+      </button>
+      {moreinfo && <CurrencyAllRate closeFunck={setMoreinfo} />}
     </Box>
   );
 };
