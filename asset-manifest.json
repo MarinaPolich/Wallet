@@ -1,17 +1,18 @@
 {
   "files": {
     "main.css": "/Wallet/static/css/main.77eac2b1.css",
-    "main.js": "/Wallet/static/js/main.ec1a08a5.js",
+    "main.js": "/Wallet/static/js/main.83d59de4.js",
     "static/js/821.472a3b95.chunk.js": "/Wallet/static/js/821.472a3b95.chunk.js",
-    "static/js/319.6aab8b10.chunk.js": "/Wallet/static/js/319.6aab8b10.chunk.js",
-    "static/js/652.08c5c1f9.chunk.js": "/Wallet/static/js/652.08c5c1f9.chunk.js",
+    "static/js/319.1dc98a61.chunk.js": "/Wallet/static/js/319.1dc98a61.chunk.js",
+    "static/js/652.5457c420.chunk.js": "/Wallet/static/js/652.5457c420.chunk.js",
     "static/js/367.6388647a.chunk.js": "/Wallet/static/js/367.6388647a.chunk.js",
-    "static/js/873.fbce845d.chunk.js": "/Wallet/static/js/873.fbce845d.chunk.js",
+    "static/js/873.fa7b7125.chunk.js": "/Wallet/static/js/873.fa7b7125.chunk.js",
     "static/js/668.87123755.chunk.js": "/Wallet/static/js/668.87123755.chunk.js",
     "static/css/183.1fc79230.chunk.css": "/Wallet/static/css/183.1fc79230.chunk.css",
     "static/js/183.e37db8dc.chunk.js": "/Wallet/static/js/183.e37db8dc.chunk.js",
     "static/css/640.b21ce385.chunk.css": "/Wallet/static/css/640.b21ce385.chunk.css",
     "static/js/640.df2410c2.chunk.js": "/Wallet/static/js/640.df2410c2.chunk.js",
+    "static/js/467.5a24281f.chunk.js": "/Wallet/static/js/467.5a24281f.chunk.js",
     "static/media/circe.ttf": "/Wallet/static/media/circe.814e4dd4329ffdb6c9ed.ttf",
     "static/media/circe-bold.ttf": "/Wallet/static/media/circe-bold.63396ee791f60623acbf.ttf",
     "static/media/Poppins-Regular.eot": "/Wallet/static/media/Poppins-Regular.dd1ec14243b1116b57a0.eot",
@@ -53,20 +54,21 @@
     "static/media/close.svg": "/Wallet/static/media/close.6194a661e88e1e5113d28da2398b6404.svg",
     "static/media/minus.svg": "/Wallet/static/media/minus.c1930871236002c803c7b6a6c0b99024.svg",
     "main.77eac2b1.css.map": "/Wallet/static/css/main.77eac2b1.css.map",
-    "main.ec1a08a5.js.map": "/Wallet/static/js/main.ec1a08a5.js.map",
+    "main.83d59de4.js.map": "/Wallet/static/js/main.83d59de4.js.map",
     "821.472a3b95.chunk.js.map": "/Wallet/static/js/821.472a3b95.chunk.js.map",
-    "319.6aab8b10.chunk.js.map": "/Wallet/static/js/319.6aab8b10.chunk.js.map",
-    "652.08c5c1f9.chunk.js.map": "/Wallet/static/js/652.08c5c1f9.chunk.js.map",
+    "319.1dc98a61.chunk.js.map": "/Wallet/static/js/319.1dc98a61.chunk.js.map",
+    "652.5457c420.chunk.js.map": "/Wallet/static/js/652.5457c420.chunk.js.map",
     "367.6388647a.chunk.js.map": "/Wallet/static/js/367.6388647a.chunk.js.map",
-    "873.fbce845d.chunk.js.map": "/Wallet/static/js/873.fbce845d.chunk.js.map",
+    "873.fa7b7125.chunk.js.map": "/Wallet/static/js/873.fa7b7125.chunk.js.map",
     "668.87123755.chunk.js.map": "/Wallet/static/js/668.87123755.chunk.js.map",
     "183.1fc79230.chunk.css.map": "/Wallet/static/css/183.1fc79230.chunk.css.map",
     "183.e37db8dc.chunk.js.map": "/Wallet/static/js/183.e37db8dc.chunk.js.map",
     "640.b21ce385.chunk.css.map": "/Wallet/static/css/640.b21ce385.chunk.css.map",
-    "640.df2410c2.chunk.js.map": "/Wallet/static/js/640.df2410c2.chunk.js.map"
+    "640.df2410c2.chunk.js.map": "/Wallet/static/js/640.df2410c2.chunk.js.map",
+    "467.5a24281f.chunk.js.map": "/Wallet/static/js/467.5a24281f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.77eac2b1.css",
-    "static/js/main.ec1a08a5.js"
+    "static/js/main.83d59de4.js"
   ]
 }
