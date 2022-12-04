@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   AmountDate,
   AmountField,
@@ -26,7 +26,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import moment from 'moment';
 

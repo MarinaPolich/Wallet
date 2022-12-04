@@ -3,7 +3,7 @@ import {
   ModalHead,
 } from './ModalAddTransaction.styled';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { FormModal } from 'components/FormModal/FormModal';
 import { Modal } from 'components/Modal/Modal';
 import { addTransactionThunk } from 'redux/finance/finance-operations';

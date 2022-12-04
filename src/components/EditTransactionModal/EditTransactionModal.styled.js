@@ -1,7 +1,4 @@
 import styled from 'styled-components';
-import { Form, Field } from 'formik';
-import DatePicker from 'react-datepicker';
-import SVG from 'react-inlinesvg';
 
 // const colorActiveLable = 'green';
 
