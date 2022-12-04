@@ -117,7 +117,7 @@ export default function Table() {
       </IsDesktopOrTablet>
       <Mobile>
         {sortedTransactions.map(item => (
-          <List key={item.id}>
+          <List key={item.id} income={item.type === 'INCOME'}>
             <ListItem>
               Date
               <ListText>
@@ -134,8 +134,11 @@ export default function Table() {
             <ListItem>
               Comment <ListText>{item.comment}</ListText>
             </ListItem>
-            <ListItem income={item.type === 'INCOME'}>
-              Sum <ListSum>{item.amount.toFixed(2)}</ListSum>
+            <ListItem>
+              Sum{' '}
+              <ListSum income={item.type === 'INCOME'}>
+                {item.amount.toFixed(2)}
+              </ListSum>
             </ListItem>
             <ListItem>
               Balance <ListText>{item.balanceAfter.toFixed(2)}</ListText>

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import {
+  Box,
   Category,
   HeaderText,
   Statistic,
@@ -26,6 +27,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { DiagramTabMoreInfor } from 'components/DiagramTabMoreInfor/DiagramTabMoreInfor';
 import { Loader } from 'components/Loader/Loader';
+import { Mobile } from 'components/Container/Mobile';
+import { IsDesktopOrTablet } from 'components/Container/Tablet';
 
 ChartJS.register(ArcElement, Tooltip);
 
@@ -208,99 +211,108 @@ const DiagramTab = () => {
   }
 
   return (
-    <>
+    <Box>
       {!summary ? (
         <Loader />
       ) : (
-        <Statistic>
-          <Diagram style={{ marginLeft: '16px' }}>
+        <>
+          <IsDesktopOrTablet>
             <Title>Statistic</Title>
-            <div style={{ position: 'relative' }}>
+          </IsDesktopOrTablet>
+          <Statistic>
+            <Diagram>
+              <Mobile>
+                <Title>Statistic</Title>
+              </Mobile>
               <Balance>₴ {summary.periodTotal}</Balance>
               <Doughnut
                 options={{ cutout: '70%', animation: { animateScale: true } }}
                 data={data}
               />
-            </div>
-          </Diagram>
-          <Table>
-            <StyledForm onSubmit={handler}>
-              <WrapperYear>
-                <StyledSelect name="year" ref={yearNode} onChange={handler}>
-                  <option value="">Year</option>
-                  {Array.from(years).map(el => (
-                    <option key={el} value={el}>
-                      {el}
-                    </option>
+            </Diagram>
+            <Table>
+              <StyledForm onSubmit={handler}>
+                <WrapperYear>
+                  <StyledSelect name="year" ref={yearNode} onChange={handler}>
+                    <option value="">Year</option>
+                    {Array.from(years).map(el => (
+                      <option key={el} value={el}>
+                        {el}
+                      </option>
+                    ))}
+                  </StyledSelect>
+                  <StyledVscChevronDown />
+                </WrapperYear>
+
+                <WrapperMmonth>
+                  <StyledSelect name="month" ref={monthNode} onChange={handler}>
+                    <option value="">Month</option>
+                    {Array.from(monthes).map(el => (
+                      <option key={el} value={el}>
+                        {el}
+                      </option>
+                    ))}
+                  </StyledSelect>
+                  <StyledVscChevronDown />
+                </WrapperMmonth>
+              </StyledForm>
+
+              <TableHeader>
+                <HeaderText
+                  data-sort="="
+                  onClick={categorySort}
+                  title="click to sort"
+                >
+                  Category
+                </HeaderText>
+                <HeaderText
+                  data-sort="="
+                  onClick={sumSort}
+                  title="click to sort"
+                >
+                  Sum
+                </HeaderText>
+              </TableHeader>
+
+              <Data>
+                {summary.categoriesSummary
+                  .filter(el => el.total < 0)
+                  .map(({ name, total }, i) => (
+                    <Category
+                      key={name}
+                      col={colors[i]}
+                      onClick={getMoreInfo}
+                      data-name={name}
+                      title="click for detailed information"
+                    >
+                      <div>{name}</div> <div>{-total}</div>
+                    </Category>
                   ))}
-                </StyledSelect>
-                <StyledVscChevronDown />
-              </WrapperYear>
-
-              <WrapperMmonth>
-                <StyledSelect name="month" ref={monthNode} onChange={handler}>
-                  <option value="">Month</option>
-                  {Array.from(monthes).map(el => (
-                    <option key={el} value={el}>
-                      {el}
-                    </option>
-                  ))}
-                </StyledSelect>
-                <StyledVscChevronDown />
-              </WrapperMmonth>
-            </StyledForm>
-
-            <TableHeader>
-              <HeaderText
-                data-sort="="
-                onClick={categorySort}
-                title="click to sort"
-              >
-                Category
-              </HeaderText>
-              <HeaderText data-sort="=" onClick={sumSort} title="click to sort">
-                Sum
-              </HeaderText>
-            </TableHeader>
-
-            <Data>
-              {summary.categoriesSummary
-                .filter(el => el.total < 0)
-                .map(({ name, total }, i) => (
-                  <Category
-                    key={name}
-                    col={colors[i]}
-                    onClick={getMoreInfo}
-                    data-name={name}
-                    title="click for detailed information"
-                  >
-                    <div>{name}</div> <div>{-total}</div>
-                  </Category>
-                ))}
-            </Data>
-            <Total>
-              <div style={{ fontWeight: 700 }}>Expenses:</div>
-              <div style={{ fontWeight: 700, color: '#FF6596' }}>
-                {-summary.expenseSummary}
-              </div>
-            </Total>
-            <Total>
-              <div style={{ fontWeight: 700 }}>Income:</div>
-              <div style={{ fontWeight: 700, color: '#24CCA7' }}>
-                {summary.incomeSummary}
-              </div>
-            </Total>
-          </Table>
-          <ToastContainer />
-          {showinfo.showinfo && (
-            <DiagramTabMoreInfor
-              showinfo={showinfo}
-              setShowinfo={setShowinfo}
-            />
-          )}
-        </Statistic>
+              </Data>
+              <Total>
+                <div style={{ fontWeight: 700 }}>Expenses:</div>
+                <div style={{ fontWeight: 700, color: '#FF6596' }}>
+                  {-summary.expenseSummary}
+                </div>
+              </Total>
+              <Total>
+                <div style={{ fontWeight: 700 }}>Income:</div>
+                <div style={{ fontWeight: 700, color: '#24CCA7' }}>
+                  {summary.incomeSummary}
+                </div>
+              </Total>
+            </Table>
+            <ToastContainer />
+            {showinfo.showinfo && (
+              <DiagramTabMoreInfor
+                showinfo={showinfo}
+                setShowinfo={setShowinfo}
+              />
+            )}
+          </Statistic>
+        </>
       )}
-    </>
+    </Box>
   );
 };
 

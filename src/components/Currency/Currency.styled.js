@@ -4,20 +4,28 @@ import SVG from 'react-inlinesvg';
 
 export const Box = styled.div`
   position: relative;
-  display: inline-block;
   width: 280px;
-  height: 197px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+
+  height: 200px;
   overflow: hidden;
   background-color: var(--active-bg-color);
   border-radius: 30px;
 
   @media ${device.tablet} {
     width: 336px;
+    height: 200px;
   }
 
   @media ${device.desktop} {
     width: 393px;
-    height: 226px;
+    height: 393px;
   }
 `;
 
@@ -27,8 +35,6 @@ export const Table = styled.table`
   border-spacing: 20px solid var(--active-bg-color);
 
   border-radius: 30px;
-  margin-left: auto;
-  margin-right: auto;
   overflow: hidden;
 
   line-height: 1.5;
@@ -98,12 +104,24 @@ export const Tr = styled.tr`
 export const Btn = styled.button`
   background-color: var(--disable-bg-color);
   border: 0;
-  padding: 2px 8px 2px 30px;
+  border-radius: 30px;
+  padding: 5px 10px;
   color: #fff;
-  border-top-right-radius: 3px;
+  /* border-top-right-radius: 3px; */
   cursor: pointer;
 `;
+
 export const TableIcon = styled(SVG)`
   position: absolute;
-  bottom: 0;
+  top: 50%;
+  left: 0;
+  transform: translate(0, 10%);
+
+  @media ${device.tablet} {
+    transform: translate(0, -15%);
+  }
+
+  @media ${device.desktop} {
+    transform: translate(0, 48%);
+  }
 `;
