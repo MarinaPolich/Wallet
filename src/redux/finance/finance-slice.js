@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { sortByDate } from 'helpers/sorters';
 import {
   addTransactionThunk,
   deleteTransactionThunk,
@@ -20,7 +21,14 @@ const financeSlice = createSlice({
       })
 
       .addCase(getAllTransactionsThunk.fulfilled, (state, action) => {
-        state.transactions = action.payload;
+        state.transactions = action.payload
+          .sort(sortByDate)
+          .reverse()
+          .map((item, index, arr) => {
+            item.balanceAfter =
+              (arr[index - 1]?.balanceAfter ?? 0) + item.amount;
+            return item;
+          });
         state.isLoading = false;
         state.error = '';
       })
@@ -50,7 +58,9 @@ const financeSlice = createSlice({
       })
 
       .addCase(deleteTransactionThunk.fulfilled, (state, action) => {
-        state.transactions = state.transactions.filter(transaction => transaction.id !== action.payload);
+        state.transactions = state.transactions.filter(
+          transaction => transaction.id !== action.payload
+        );
         state.isLoading = false;
         state.error = '';
       })
@@ -60,20 +70,19 @@ const financeSlice = createSlice({
         state.isLoading = false;
       })
 
-
       .addCase(editTransactionThunk.pending, state => {
         state.isLoading = true;
       })
 
       .addCase(editTransactionThunk.fulfilled, (state, action) => {
-        console.log('action.payload', action.payload)
-        
+        console.log('action.payload', action.payload);
+
         state.transactions = state.transactions.map(item => {
-            if(item.id === action.payload.id) {
-                return action.payload;
-            }
-            return item;
-        })
+          if (item.id === action.payload.id) {
+            return action.payload;
+          }
+          return item;
+        });
         state.isLoading = false;
         state.error = '';
       })
@@ -82,9 +91,6 @@ const financeSlice = createSlice({
         state.error = action.payload;
         state.isLoading = false;
       });
-
-
-      
   },
 });
 

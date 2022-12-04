@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { device } from 'stylesheet/breakpoints';
+
 export const Box = styled.div`
   @media ${device.tablet} {
     padding: 60px 0 196px 0;
@@ -21,7 +22,7 @@ export const Container = styled.div`
     // position: fixed;
     // top: 0;
     // right: 0;
-    // width: calc(100% * 0.57);
+    /* width: calc(100% * 0.57); */
     background-color: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(25px);
   }

@@ -3,7 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RotatingLines } from 'react-loader-spinner';
 import { fetchCurrency } from 'redux/currency/operations';
 import { selectCurrency, selectIsLoading } from 'redux/currency/selectors';
-import { Box, Table, Thead, Th, Tbody, LoadBox,Tr, Td } from './Currency.styled';
+import {
+  Box,
+  Table,
+  Thead,
+  Th,
+  Tbody,
+  LoadBox,
+  Tr,
+  Td,
+  TableIcon,
+} from './Currency.styled';
+import { diagram, diagramTab, diagramMob } from 'assets/media/icons';
+import { Tablet } from 'components/Container/Tablet';
+import { Desktop } from 'components/Container/Desktop';
+import { Mobile } from 'components/Container/Mobile';
 
 export const Currency = () => {
   const currency = useSelector(selectCurrency);
@@ -60,6 +74,15 @@ export const Currency = () => {
           )}
         </Tbody>
       </Table>
+      <Mobile>
+        <TableIcon src={diagramMob} width={280} height={93} />
+      </Mobile>
+      <Tablet>
+        <TableIcon src={diagramTab} width={336} height={119} />
+      </Tablet>
+      <Desktop>
+        <TableIcon src={diagram} width={393} height={134} />
+      </Desktop>
     </Box>
   );
 };

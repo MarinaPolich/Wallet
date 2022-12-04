@@ -19,7 +19,7 @@ export const Box = styled.div`
 
   @media ${device.tablet} {
     width: ${tablet}px;
-    padding: 32px 40px 32px;
+    padding: 40px 32px;
   }
 
   @media ${device.desktop} {
