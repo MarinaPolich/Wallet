@@ -7,7 +7,7 @@ export const Box = styled.div`
   display: flex;
   padding: 12px 0;
   margin-bottom: 28px;
- justify-content: center;
+  justify-content: center;
 
   @media ${device.tabDesk} {
     padding: 0;
@@ -54,12 +54,13 @@ export const Text = styled.span`
 `;
 
 export const Icon = styled(SVG)`
-  padding: 3px;
+  /* padding: 3px; */
 
   fill: var(--disable-bg-color);
 
   ${StyledLink}.active & {
     fill: var(--active-bg-color);
+    filter: drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));
   }
 
   @media ${device.tabDesk} {
@@ -68,10 +69,12 @@ export const Icon = styled(SVG)`
 `;
 
 export const CurrencyIcon = styled(SVG)`
-  padding: 3px;
+  /* padding: 3px; */
+
   fill: var(--disable-bg-color);
 
   ${StyledLink}.active & {
     fill: var(--active-bg-color);
+    filter: drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));
   }
 `;

@@ -2,11 +2,11 @@ import logo from './logo.svg';
 import logoText from './logo-text.svg';
 import close from './close.svg';
 import exit from './exit.svg';
-import currency from './currency.svg';
+import currency_mobile from './currency_mobile.svg';
 import home from './home.svg';
-import homeS from './homeS.svg';
+import home_mobile from './home_mobile.svg';
 import statistic from './statistic.svg';
-import statS from './statS.svg';
+import statistic_mobile from './statistic_mobile.svg';
 import email from './email.svg';
 import lock from './lock.svg';
 import account from './account.svg';
@@ -25,10 +25,10 @@ export {
   close,
   exit,
   home,
-  homeS,
+  home_mobile,
   statistic,
-  statS,
-  currency,
+  statistic_mobile,
+  currency_mobile,
   email,
   lock,
   account,
