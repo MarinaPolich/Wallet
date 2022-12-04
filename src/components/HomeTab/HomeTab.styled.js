@@ -1,3 +1,5 @@
 import styled from 'styled-components';
 
-export const BoxTab = styled.div``;
+export const BoxTab = styled.div`
+  position: relative;
+`;

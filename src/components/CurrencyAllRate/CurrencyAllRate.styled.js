@@ -21,11 +21,11 @@ export const Box = styled.div`
   max-height: 80vh;
   overflow-y: auto;
   @media ${device.tablet} {
-    width: 336px;
+    width: 354px;
     border-radius: 3px;
   }
   @media ${device.desktop} {
-    width: 393px;
+    width: 411px;
   }
 `;
 export const Caption = styled.p`

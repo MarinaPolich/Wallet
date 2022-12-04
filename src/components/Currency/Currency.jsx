@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'; //
 import { useDispatch, useSelector } from 'react-redux';
 import { RotatingLines } from 'react-loader-spinner';
 import { fetchCurrency } from 'redux/currency/operations';
@@ -13,6 +13,7 @@ import {
   Tr,
   Td,
   TableIcon,
+  Btn,
 } from './Currency.styled';
 import { CurrencyAllRate } from 'components/CurrencyAllRate/CurrencyAllRate';
 import { diagram, diagramTab, diagramMob } from 'assets/media/icons';
@@ -76,6 +77,10 @@ export const Currency = () => {
           )}
         </Tbody>
       </Table>
+      <Btn type="button" onClick={() => setMoreinfo(true)}>
+        more info
+      </Btn>
+      {moreinfo && <CurrencyAllRate closeFunck={setMoreinfo} />}
 
       <Mobile>
         <TableIcon src={diagramMob} width={280} height={93} />
@@ -86,10 +91,6 @@ export const Currency = () => {
       <Desktop>
         <TableIcon src={diagram} width={393} height={134} />
       </Desktop>
-      <button type="button" onClick={() => setMoreinfo(true)}>
-        More info
-      </button>
-      {moreinfo && <CurrencyAllRate closeFunck={setMoreinfo} />}
     </Box>
   );
 };
