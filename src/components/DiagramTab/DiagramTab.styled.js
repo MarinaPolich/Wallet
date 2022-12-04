@@ -1,21 +1,33 @@
 import styled from 'styled-components';
 import { VscChevronDown } from 'react-icons/vsc';
 
-export const Statistic = styled.div`
-  @media screen and (min-width: 768.99px) {
-    display: flex;
-    gap: 32px;
-  }
+export const Box = styled.div`
   @media screen and (min-width: 1279.99px) {
+    padding-left: 69px;
+  }
+`;
+
+export const Statistic = styled.div`
+  display: flex;
+
+  @media screen and (max-width: 768.99px) {
+    flex-direction: column;
+    align-items: center;
   }
 `;
 export const Diagram = styled.div`
+  position: relative;
   width: 280px;
+  margin-left: 16px;
+
   @media screen and (min-width: 768.99px) {
     width: 236px;
+    margin-right: 116px;
   }
   @media screen and (min-width: 1279.99px) {
     width: 288px;
+    margin-left: 0;
+    margin-right: 32px;
   }
 `;
 
@@ -31,9 +43,18 @@ export const Balance = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 50%);
   font-size: 18px;
   font-weight: 700;
+
+  @media screen and (min-width: 768.99px) {
+    top: 25%;
+    transform: translate(-50%, 75%);
+  }
+  @media screen and (min-width: 1279.99px) {
+    top: 40%;
+    transform: translate(-50%, 0);
+  }
 `;
 export const Table = styled.div`
   margin-top: 25px;
@@ -131,7 +152,6 @@ export const StyledVscChevronDown = styled(VscChevronDown)`
     transform: translate(-20px, -50%) rotate(180deg);
   }
   z-index: 0;
- 
 `;
 
 export const TableHeader = styled.div`
