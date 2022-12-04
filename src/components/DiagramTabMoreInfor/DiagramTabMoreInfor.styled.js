@@ -2,12 +2,12 @@ import styled from 'styled-components';
 
 export const Box = styled.div`
   position: fixed;
-  z-index:2;
+  z-index: 2;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0,0,0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 export const Report = styled.div`
   position: absolute;
@@ -31,12 +31,10 @@ export const Caption = styled.div`
 export const Table = styled.div``;
 
 export const Header = styled.div`
-
   display: none;
   background-color: #fff;
   @media screen and (min-width: 767.99px) {
     display: flex;
-
   }
 `;
 
@@ -58,7 +56,7 @@ export const StyledTr = styled.div`
   display: flex;
   flex-direction: column;
   border: 1px solid #222;
- 
+
   @media screen and (min-width: 767.99px) {
     flex-direction: row;
     border: none;

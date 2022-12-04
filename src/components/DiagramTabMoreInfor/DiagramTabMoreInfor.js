@@ -19,7 +19,7 @@ export function DiagramTabMoreInfor({ showinfo, setShowinfo }) {
   console.log('showinfo ======', showinfo);
 
   return createPortal(
-    (<Box>
+    <Box>
       <Report>
         <Caption> {showinfo.caption}</Caption>
         <Table>
@@ -28,25 +28,26 @@ export function DiagramTabMoreInfor({ showinfo, setShowinfo }) {
             <StyledTh position={'left'}>Comment</StyledTh>
             <StyledTh>Sum</StyledTh>
           </Header>
-
-          {showinfo.data.map(item => (
-            <StyledTr key={item.id}>
-              <SpanCell position={'left'}>
-                <SpanCaption>Date</SpanCaption>
-                <SpanValue>
-                  {moment(item.transactionDate).format('DD.MM.YY')}
-                </SpanValue>
-              </SpanCell>
-              <SpanCell position={'left'}>
-                <SpanCaption>Comment</SpanCaption>
-                <SpanValue>{item.comment}</SpanValue>
-              </SpanCell>
-              <SpanCell position={'right'}>
-                <SpanCaption>Sum</SpanCaption>
-                <SpanSum>{-item.amount}</SpanSum>
-              </SpanCell>
-            </StyledTr>
-          ))}
+          <div style={{ maxHeight: '60vh', overflow: 'auto' }}>
+            {showinfo.data.map(item => (
+              <StyledTr key={item.id}>
+                <SpanCell position={'left'}>
+                  <SpanCaption>Date</SpanCaption>
+                  <SpanValue>
+                    {moment(item.transactionDate).format('DD.MM.YY')}
+                  </SpanValue>
+                </SpanCell>
+                <SpanCell position={'left'}>
+                  <SpanCaption>Comment</SpanCaption>
+                  <SpanValue>{item.comment}</SpanValue>
+                </SpanCell>
+                <SpanCell position={'right'}>
+                  <SpanCaption>Sum</SpanCaption>
+                  <SpanSum>{-item.amount}</SpanSum>
+                </SpanCell>
+              </StyledTr>
+            ))}
+          </div>
         </Table>
         <Btn
           onClick={() =>
@@ -57,7 +58,7 @@ export function DiagramTabMoreInfor({ showinfo, setShowinfo }) {
           x
         </Btn>
       </Report>
-    </Box>),
+    </Box>,
     document.querySelector('#portal')
   );
 }

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchCurrency } from './operations';
+import { fetchCurrency, fetchnbu, fetchprivat } from './operations';
 
 const currencySlice = createSlice({
   name: 'bank',
