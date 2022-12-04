@@ -8,8 +8,6 @@ export const EditTransactionModal = ({ closeModal, transactionData }) => {
   const dispatch = useDispatch();
 
   const handlerSubmit = values => {
-    console.log(values.transactionDate);
-
     dispatch(editTransactionThunk(values));
     closeModal();
   };
@@ -59,29 +57,3 @@ export const EditTransactionModal = ({ closeModal, transactionData }) => {
     </Modal>
   );
 };
-
-// const handleSubmit = (values, { resetForm }) => {
-//   const date = moment(startDate).format('YYYY-MM-DD');
-
-//   dispatch(editTransactionThunk({ id: transactionData.id, ...values, date }));
-//   closeModal();
-// };
-
-// const initialValues = {
-//   operation: transactionData.type,
-//   transaction: transactionData.categoryId,
-//   sum: transactionData.amount,
-//   date: transactionData.transactionDate,
-//   comment: transactionData.comment,
-// };
-
-// const schema = yup.object().shape({
-//   operation: yup.string().required(),
-//   sum: yup.number().required('Enter amount'),
-//   date: yup
-//     .date()
-//     .required()
-//     .default(() => new Date()),
-//   transaction: yup.string().required('Select transaction type!'),
-//   comment: yup.string(),
-// });

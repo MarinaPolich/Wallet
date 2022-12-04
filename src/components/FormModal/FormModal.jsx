@@ -68,8 +68,6 @@ const FromError = ({ name }) => {
 };
 
 export const FormModal = ({ closeModal, submitText, submitHandler, initial = initialValues }) => {
-
-
   const categoriesName = useSelector(state => state.categories.items);
   const optionFunc = useCallback((filter) => categoriesName
     ?.filter(({ type }) => type === filter)
@@ -88,7 +86,6 @@ export const FormModal = ({ closeModal, submitText, submitHandler, initial = ini
       onSubmit={handleSubmit}
     >
       {props => {
-        console.log(props)
         const handleChange = ({ target }) => {
           props.setFieldValue(target.name, target.value);
           if (target.value === TypeOperation.INCOME) {
@@ -101,7 +98,6 @@ export const FormModal = ({ closeModal, submitText, submitHandler, initial = ini
 
         const setStartDate = (value) => {
           const date = moment(value).format('YYYY-MM-DD');
-          console.log({ value, date });
           props.setFieldValue('transactionDate', date)
         }
         return (
