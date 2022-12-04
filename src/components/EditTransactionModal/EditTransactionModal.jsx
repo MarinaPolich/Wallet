@@ -11,10 +11,10 @@ import moment from 'moment';
 
 export const EditTransactionModal = ({ closeModal, transactionData }) => {
   const dispatch = useDispatch();
-  //transactionData.transactionDate = moment(transactionData.transactionDate).toDate();
-  console.log(' moment(transactionData.transactionDate).toDate()', moment(transactionData.transactionDate).toDate())
 
   const handlerSubmit = (values) => {
+    console.log(values.transactionDate)
+
     dispatch(editTransactionThunk(values));
     closeModal();
   }
@@ -22,7 +22,7 @@ export const EditTransactionModal = ({ closeModal, transactionData }) => {
   return <Modal>
     <ModalHead>Edit transaction</ModalHead>
 
-    <FormModal closeModal={closeModal} initial={{...transactionData,transactionDate: moment(transactionData.transactionDate).toDate()}} submitHandler={handlerSubmit} />
+    <FormModal closeModal={closeModal} submitText="UPDATE" initial={{...transactionData, amount: Math.abs(transactionData.amount)}} submitHandler={handlerSubmit} />
 
     <ButtonClose onClick={closeModal}>
       <svg

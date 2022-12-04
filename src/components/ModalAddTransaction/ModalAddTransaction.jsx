@@ -18,7 +18,7 @@ export const ModalAddTransaction = ({ closeModal }) => {
   return <Modal>
     <ModalHead>Add transaction</ModalHead>
 
-    <FormModal closeModal={closeModal} submitHandler={handlerSubmit} />
+    <FormModal closeModal={closeModal} submitText="ADD" submitHandler={handlerSubmit} />
 
     <ButtonClose onClick={closeModal}>
       <svg
