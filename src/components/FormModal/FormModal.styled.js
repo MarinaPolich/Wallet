@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import SVG from 'react-inlinesvg';
 import { device } from 'stylesheet/breakpoints';
 
-export const ErrorText = styled.p`
+export const ErrorText = styled.div`
   color: red;
 `;
 
@@ -142,8 +142,6 @@ export const CloseIcon = styled(SVG)`
 
 // BUTTON
 
-
-
 export const Btn = styled.div`
   display: block;
   /* font-family: 'Circe', sans-serif;
@@ -159,38 +157,49 @@ export const Btn = styled.div`
 export const ButtonAdd = styled.button`
   width: 300px;
   height: 50px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  letter-spacing: 0.1em;
   background-color: var(--btn-bg-color);
   color: var(--white);
   border: none;
   border-radius: 20px;
   margin-bottom: 20px;
+  margin-top: 30px;
   cursor: pointer;
-  transition: 1000ms;
+  transition: 500ms;
 
   &:hover {
     background-color: var(--white);
     color: var(--btn-bg-color);
-    transition: 1000ms;
+    transition: 500ms;
     border: 1px solid var(--btn-bg-color);
   }
   @media ${device.mobile} {
     width: 280px;
+    margin-top: 30px;
   }
 `;
 
 export const ButtonCancel = styled.button`
   width: 300px;
   height: 50px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  text-align: center;
+  letter-spacing: 0.1em;
   background-color: var(--white);
   border: 1px solid var(--active-bg-color);
   border-radius: 20px;
   color: var(--active-bg-color);
   cursor: pointer;
-  transition: 1000ms;
+  transition: 500ms;
   &:hover {
     background-color: var(--active-bg-color);
     color: var(--white);
-    transition: 1000ms;
+    transition: 500ms;
   }
   @media ${device.mobile} {
     width: 280px;
@@ -207,7 +216,7 @@ export const IconDate = styled.label`
   left: 80%;
   cursor: pointer;
   @media ${device.mobile} {
-    left: 95%;
+    left: 90%;
     top: 20%;
   }
 `;
@@ -232,8 +241,6 @@ export const AmountDate = styled.div`
   }
 `;
 // Field
-
-
 
 export const AmountField = styled(Field)`
   position: relative;
@@ -269,7 +276,7 @@ export const DateField = styled(DatePicker)`
   border-right: none;
   @media ${device.mobile} {
     width: 280px;
-    margin-top: 0;
+    margin: 0;
   }
 `;
 
@@ -277,7 +284,6 @@ export const CommentField = styled(Field)`
   outline: none;
   padding: 8px;
   margin-top: 40px;
-  margin-bottom: 40px;
   border: 1px solid var(--gray-5);
   border-top: none;
   border-left: none;
@@ -293,6 +299,5 @@ export const CommentField = styled(Field)`
   @media ${device.mobile} {
     width: 280px;
     margin-top: 30px;
-    margin-bottom: 30px;
   }
 `;
