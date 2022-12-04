@@ -28,7 +28,6 @@ export const Currency = () => {
   useEffect(() => {
     dispatch(fetchCurrency());
   }, [dispatch]);
-
   return (
     <Box>
       <Table>
@@ -40,7 +39,8 @@ export const Currency = () => {
           </tr>
         </Thead>
         <Tbody>
-          {loading && currency?.length > 0 ? (
+         
+          {loading ? (
             <Tr>
               <td colSpan="3">
                 <LoadBox>
@@ -55,6 +55,7 @@ export const Currency = () => {
               </td>
             </Tr>
           ) : (
+            currency?.length > 0 &&
             <>
               <Tr>
                 <Td>USD</Td>
