@@ -19,7 +19,7 @@ import {
   CloseIcon,
   Plus,
   SvgDate,
-  ErrorText
+  ErrorText,
 } from './FormModal.styled';
 
 import { close, minus } from 'assets/media/icons';
@@ -31,11 +31,10 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { SelectField } from 'components/SelectField/SelectField';
 
-
 const TypeOperation = {
   EXPENSE: 'EXPENSE',
-  INCOME: 'INCOME'
-}
+  INCOME: 'INCOME',
+};
 
 const initialValues = {
   transactionDate: moment().format('YYYY-MM-DD'),
@@ -52,11 +51,9 @@ const schema = yup.object().shape({
     .date()
     .required()
     .default(() => new Date()),
-  categoryId: yup.string().required('Select category'),
-  comment: yup.string(),
+  categoryId: yup.string(),
+  comment: yup.string().max(10, 'Maximum number of characters 10'),
 });
-
-
 
 const FromError = ({ name }) => {
   return (
@@ -67,16 +64,26 @@ const FromError = ({ name }) => {
   );
 };
 
-export const FormModal = ({ closeModal, submitText, submitHandler, initial = initialValues }) => {
+export const FormModal = ({
+  closeModal,
+  submitText,
+  submitHandler,
+  initial = initialValues,
+}) => {
   const categoriesName = useSelector(state => state.categories.items);
-  const optionFunc = useCallback((filter) => categoriesName
-    ?.filter(({ type }) => type === filter)
-    .map(({ name, id }) => ({ value: id, label: name, })),
-    [categoriesName]);
-
+  const optionFunc = useCallback(
+    filter =>
+      categoriesName
+        ?.filter(({ type }) => type === filter)
+        .map(({ name, id }) => ({ value: id, label: name })),
+    [categoriesName]
+  );
 
   const handleSubmit = (values, { resetForm, ...props }) => {
-    values.amount = values.type === TypeOperation.EXPENSE ? -Math.abs(values.amount) : Math.abs(values.amount);
+    values.amount =
+      values.type === TypeOperation.EXPENSE
+        ? -Math.abs(values.amount)
+        : Math.abs(values.amount);
     submitHandler(values);
   };
   return (
@@ -89,17 +96,21 @@ export const FormModal = ({ closeModal, submitText, submitHandler, initial = ini
         const handleChange = ({ target }) => {
           props.setFieldValue(target.name, target.value);
           if (target.value === TypeOperation.INCOME) {
-            props.setFieldValue('categoryId', optionFunc(target.value).map(x => x.value).find(x => x))
-          }
-          else {
-            props.setFieldValue('categoryId', initial.categoryId)
+            props.setFieldValue(
+              'categoryId',
+              optionFunc(target.value)
+                .map(x => x.value)
+                .find(x => x)
+            );
+          } else {
+            props.setFieldValue('categoryId', initial.categoryId);
           }
         };
 
-        const setStartDate = (value) => {
+        const setStartDate = value => {
           const date = moment(value).format('YYYY-MM-DD');
-          props.setFieldValue('transactionDate', date)
-        }
+          props.setFieldValue('transactionDate', date);
+        };
         return (
           <ModalForm>
             <Operation>
@@ -123,7 +134,9 @@ export const FormModal = ({ closeModal, submitText, submitHandler, initial = ini
               <ToggleRb>
                 <Plus>
                   <CloseIcon
-                    src={props.values.type === TypeOperation.INCOME ? close : minus}
+                    src={
+                      props.values.type === TypeOperation.INCOME ? close : minus
+                    }
                     width={20}
                     height={20}
                     title="Change"
@@ -133,19 +146,28 @@ export const FormModal = ({ closeModal, submitText, submitHandler, initial = ini
               <LabelExpense htmlFor="expense">Expense</LabelExpense>
             </Operation>
 
-            {props.values.type === TypeOperation.EXPENSE && 
-            <div>
-              <Field id="categoryId" name="categoryId" component={SelectField} options={optionFunc(props.values.type)} />
-              <FromError name="categoryId" />
-            </div>
-            }
-
-
+            {props.values.type === TypeOperation.EXPENSE && (
+              <div>
+                <Field
+                  id="categoryId"
+                  name="categoryId"
+                  component={SelectField}
+                  options={optionFunc(props.values.type)}
+                />
+                <FromError name="categoryId" />
+              </div>
+            )}
 
             <AmountDate>
-              <label htmlFor="amount"></label>
-              <AmountField id="amount" type="number" name="amount" placeholder="0.00" />
-              <FromError name="amount" />
+              <label htmlFor="amount">
+                <AmountField
+                  type="number"
+                  name="amount"
+                  placeholder="0.00"
+                  required
+                />
+                {/* <FromError name="amount" /> */}
+              </label>
               <DateContainer>
                 <DateField
                   id="transactionDate"
@@ -154,6 +176,7 @@ export const FormModal = ({ closeModal, submitText, submitHandler, initial = ini
                   selected={moment(props.values.transactionDate).toDate()}
                   onChange={setStartDate}
                   dateFormat="dd.MM.yyyy"
+                  required
                 />
                 <FromError name="transactionDate" />
                 <IconDate htmlFor="transactionDate">
@@ -175,6 +198,7 @@ export const FormModal = ({ closeModal, submitText, submitHandler, initial = ini
             <label htmlFor="comment"></label>
             <div>
               <CommentField type="text" name="comment" placeholder="Comment" />
+              <FromError name="comment" />
             </div>
             <Btn>
               <ButtonAdd type="submit">{submitText}</ButtonAdd>
