@@ -4,8 +4,12 @@ import SVG from 'react-inlinesvg';
 
 export const Box = styled.div`
   position: relative;
-  display: inline-block;
   width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
 
   @media ${device.tablet} {
     width: 336px;
@@ -22,8 +26,6 @@ export const Table = styled.table`
   border-spacing: 20px solid var(--active-bg-color);
 
   border-radius: 30px;
-  margin-left: auto;
-  margin-right: auto;
   overflow: hidden;
 
   line-height: 1.5;
@@ -93,5 +95,15 @@ export const Tr = styled.tr`
 
 export const TableIcon = styled(SVG)`
   position: absolute;
-  bottom: 0;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -25%);
+
+  @media ${device.tablet} {
+    transform: translate(0, -35%);
+  }
+
+  @media ${device.desktop} {
+    transform: translate(0, 20%);
+  }
 `;
