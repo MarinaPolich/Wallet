@@ -46,10 +46,10 @@ const schema = yup.object().shape({
     .required()
     .default(() => new Date()),
   categoryId: yup.object(),
-  comment: yup.string(),
+  comment: yup.string().max(10, 'Maximum number of characters 10'),
 });
 
-const ErrorText = styled.p`
+const ErrorText = styled.div`
   color: red;
 `;
 
@@ -62,12 +62,15 @@ const FromError = ({ name }) => {
   );
 };
 
-export const FormModal = ({ closeModal, submitHandler, initial = initialValues }) => {
-  console.log('initial',initial)
+export const FormModal = ({
+  closeModal,
+  submitHandler,
+  initial = initialValues,
+}) => {
+  console.log('initial', initial);
   const [startDate, setStartDate] = useState(initial.transactionDate);
   const [select, setSelect] = useState('');
   const categoriesName = useSelector(state => state.categories.items);
-
 
   const handleSubmit = (values, { resetForm, ...props }) => {
     const date = moment(startDate).format('YYYY-MM-DD');
@@ -133,30 +136,64 @@ export const FormModal = ({ closeModal, submitHandler, initial = initialValues }
                   onChange={option => {
                     setSelect(option.value);
                   }}
-                  options={categoriesName?.map(({ name, id }) => ({
-                    value: id,
-                    label: name,
-                  }))}
+                  options={categoriesName
+                    ?.filter(cat => cat.type === 'EXPENSE')
+                    .map(({ name, id }) => ({
+                      value: id,
+                      label: name,
+                    }))}
                   placeholder={'Select a category'}
+                  unstyled
                   styles={{
                     control: (baseStyles, state) => ({
                       ...baseStyles,
                       outline: 'none',
-                      border: '1px solid var(--gray-5)',
-                      borderTop: 'none',
-                      borderLeft: 'none',
-                      borderRight: 'none',
+                      border: 'none',
+                      borderRadius: '0',
+                      borderBottom: '1px solid var(--gray-5)',
+                      fontWeight: '400',
+                      fontSize: '18px',
+                      lineHeight: '1.5',
+                    }),
+                    placeholder: baseStyles => ({
+                      ...baseStyles,
+                      color: 'var(--gray-4)',
+                    }),
+                    option: (baseStyles, { isFocused }) => ({
+                      ...baseStyles,
+                      backgroundColor: isFocused && '#fff',
+                      fontWeight: isFocused && '700',
+                      color: isFocused && 'var(--error-color)',
+                      padding: '10px 0 10px',
+                      cursor: 'pointer',
+                    }),
+                    menu: baseStyles => ({
+                      ...baseStyles,
+                      fontSize: '18px',
+                      lineHeight: 1.5,
+                      backgroundColor: 'var(--bg-select)',
+                      backdropFilter: 'blur(25px)',
+                      boxShadow: '0px 6px 15px var(--badroc-color)',
+                      borderRadius: '20px',
                     }),
                   }}
+                  required
                 />
                 <FromError name="categoryId" />
               </div>
             )}
 
             <AmountDate>
-              <label htmlFor="amount"></label>
-              <AmountField type="number" name="amount" placeholder="0.00" />
-              <FromError name="amount" />
+              <label htmlFor="amount">
+                <AmountField
+                  type="number"
+                  name="amount"
+                  placeholder="0.00"
+                  required
+                />
+                {/* <FromError name="amount" /> */}
+              </label>
+
               <DateContainer>
                 <DateField
                   id="transactionDate"
@@ -165,6 +202,7 @@ export const FormModal = ({ closeModal, submitHandler, initial = initialValues }
                   selected={startDate}
                   onChange={setStartDate}
                   dateFormat="dd.MM.yyyy"
+                  required
                 />
                 <FromError name="transactionDate" />
                 <IconDate htmlFor="transactionDate">
@@ -186,6 +224,7 @@ export const FormModal = ({ closeModal, submitHandler, initial = initialValues }
             <label htmlFor="comment"></label>
             <div>
               <CommentField type="text" name="comment" placeholder="Comment" />
+              <FromError name="comment" />
             </div>
             <Btn>
               <ButtonAdd type="submit">ADD</ButtonAdd>

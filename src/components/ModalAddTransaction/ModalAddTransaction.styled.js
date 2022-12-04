@@ -7,10 +7,6 @@ import { device } from 'stylesheet/breakpoints';
 
 // const colorActiveLable = 'green';
 
-
-
-
-
 export const ModalHead = styled.h1`
   margin-top: 20px;
   margin-bottom: 40px;
@@ -191,11 +187,16 @@ export const Btn = styled.div`
 export const ButtonAdd = styled.button`
   width: 300px;
   height: 50px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  letter-spacing: 0.1em;
   background-color: var(--btn-bg-color);
   color: var(--white);
   border: none;
   border-radius: 20px;
   margin-bottom: 20px;
+  margin-top: 40px;
   cursor: pointer;
   transition: 1000ms;
 
@@ -207,12 +208,18 @@ export const ButtonAdd = styled.button`
   }
   @media ${device.mobile} {
     width: 280px;
+    margin-top: 30px;
   }
 `;
 
 export const ButtonCancel = styled.button`
   width: 300px;
   height: 50px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  text-align: center;
+  letter-spacing: 0.1em;
   background-color: var(--white);
   border: 1px solid var(--active-bg-color);
   border-radius: 20px;
@@ -239,7 +246,7 @@ export const IconDate = styled.label`
   left: 80%;
   cursor: pointer;
   @media ${device.mobile} {
-    left: 95%;
+    left: 90%;
     top: 20%;
   }
 `;
@@ -312,6 +319,7 @@ export const DateField = styled(DatePicker)`
   border-right: none;
   @media ${device.mobile} {
     width: 280px;
+    margin: 0;
     margin-top: 0;
   }
 `;
@@ -320,7 +328,6 @@ export const CommentField = styled(Field)`
   outline: none;
   padding: 8px;
   margin-top: 40px;
-  margin-bottom: 40px;
   border: 1px solid var(--gray-5);
   border-top: none;
   border-left: none;
@@ -336,6 +343,5 @@ export const CommentField = styled(Field)`
   @media ${device.mobile} {
     width: 280px;
     margin-top: 30px;
-    margin-bottom: 30px;
   }
 `;
