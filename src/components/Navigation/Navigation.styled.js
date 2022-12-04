@@ -4,8 +4,10 @@ import { NavLink } from 'react-router-dom';
 import { device } from 'stylesheet/breakpoints';
 
 export const Box = styled.div`
-  padding: 12px 44px;
+  display: flex;
+  padding: 12px 0;
   margin-bottom: 28px;
+ justify-content: center;
 
   @media ${device.tabDesk} {
     padding: 0;
