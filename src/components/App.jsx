@@ -1,12 +1,15 @@
 import { useMobile } from 'hooks/useMobile';
 import { useEffect } from 'react';
 import { lazy } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { refreshUser } from 'redux/auth/auth-operations';
 import { Currency } from './Currency/Currency';
 import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
+import { getIsRefreshing } from 'redux/auth/auth-selector';
+import { Loader } from './Loader/Loader';
+
 const HomeTab = lazy(() => import('components/HomeTab/HomeTab'));
 const Registration = lazy(() => import('pages/Registration'));
 const Login = lazy(() => import('pages/Login'));
@@ -16,12 +19,15 @@ const Dashboard = lazy(() => import('pages/Dashboard/Dashboard'));
 export const App = () => {
   const isMobile = useMobile();
   const dispatch = useDispatch();
+  const isRefreshing = useSelector(getIsRefreshing);
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
+  return isRefreshing ? (
+    <Loader />
+  ) : (
     <Routes>
       <Route
         path="login"

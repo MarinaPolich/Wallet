@@ -2,15 +2,20 @@ import styled from 'styled-components';
 import { VscChevronDown } from 'react-icons/vsc';
 
 export const Statistic = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+  width: 280px;
   @media screen and (min-width: 768.99px) {
     display: flex;
     gap: 32px;
+    width: 572px;
   }
   @media screen and (min-width: 1279.99px) {
+    width: 684px;
   }
 `;
 export const Diagram = styled.div`
-  width: 280px;
+ 
   @media screen and (min-width: 768.99px) {
     width: 236px;
   }
@@ -37,13 +42,13 @@ export const Balance = styled.div`
 `;
 export const Table = styled.div`
   margin-top: 25px;
-  width: 280px;
-  @media screen and (min-width: 768.99px) {
+ 
+  /* @media screen and (min-width: 768.99px) {
     width: 336px;
   }
   @media screen and (min-width: 1279.99px) {
     width: 396px;
-  }
+  } */
 `;
 
 export const StyledForm = styled.form`
@@ -148,6 +153,10 @@ export const HeaderText = styled.div`
   padding-right: 15px;
   line-height: 58px;
   cursor: pointer;
+  &:hover,
+  &:focus {
+    color: rgb(36, 204, 167);
+  }
   @media screen and (min-width: 768.99px) {
     padding-left: 20px;
     padding-right: 20px;
@@ -157,6 +166,19 @@ export const HeaderText = styled.div`
     padding-right: 28px;
   }
 `;
+export const Data = styled.ul`
+  scrollbar-width: thin;
+  min-height: 100px;
+  @media screen and (min-width: 768.99px) {
+    max-height: calc(100vh - 590px);
+    overflow-y: auto;
+  }
+  @media screen and (min-width: 1279.99px) {
+    max-height: calc(100vh - 360px);
+    overflow-y: auto;
+  }
+`;
+
 export const Category = styled.li`
   display: flex;
   justify-content: start;

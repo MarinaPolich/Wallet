@@ -10,6 +10,7 @@ const sortByAlphabet = (a = '', b = '') => {
   return 0;
 };
 
-const sortByDate = (a, b) => moment(b.transactionDate).diff(moment(a.transactionDate));
+const sortByDate = (a, b) =>
+  moment(b.transactionDate).diff(moment(a.transactionDate));
 
 export { sortByNumber, sortByAlphabet, sortByDate };

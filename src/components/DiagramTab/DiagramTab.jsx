@@ -16,6 +16,7 @@ import {
   Title,
   Table,
   Diagram,
+  Data,
 } from './DiagramTab.styled';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
@@ -226,9 +227,7 @@ const DiagramTab = () => {
             <StyledForm onSubmit={handler}>
               <WrapperYear>
                 <StyledSelect name="year" ref={yearNode} onChange={handler}>
-                  <option value="" key="0">
-                    Year
-                  </option>
+                  <option value="">Year</option>
                   {Array.from(years).map(el => (
                     <option key={el} value={el}>
                       {el}
@@ -240,9 +239,7 @@ const DiagramTab = () => {
 
               <WrapperMmonth>
                 <StyledSelect name="month" ref={monthNode} onChange={handler}>
-                  <option value="" key="0">
-                    Month
-                  </option>
+                  <option value="">Month</option>
                   {Array.from(monthes).map(el => (
                     <option key={el} value={el}>
                       {el}
@@ -254,15 +251,19 @@ const DiagramTab = () => {
             </StyledForm>
 
             <TableHeader>
-              <HeaderText data-sort="=" onClick={categorySort}>
+              <HeaderText
+                data-sort="="
+                onClick={categorySort}
+                title="click to sort"
+              >
                 Category
               </HeaderText>
-              <HeaderText data-sort="=" onClick={sumSort}>
+              <HeaderText data-sort="=" onClick={sumSort} title="click to sort">
                 Sum
               </HeaderText>
             </TableHeader>
 
-            <ul>
+            <Data>
               {summary.categoriesSummary
                 .filter(el => el.total < 0)
                 .map(({ name, total }, i) => (
@@ -271,11 +272,12 @@ const DiagramTab = () => {
                     col={colors[i]}
                     onClick={getMoreInfo}
                     data-name={name}
+                    title="click for detailed information"
                   >
                     <div>{name}</div> <div>{-total}</div>
                   </Category>
                 ))}
-            </ul>
+            </Data>
             <Total>
               <div style={{ fontWeight: 700 }}>Expenses:</div>
               <div style={{ fontWeight: 700, color: '#FF6596' }}>

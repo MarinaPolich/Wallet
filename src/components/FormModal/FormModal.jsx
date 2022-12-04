@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import {
   AmountDate,
   AmountField,
@@ -19,21 +19,27 @@ import {
   CloseIcon,
   Plus,
   SvgDate,
-  SelectField,
-} from '../ModalAddTransaction/ModalAddTransaction.styled';
+  ErrorText
+} from './FormModal.styled';
+
 import { close, minus } from 'assets/media/icons';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Formik, ErrorMessage } from 'formik';
+import { Formik, ErrorMessage, Field } from 'formik';
 import * as yup from 'yup';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { addTransaction } from 'redux/transaction/operations';
-import { getAllTransactionsThunk } from 'redux/finance/finance-operations';
+import { useSelector } from 'react-redux';
+
 import moment from 'moment';
+import { SelectField } from 'components/SelectField/SelectField';
+
+
+const TypeOperation = {
+  EXPENSE: 'EXPENSE',
+  INCOME: 'INCOME'
+}
 
 const initialValues = {
-  transactionDate: new Date(),
-  type: 'EXPENSE',
+  transactionDate: moment().format('YYYY-MM-DD'),
+  type: TypeOperation.EXPENSE,
   categoryId: '',
   amount: '',
   comment: '',
@@ -46,13 +52,11 @@ const schema = yup.object().shape({
     .date()
     .required()
     .default(() => new Date()),
-  categoryId: yup.object(),
+  categoryId: yup.string().required('Select category'),
   comment: yup.string(),
 });
 
-const ErrorText = styled.p`
-  color: red;
-`;
+
 
 const FromError = ({ name }) => {
   return (
@@ -63,73 +67,63 @@ const FromError = ({ name }) => {
   );
 };
 
-export const FormModal = ({ closeModal }) => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [select, setSelect] = useState('');
+export const FormModal = ({ closeModal, submitText, submitHandler, initial = initialValues }) => {
   const categoriesName = useSelector(state => state.categories.items);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllTransactionsThunk());
-  }, [dispatch]);
+  const optionFunc = useCallback((filter) => categoriesName
+    ?.filter(({ type }) => type === filter)
+    .map(({ name, id }) => ({ value: id, label: name, })),
+    [categoriesName]);
 
-  const handleChangeDate = e => {
-    setStartDate(e);
-    console.log('object :>> ', e);
-    const day = e.toISOString(10).slice(0, 10);
-    console.log(day);
-  };
-
-  const handleChange = e => {
-    //console.log(e.target.value);
-  };
 
   const handleSubmit = (values, { resetForm, ...props }) => {
-    const date = moment(startDate).format('YYYY-MM-DD');
-    values.transactionDate = date;
-
-    // values.transactionDate = values.transactionDate.toISOString().slice(0, 10);
-
-    values.categoryId =
-      values.type === 'EXPENSE'
-        ? select
-        : '063f1132-ba5d-42b4-951d-44011ca46262';
-    values.amount =
-      values.type === 'EXPENSE' ? '-' + values.amount : '' + values.amount;
-    console.log(values);
-    dispatch(addTransaction(values));
-    closeModal();
-    resetForm();
+    values.amount = values.type === TypeOperation.EXPENSE ? -Math.abs(values.amount) : Math.abs(values.amount);
+    submitHandler(values);
   };
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={initial}
       validationSchema={schema}
       onSubmit={handleSubmit}
     >
       {props => {
-        // console.log(props.values);
+        const handleChange = ({ target }) => {
+          props.setFieldValue(target.name, target.value);
+          if (target.value === TypeOperation.INCOME) {
+            props.setFieldValue('categoryId', optionFunc(target.value).map(x => x.value).find(x => x))
+          }
+          else {
+            props.setFieldValue('categoryId', initial.categoryId)
+          }
+        };
+
+        const setStartDate = (value) => {
+          const date = moment(value).format('YYYY-MM-DD');
+          props.setFieldValue('transactionDate', date)
+        }
         return (
           <ModalForm>
-            <Operation onChange={handleChange}>
+            <Operation>
               <RadioFieldIncome
                 id="income"
                 type="radio"
-                checked={props.values.type === 'INCOME'}
+                checked={props.values.type === TypeOperation.INCOME}
+                onChange={handleChange}
                 name="type"
-                value="INCOME"
+                value={TypeOperation.INCOME}
               />
               <RadioFieldExpense
                 id="expense"
                 type="radio"
-                checked={props.values.type === 'EXPENSE'}
+                checked={props.values.type === TypeOperation.EXPENSE}
+                onChange={handleChange}
                 name="type"
-                value="EXPENSE"
+                value={TypeOperation.EXPENSE}
               />
               <LabelIncome htmlFor="income">Income </LabelIncome>
               <ToggleRb>
                 <Plus>
                   <CloseIcon
-                    src={props.values.type === 'INCOME' ? close : minus}
+                    src={props.values.type === TypeOperation.INCOME ? close : minus}
                     width={20}
                     height={20}
                     title="Change"
@@ -139,44 +133,26 @@ export const FormModal = ({ closeModal }) => {
               <LabelExpense htmlFor="expense">Expense</LabelExpense>
             </Operation>
 
-            {props.values.type === 'EXPENSE' && (
-              <div>
-                <SelectField
-                  name="categoryId"
-                  onChange={option => {
-                    setSelect(option.value);
-                  }}
-                  options={categoriesName?.map(({ name, id }) => ({
-                    value: id,
-                    label: name,
-                  }))}
-                  placeholder={'Select a category'}
-                  styles={{
-                    control: (baseStyles, state) => ({
-                      ...baseStyles,
-                      outline: 'none',
-                      border: '1px solid var(--gray-5)',
-                      borderTop: 'none',
-                      borderLeft: 'none',
-                      borderRight: 'none',
-                    }),
-                  }}
-                />
-                <FromError name="categoryId" />
-              </div>
-            )}
+            {props.values.type === TypeOperation.EXPENSE && 
+            <div>
+              <Field id="categoryId" name="categoryId" component={SelectField} options={optionFunc(props.values.type)} />
+              <FromError name="categoryId" />
+            </div>
+            }
+
+
 
             <AmountDate>
               <label htmlFor="amount"></label>
-              <AmountField type="number" name="amount" placeholder="0.00" />
+              <AmountField id="amount" type="number" name="amount" placeholder="0.00" />
               <FromError name="amount" />
               <DateContainer>
                 <DateField
                   id="transactionDate"
                   type="date"
                   name="transactionDate"
-                  selected={startDate}
-                  onChange={handleChangeDate}
+                  selected={moment(props.values.transactionDate).toDate()}
+                  onChange={setStartDate}
                   dateFormat="dd.MM.yyyy"
                 />
                 <FromError name="transactionDate" />
@@ -201,7 +177,7 @@ export const FormModal = ({ closeModal }) => {
               <CommentField type="text" name="comment" placeholder="Comment" />
             </div>
             <Btn>
-              <ButtonAdd type="submit">ADD</ButtonAdd>
+              <ButtonAdd type="submit">{submitText}</ButtonAdd>
               <ButtonCancel type="button" onClick={closeModal}>
                 CANCEL
               </ButtonCancel>

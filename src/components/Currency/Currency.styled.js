@@ -1,9 +1,15 @@
 import styled from 'styled-components';
 import { device } from 'stylesheet/breakpoints';
+import SVG from 'react-inlinesvg';
 
 export const Box = styled.div`
+  position: relative;
   display: inline-block;
   width: 280px;
+  height: 197px;
+  overflow: hidden;
+  background-color: var(--active-bg-color);
+  border-radius: 30px;
 
   @media ${device.tablet} {
     width: 336px;
@@ -11,6 +17,7 @@ export const Box = styled.div`
 
   @media ${device.desktop} {
     width: 393px;
+    height: 226px;
   }
 `;
 
@@ -29,25 +36,17 @@ export const Table = styled.table`
   background-color: var(--active-bg-color);
   color: var(--white);
 
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.2) -8.67%,
-    rgba(255, 255, 255, 0) 116.22%
-  );
-
   @media ${device.tablet} {
+    height: 174px;
     margin: 0;
-    border-bottom: 22px solid var(--active-bg-color);
+    border-bottom: 12px solid var(--active-bg-color);
   }
 
   @media ${device.desktop} {
     margin: 0;
-
     width: 393px;
-
     border-spacing: 40px solid var(--active-bg-color);
-
-    border-bottom: 143px solid var(--active-bg-color);
+    border-bottom: 1px solid var(--active-bg-color);
   }
 `;
 
@@ -95,4 +94,16 @@ export const Td = styled.td`
 
 export const Tr = styled.tr`
   border: 0;
+`;
+export const Btn = styled.button`
+  background-color: var(--disable-bg-color);
+  border: 0;
+  padding: 2px 8px 2px 30px;
+  color: #fff;
+  border-top-right-radius: 3px;
+  cursor: pointer;
+`;
+export const TableIcon = styled(SVG)`
+  position: absolute;
+  bottom: 0;
 `;

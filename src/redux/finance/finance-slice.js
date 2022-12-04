@@ -1,10 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { sortByDate } from 'helpers/sorters';
 import {
   addTransactionThunk,
   deleteTransactionThunk,
   editTransactionThunk,
   getAllTransactionsThunk,
 } from './finance-operations';
+
+const sortFunc = (arr) => arr.sort(sortByDate).reverse();
+const calcBalance = (arr) => arr.map((item, index, arr) => {
+  item.balanceAfter =
+    (arr[index - 1]?.balanceAfter ?? 0) + item.amount;
+  return item;
+});
 const initialState = {
   error: null,
   isLoading: false,
@@ -20,7 +28,7 @@ const financeSlice = createSlice({
       })
 
       .addCase(getAllTransactionsThunk.fulfilled, (state, action) => {
-        state.transactions = action.payload;
+        state.transactions = calcBalance(sortFunc(action.payload));
         state.isLoading = false;
         state.error = '';
       })
@@ -35,7 +43,7 @@ const financeSlice = createSlice({
       })
 
       .addCase(addTransactionThunk.fulfilled, (state, action) => {
-        state.transactions = [...state.transactions, action.payload];
+        state.transactions = calcBalance(sortFunc([...state.transactions, action.payload]));
         state.isLoading = false;
         state.error = '';
       })
@@ -50,7 +58,9 @@ const financeSlice = createSlice({
       })
 
       .addCase(deleteTransactionThunk.fulfilled, (state, action) => {
-        state.transactions = state.transactions.filter(transaction => transaction.id !== action.payload);
+        state.transactions = calcBalance(sortFunc(state.transactions.filter(
+          transaction => transaction.id !== action.payload
+        )));
         state.isLoading = false;
         state.error = '';
       })
@@ -60,20 +70,17 @@ const financeSlice = createSlice({
         state.isLoading = false;
       })
 
-
       .addCase(editTransactionThunk.pending, state => {
         state.isLoading = true;
       })
 
       .addCase(editTransactionThunk.fulfilled, (state, action) => {
-        console.log('action.payload', action.payload)
-        
-        state.transactions = state.transactions.map(item => {
-            if(item.id === action.payload.id) {
-                return action.payload;
-            }
-            return item;
-        })
+        state.transactions = calcBalance(sortFunc(state.transactions.map(item => {
+          if (item.id === action.payload.id) {
+            return action.payload;
+          }
+          return item;
+        })));
         state.isLoading = false;
         state.error = '';
       })
@@ -82,9 +89,6 @@ const financeSlice = createSlice({
         state.error = action.payload;
         state.isLoading = false;
       });
-
-
-      
   },
 });
 

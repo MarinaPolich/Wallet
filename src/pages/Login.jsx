@@ -13,9 +13,9 @@ import { Desktop } from 'components/Container/Desktop';
 const Login = () => {
   return (
     <Box>
-      {' '}
+      {/* {' '} */}
       <ImgBox>
-        {' '}
+        {/* {' '} */}
         <Tablet>
           <img
             src={frameManTab}
