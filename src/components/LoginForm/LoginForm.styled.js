@@ -90,7 +90,7 @@ export const Button = styled.button`
   text-align: center;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-
+cursor: pointer;
   color: var(--white);
   width: 280px;
   height: 50px;
@@ -99,6 +99,12 @@ export const Button = styled.button`
   background-color: var(--btn-bg-color);
   border: none;
   border-radius: 20px;
+    &:hover {
+    background-color: var(--white);
+    color: var(--btn-bg-color);
+    transition: 1000ms;
+    border: 1px solid var(--btn-bg-color);
+  }
   @media ${device.tabDesk} {
     width: 300px;
   }
@@ -123,6 +129,11 @@ export const StyledLink = styled(Link)`
 
   border: 1px solid var(--active-bg-color);
   border-radius: 20px;
+   &:hover {
+    background-color: var(--active-bg-color);
+    color: var(--white);
+    transition: 1000ms;
+  }
   @media ${device.tabDesk} {
     width: 300px;
   }
