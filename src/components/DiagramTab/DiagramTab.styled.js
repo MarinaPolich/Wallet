@@ -6,10 +6,8 @@ export const Box = styled.div`
     padding-left: 69px;
   }
 `;
-
 export const Statistic = styled.div`
   display: flex;
-
   @media screen and (max-width: 768.99px) {
     flex-direction: column;
     align-items: center;
