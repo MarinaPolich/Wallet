@@ -4,6 +4,12 @@
           @license MIT
           */
 
+/*!
+  Copyright (c) 2015 Jed Watson.
+  Based on code that is Copyright 2013-2015, Facebook, Inc.
+  All rights reserved.
+*/
+
 /*! ./Component */
 
 /*! ./Context */
@@ -247,3 +253,5 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+//! moment.js
