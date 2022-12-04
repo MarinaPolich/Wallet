@@ -5,17 +5,28 @@ import { device } from 'stylesheet/breakpoints';
 export const Container = styled.div`
   position: relative;
   width: 100%;
-  height: 100vh;
   margin: 0 auto;
-  overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(25px);
+  padding-top: 60px;
+
+  @media ${device.tabDesk} {
+    height: 100vh;
+    padding-top: 80px;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(25px);
+  }
 `;
 
 export const Box = styled.div`
+  position: relative;
   width: 100%;
   margin: 0 auto;
   padding: 12px 20px;
+
+  @media ${device.mobile} {
+    max-height: calc(100vh - 70px);
+    overflow: auto;
+  }
 
   @media ${device.tablet} {
     width: ${tablet}px;
@@ -23,8 +34,8 @@ export const Box = styled.div`
   }
 
   @media ${device.desktop} {
-    width: ${desktop}px;
     display: flex;
+    width: ${desktop}px;
     padding: 40px 40px 40px 0;
   }
 `;
