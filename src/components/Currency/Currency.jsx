@@ -28,7 +28,6 @@ export const Currency = () => {
   useEffect(() => {
     dispatch(fetchCurrency());
   }, [dispatch]);
-
   return (
     <Box>
       <Table>
@@ -40,7 +39,7 @@ export const Currency = () => {
           </tr>
         </Thead>
         <Tbody>
-          {loading && currency?.length > 0 ? (
+          {loading ? (
             <Tr>
               <td colSpan="3">
                 <LoadBox>
@@ -55,23 +54,25 @@ export const Currency = () => {
               </td>
             </Tr>
           ) : (
-            <>
-              <Tr>
-                <Td>USD</Td>
-                <Td>{currency[0].rateBuy.toFixed(2)}</Td>
-                <Td>{currency[0].rateSell.toFixed(2)}</Td>
-              </Tr>
-              <Tr>
-                <Td>EUR</Td>
-                <Td>{currency[1].rateBuy.toFixed(2)}</Td>
-                <Td>{currency[1].rateSell.toFixed(2)}</Td>
-              </Tr>
-              <Tr>
-                <Td>EUR/USD</Td>
-                <Td>{currency[2].rateBuy.toFixed(2)}</Td>
-                <Td>{currency[2].rateSell.toFixed(2)}</Td>
-              </Tr>
-            </>
+            currency?.length > 0 && (
+              <>
+                <Tr>
+                  <Td>USD</Td>
+                  <Td>{currency[0].rateBuy.toFixed(2)}</Td>
+                  <Td>{currency[0].rateSell.toFixed(2)}</Td>
+                </Tr>
+                <Tr>
+                  <Td>EUR</Td>
+                  <Td>{currency[1].rateBuy.toFixed(2)}</Td>
+                  <Td>{currency[1].rateSell.toFixed(2)}</Td>
+                </Tr>
+                <Tr>
+                  <Td>EUR/USD</Td>
+                  <Td>{currency[2].rateBuy.toFixed(2)}</Td>
+                  <Td>{currency[2].rateSell.toFixed(2)}</Td>
+                </Tr>
+              </>
+            )
           )}
         </Tbody>
       </Table>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   AmountDate,
   AmountField,
@@ -26,9 +26,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { addTransaction } from 'redux/transaction/operations';
-import { getAllTransactionsThunk } from 'redux/finance/finance-operations';
+import { useSelector } from 'react-redux';
+
 import moment from 'moment';
 
 const initialValues = {
@@ -63,25 +62,12 @@ const FromError = ({ name }) => {
   );
 };
 
-export const FormModal = ({ closeModal }) => {
-  const [startDate, setStartDate] = useState(new Date());
+export const FormModal = ({ closeModal, submitHandler, initial = initialValues }) => {
+  console.log('initial',initial)
+  const [startDate, setStartDate] = useState(initial.transactionDate);
   const [select, setSelect] = useState('');
   const categoriesName = useSelector(state => state.categories.items);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllTransactionsThunk());
-  }, [dispatch]);
 
-  const handleChangeDate = e => {
-    setStartDate(e);
-    console.log('object :>> ', e);
-    const day = e.toISOString(10).slice(0, 10);
-    console.log(day);
-  };
-
-  const handleChange = e => {
-    //console.log(e.target.value);
-  };
 
   const handleSubmit = (values, { resetForm, ...props }) => {
     const date = moment(startDate).format('YYYY-MM-DD');
@@ -96,13 +82,14 @@ export const FormModal = ({ closeModal }) => {
     values.amount =
       values.type === 'EXPENSE' ? '-' + values.amount : '' + values.amount;
     console.log(values);
-    dispatch(addTransaction(values));
-    closeModal();
-    resetForm();
+    submitHandler(values);
+    // dispatch(addTransaction(values));
+    // closeModal();
+    //resetForm();
   };
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={initial}
       validationSchema={schema}
       onSubmit={handleSubmit}
     >
@@ -110,7 +97,7 @@ export const FormModal = ({ closeModal }) => {
         // console.log(props.values);
         return (
           <ModalForm>
-            <Operation onChange={handleChange}>
+            <Operation>
               <RadioFieldIncome
                 id="income"
                 type="radio"
@@ -176,7 +163,7 @@ export const FormModal = ({ closeModal }) => {
                   type="date"
                   name="transactionDate"
                   selected={startDate}
-                  onChange={handleChangeDate}
+                  onChange={setStartDate}
                   dateFormat="dd.MM.yyyy"
                 />
                 <FromError name="transactionDate" />

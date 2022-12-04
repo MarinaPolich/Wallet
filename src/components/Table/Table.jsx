@@ -33,6 +33,7 @@ import {
 import { useEffect } from 'react';
 import { categoriesSelector, transactionsSelector } from 'redux/selectors';
 // import { sortByDate } from 'helpers/sorters';
+
 import { EditTransactionModal } from 'components/EditTransactionModal/EditTransactionModal';
 
 export default function Table() {
