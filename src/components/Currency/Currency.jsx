@@ -27,7 +27,7 @@ export const Currency = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchCurrency());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Box>
