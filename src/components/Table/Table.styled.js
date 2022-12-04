@@ -8,7 +8,7 @@ export const Section = styled.section`
   }
   @media ${device.desktop} {
     padding-top: 46px;
-    padding-left: 20px; // 69
+    padding-left: 69px;
     max-height: calc(100vh - 130px);
     overflow-y: auto;
   }
@@ -16,8 +16,6 @@ export const Section = styled.section`
 
 export const StyledTable = styled.table`
   width: 688px; // 704
-  padding-left: 20px;
-  padding-right: 20px;
   border-spacing: 0;
 
   @media ${device.desktop} {
@@ -119,4 +117,48 @@ export const StyledSpan = styled.span`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+`;
+
+export const List = styled.ul`
+  width: 280px;
+  background-color: var(--white);
+  border-radius: 10px;
+  border-left: 5px solid
+    ${props => (props.income ? 'var(--btn-bg-color)' : 'var(--error-color)')};
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 8px;
+
+  list-style: none;
+`;
+
+export const ListItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+  padding-top: 12px;
+  padding-left: 20px;
+  padding-bottom: 8px;
+  padding-right: 20px;
+
+  font-family: 'Circe';
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.5;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #dcdcdf;
+    /* transform: matrix(0, 1, 1, 0, 0, 0); */
+  }
+`;
+
+export const ListText = styled.span`
+  font-family: 'Circe';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+`;
+
+export const ListSum = styled.span`
+  color: ${props =>
+    props.income ? 'var(--btn-bg-color)' : 'var(--error-color)'};
 `;
