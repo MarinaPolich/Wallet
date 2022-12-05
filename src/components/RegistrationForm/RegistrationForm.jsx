@@ -15,6 +15,7 @@ import {
   StyledLink,
   LogoSvg,
   TextError,
+  Bar,
 } from './RegistrationForm.styled.js';
 import { logo, email, lock, account, eyeClose, eye } from 'assets/media/icons';
 export const RegistrationForm = () => {
@@ -115,16 +116,19 @@ export const RegistrationForm = () => {
                 values.password.length
               )}
 
-          {values.password.length!==0  &&  <Bar
-                width={
-                  (values.confirm.length / (values.password.length)) > 1 ? 100 : (values.confirm.length / (values.password.length) *
-                  100)
-                }
-                color={
-                  values.password.slice(0, values.confirm.length) ===
-                  values.confirm
-                }
-              ></Bar>}
+              {values.password.length !== 0 && (
+                <Bar
+                  width={
+                    values.confirm.length / values.password.length > 1
+                      ? 100
+                      : (values.confirm.length / values.password.length) * 100
+                  }
+                  color={
+                    values.password.slice(0, values.confirm.length) ===
+                    values.confirm
+                  }
+                ></Bar>
+              )}
 
               <Svg
                 src={passwordShown ? eye : eyeClose}
