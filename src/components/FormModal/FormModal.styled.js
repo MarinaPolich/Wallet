@@ -54,11 +54,6 @@ export const LabelExpense = styled.label`
   }
 `;
 
-// border: 1px solid #e0e0e0;
-//   width: 80px;
-//   height: 40px;
-//   border-radius: 30px;
-
 export const ToggleRb = styled.div`
   position: relative;
   height: 40px;
@@ -115,31 +110,6 @@ export const CloseIcon = styled(SVG)`
   fill: var(--white);
 `;
 
-// Toggle Changes
-
-// export const Marker = styled.div`
-//   position: relative;
-//   background-color: #e0e0e0;
-//   width: 16px;
-//   height: 16px;
-//   border-radius: 50%;
-//   z-index: 2;
-//   pointer-events: none;
-//   transform: translateX(1px);
-//   transition: transform 250ms linear;
-// `;
-
-// export const RadioButton = styled.div`
-//   display: flex;
-//   justify-content: space-around;
-//   text-align: center;
-//   align-items: center;
-//   border-radius: 30px;
-//   width: 80px;
-//   height: 40px;
-//   border: 1px solid #e0e0e0;
-// `;
-
 // BUTTON
 
 export const Btn = styled.div`
@@ -178,7 +148,7 @@ export const ButtonAdd = styled.button`
   }
   @media ${device.mobile} {
     width: 280px;
-    margin-top: 30px;
+    margin-top: 40px;
   }
 `;
 
@@ -261,7 +231,7 @@ export const AmountField = styled(Field)`
   }
   @media ${device.mobile} {
     width: 280px;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
   }
 `;
 
@@ -298,6 +268,6 @@ export const CommentField = styled(Field)`
   }
   @media ${device.mobile} {
     width: 280px;
-    margin-top: 30px;
+    margin-top: 40px;
   }
 `;
