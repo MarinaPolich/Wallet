@@ -23,8 +23,10 @@ import {
   ListText,
   ListSum,
   ActionContainer,
+  Btn,
   TR,
   ListItemBtn,
+  StyledInput,
 } from './Table.styled';
 
 import moment from 'moment';
@@ -40,6 +42,7 @@ import { EditTransactionModal } from 'components/EditTransactionModal/EditTransa
 
 export default function Table() {
   const [editTransactionId, setEditTransactionId] = useState('');
+  const [filter, setfilter] = useState({ categoryName: '', comment: '' });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -51,17 +54,24 @@ export default function Table() {
     setEditTransactionId(itemId);
     setIsModalOpen(true);
   };
-
-  const transactions = useSelector(transactionsSelector);
-  const sortedTransactions = [...transactions].reverse(); //.sort(sortByDate);
-
   const categories = useSelector(categoriesSelector);
-
   const searchCategoryName = id => {
     const category = categories.find(item => id === item.id);
     // console.log('category', category);
     return category?.name;
   };
+  const transactions = useSelector(transactionsSelector);
+  const transactionsWithCategory = [...transactions].map(el => {
+    return { ...el, categoryName: searchCategoryName(el.categoryId) };
+  });
+  let sortedTransactions = [...transactionsWithCategory].reverse(); //.sort(sortByDate);
+  for (let [key, value] of Object.entries(filter)) {
+    if (value === '') continue;
+    sortedTransactions = [...sortedTransactions].filter(el =>
+      el[key].toLowerCase().includes(value.toLowerCase())
+    );
+  }
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -70,6 +80,18 @@ export default function Table() {
 
   const deleteTransaction = itemId => {
     dispatch(deleteTransactionThunk(itemId));
+  };
+  const hendelerFilterCategory = e => {
+    setfilter(st => ({
+      ...st,
+      categoryName: e.target.value,
+    }));
+  };
+  const hendelerFilterComment = e => {
+    setfilter(st => ({
+      ...st,
+      comment: e.target.value,
+    }));
   };
 
   return (
@@ -80,8 +102,44 @@ export default function Table() {
             <tr>
               <StyledTh>Date</StyledTh>
               <StyledTh>Type</StyledTh>
-              <StyledTh>Category</StyledTh>
-              <CommentTh>Comment</CommentTh>
+
+              <StyledTh>
+                <StyledInput
+                  type="text"
+                  placeholder="Category"
+                  value={filter.categoryName}
+                  onChange={hendelerFilterCategory}
+                />
+                {filter.categoryName && (
+                  <ActionContainer>
+                    <Btn
+                      onClick={() =>
+                        setfilter(st => ({ ...st, categoryName: '' }))
+                      }
+                    >
+                      <BsFillTrashFill size={16} color="#a6a6a6" />
+                    </Btn>
+                  </ActionContainer>
+                )}
+              </StyledTh>
+              <CommentTh>
+                <StyledInput
+                  type="text"
+                  placeholder="Comment"
+                  value={filter.comment}
+                  onChange={hendelerFilterComment}
+                />
+                {filter.comment && (
+                  <ActionContainer>
+                    <Btn
+                      onClick={() => setfilter(st => ({ ...st, comment: '' }))}
+                    >
+                      <BsFillTrashFill size={16} color="#a6a6a6" />
+                    </Btn>
+                  </ActionContainer>
+                )}
+              </CommentTh>
+
               <ThRight>Sum</ThRight>
               <ThRight>Balance</ThRight>
             </tr>
@@ -93,8 +151,10 @@ export default function Table() {
                   {moment(item.transactionDate).format('DD.MM.YY')}
                 </StyledTd>
                 <TypeTd>{item.type === 'INCOME' ? '+' : '-'}</TypeTd>
+
                 <StyledTd>{searchCategoryName(item.categoryId)}</StyledTd>
                 <CommentTd>{item.comment}</CommentTd>
+
                 <TSum income={item.type === 'INCOME'}>
                   {item.amount.toFixed(2)}
                 </TSum>
@@ -118,6 +178,44 @@ export default function Table() {
         </StyledTable>
       </IsDesktopOrTablet>
       <Mobile>
+        <div
+          style={{ marginLeft: 'auto', marginRight: 'auto', width: '280px' }}
+        >
+          <StyledTh style={{ paddingLeft: 0 }}></StyledTh>
+          <StyledTh style={{ paddingLeft: 0 }}></StyledTh>
+          <StyledTh style={{ padding: '0 5px', width: '140px' }}>
+            <StyledInput
+              type="text"
+              placeholder="Category"
+              value={filter.categoryName}
+              onChange={hendelerFilterCategory}
+            />
+            {filter.categoryName && (
+              <ActionContainer>
+                <Btn
+                  onClick={() => setfilter(st => ({ ...st, categoryName: '' }))}
+                >
+                  <BsFillTrashFill size={16} color="#a6a6a6" />
+                </Btn>
+              </ActionContainer>
+            )}
+          </StyledTh>
+          <StyledTh style={{ padding: '0 5px', width: '140px' }}>
+            <StyledInput
+              type="text"
+              placeholder="Comment"
+              value={filter.comment}
+              onChange={hendelerFilterComment}
+            />
+            {filter.comment && (
+              <ActionContainer>
+                <Btn onClick={() => setfilter(st => ({ ...st, comment: '' }))}>
+                  <BsFillTrashFill size={16} color="#a6a6a6" />
+                </Btn>
+              </ActionContainer>
+            )}
+          </StyledTh>
+        </div>
         {sortedTransactions.map(item => (
           <List key={item.id} income={item.type === 'INCOME'}>
             <ListItem>
