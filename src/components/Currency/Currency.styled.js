@@ -101,8 +101,9 @@ export const Td = styled.td`
 export const Tr = styled.tr`
   border: 0;
 `;
-export const Btn = styled.button`
+export const MoreInfo = styled.button`
   position: absolute;
+  z-index: 1000;
   bottom: 0;
   left: 0;
   transform: translate(20px, -5px);
