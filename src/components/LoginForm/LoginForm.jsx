@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Formik } from 'formik';
 import { logIn } from '../../redux/auth/auth-operations';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import { logo, email, lock } from 'assets/media/icons';
+import { logo, email, lock, eyeClose, eye } from 'assets/media/icons';
 import {
   Form,
   Input,
@@ -17,6 +17,7 @@ import {
   TextError,
 } from './LoginForm.styled.js';
 export const LoginForm = () => {
+  const [passwordShown, setPasswordShown] = useState(false)
   const dispatch = useDispatch();
   const handelSubmit = ({ email, password }, { resetForm }) => {
     dispatch(logIn({ email, password }));
@@ -59,12 +60,13 @@ export const LoginForm = () => {
             <Label>
               <Svg src={lock} width={30} height={28} title="Lock" />
               <Input
-                type="password"
+                type={passwordShown ? "text" : "password"}
                 name="password"
                 placeholder="Password"
                 value={values.password}
                 onChange={handleChange}
               />
+              <Svg  src={passwordShown ? eye : eyeClose} width={30} height={28} title="Eye" onClick={() => setPasswordShown(!passwordShown)}/>
               {errors.password && touched.password ? (
                 <TextError>{errors.password}</TextError>
               ) : null}

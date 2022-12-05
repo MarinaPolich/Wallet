@@ -8,7 +8,6 @@ export const Box = styled.div`
   }
   @media ${device.desktop} {
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
   }
 `;

@@ -8,7 +8,6 @@ export const Box = styled.div`
   }
   @media ${device.desktop} {
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
   }
 `;
@@ -22,11 +21,6 @@ export const Container = styled.div`
      width: 100%;
     height: 100vh;
       background-color: rgba(255, 255, 255, 0.4);
-
-    // position: fixed;
-    // top: 0;
-    // right: 0;
-    /* width: calc(100% * 0.57); */
     backdrop-filter: blur(25px);
   }
 `;
