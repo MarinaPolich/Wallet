@@ -9,11 +9,13 @@ import {
   Section,
   StyledTable,
   StyledTd,
+  CommentTh,
   StyledTh,
   ThRight,
   THead,
   Tbody,
   TypeTd,
+  CommentTd,
   TSum,
   BalanceTd,
   List,
@@ -100,6 +102,7 @@ export default function Table() {
             <tr>
               <StyledTh>Date</StyledTh>
               <StyledTh>Type</StyledTh>
+
               <StyledTh>
                 <StyledInput
                   type="text"
@@ -119,7 +122,7 @@ export default function Table() {
                   </ActionContainer>
                 )}
               </StyledTh>
-              <StyledTh>
+              <CommentTh>
                 <StyledInput
                   type="text"
                   placeholder="Comment"
@@ -135,7 +138,8 @@ export default function Table() {
                     </Btn>
                   </ActionContainer>
                 )}
-              </StyledTh>
+              </CommentTh>
+
               <ThRight>Sum</ThRight>
               <ThRight>Balance</ThRight>
             </tr>
@@ -147,8 +151,10 @@ export default function Table() {
                   {moment(item.transactionDate).format('DD.MM.YY')}
                 </StyledTd>
                 <TypeTd>{item.type === 'INCOME' ? '+' : '-'}</TypeTd>
-                <StyledTd>{item.categoryName}</StyledTd>
-                <StyledTd>{item.comment}</StyledTd>
+
+                <StyledTd>{searchCategoryName(item.categoryId)}</StyledTd>
+                <CommentTd>{item.comment}</CommentTd>
+
                 <TSum income={item.type === 'INCOME'}>
                   {item.amount.toFixed(2)}
                 </TSum>

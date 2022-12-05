@@ -1,17 +1,20 @@
 import styled from 'styled-components';
+import { css } from 'styled-components';
 import { device } from 'stylesheet/breakpoints';
 
+
+const tableCss = css`
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+`;
+
 export const Section = styled.section`
-  @media ${device.tablet} {
-    max-height: calc(100vh - 340px);
-    overflow-y: auto;
-  }
   @media ${device.desktop} {
-    padding-top: 46px;
     padding-left: 69px;
-    max-height: calc(100vh - 130px);
-    overflow-y: auto;
+    padding-top: 46px;
   }
+ 
 `;
 export const ActionContainer = styled.div`
   opacity: 0;
@@ -34,7 +37,7 @@ export const StyledInput = styled.input`
 `;
 
 export const StyledTable = styled.table`
-  width: 688px; // 704
+  width: 704px; // 704
   border-spacing: 0;
 
   @media ${device.desktop} {
@@ -49,15 +52,18 @@ export const THead = styled.thead`
   line-height: 1.5;
 
   background-color: var(--white);
+  border-radius: 30px;
+
+  ${tableCss}
+  width: calc(100% - 18px);
 `;
 
 export const StyledTh = styled.th`
   position: relative;
   padding-top: 16px;
   padding-bottom: 16px;
-  padding-left: 20px;
-
-  text-align: left;
+  text-align: center;
+  width: 14%;
 
   &:first-child {
     border-top-left-radius: 30px;
@@ -75,7 +81,12 @@ export const StyledTh = styled.th`
       background-color: var(--bg-color);
     }
   }
+
 `;
+export const CommentTh = styled(StyledTh)`
+  width: 25%
+`;
+
 
 export const Btn = styled.button`
   position: absolute;
@@ -84,15 +95,11 @@ export const Btn = styled.button`
   border: 0;
   background-color: var(--bg-color);
 `;
-export const ThRight = styled.th`
-  padding-top: 16px;
-  padding-bottom: 16px;
-  padding-right: 20px;
-  text-align: right;
-  &:last-child {
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-  }
+
+export const ThRight = styled(StyledTh)`
+  text-align: center;
+  width: auto;
+
 `;
 
 export const Tbody = styled.tbody`
@@ -100,6 +107,22 @@ export const Tbody = styled.tbody`
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
+
+  ${tableCss}
+
+  
+  table-layout: fixed;
+  display: block;
+  overflow-y: auto;
+  overflow-x: hidden;
+  @media ${device.desktop} {
+    max-height: calc(100vh - 250px);
+  }
+  @media ${device.tablet} {
+    max-height: calc(100vh - 410px);
+
+  }
+
 `;
 
 export const StyledTd = styled.td`
@@ -108,7 +131,12 @@ export const StyledTd = styled.td`
   padding-left: 20px;
   border-bottom: 1px solid #dcdcdf;
   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
+  width: 14%;
 `;
+
+export const CommentTd = styled(StyledTd)`
+  width: 25%;
+`
 
 export const TypeTd = styled.td`
   padding-top: 16px;
@@ -116,6 +144,7 @@ export const TypeTd = styled.td`
   border-bottom: 1px solid #dcdcdf;
   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
   text-align: center;
+  width: 14%;
 `;
 
 export const TSum = styled.td`
@@ -219,6 +248,7 @@ export const StyledSpan = styled.span`
 export const TR = styled.tr`
   position: relative;
   transition: all 250ms linear;
+  ${tableCss}
 
   @media ${device.tabDesk} {
     &:hover,
