@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/Wallet/static/css/main.81fcee2d.css",
-    "main.js": "/Wallet/static/js/main.382ad5cc.js",
-    "static/js/821.baed144a.chunk.js": "/Wallet/static/js/821.baed144a.chunk.js",
-    "static/js/319.911c7934.chunk.js": "/Wallet/static/js/319.911c7934.chunk.js",
-    "static/js/652.49aeff4d.chunk.js": "/Wallet/static/js/652.49aeff4d.chunk.js",
+    "main.js": "/Wallet/static/js/main.440ec0ef.js",
+    "static/js/821.fc7094d5.chunk.js": "/Wallet/static/js/821.fc7094d5.chunk.js",
+    "static/js/319.efcc0498.chunk.js": "/Wallet/static/js/319.efcc0498.chunk.js",
+    "static/js/652.126c46dc.chunk.js": "/Wallet/static/js/652.126c46dc.chunk.js",
     "static/js/367.c4a1a55b.chunk.js": "/Wallet/static/js/367.c4a1a55b.chunk.js",
-    "static/js/873.921ebfbd.chunk.js": "/Wallet/static/js/873.921ebfbd.chunk.js",
+    "static/js/873.9510af1e.chunk.js": "/Wallet/static/js/873.9510af1e.chunk.js",
     "static/js/668.87123755.chunk.js": "/Wallet/static/js/668.87123755.chunk.js",
     "static/css/183.1fc79230.chunk.css": "/Wallet/static/css/183.1fc79230.chunk.css",
     "static/js/183.e37db8dc.chunk.js": "/Wallet/static/js/183.e37db8dc.chunk.js",
@@ -34,6 +34,7 @@
     "static/media/frameManTab.png": "/Wallet/static/media/frameManTab.5ab1ff1e730a6ee0a05d.png",
     "static/media/logo-text.svg": "/Wallet/static/media/logo-text.3b2035495ffafb0331cdf9f90b68371c.svg",
     "static/media/logo.svg": "/Wallet/static/media/logo.2e8c127a95c7317a83a5e9e275a21ef5.svg",
+    "static/media/eyeClose.svg": "/Wallet/static/media/eyeClose.6f317c35482b4a18d290c6b45474fbec.svg",
     "index.html": "/Wallet/index.html",
     "static/media/diagramTab.svg": "/Wallet/static/media/diagramTab.fae4a9c7f98c64fc6f39741d6fb92d93.svg",
     "static/media/diagram.svg": "/Wallet/static/media/diagram.5433e683ecf5277df81396cd768c649c.svg",
@@ -41,6 +42,7 @@
     "static/media/statistic_mobile.svg": "/Wallet/static/media/statistic_mobile.3adbad0b4ddc6bd0550ddea93fc9b07a.svg",
     "static/media/statistic.svg": "/Wallet/static/media/statistic.75957084ecfcd2376ffc6ced91c3f096.svg",
     "static/media/exit.svg": "/Wallet/static/media/exit.dbae2312157954dacc6e34cea098b3da.svg",
+    "static/media/eye.svg": "/Wallet/static/media/eye.6a61e61d0f36f8e792b998cc4904b332.svg",
     "static/media/currency_mobile.svg": "/Wallet/static/media/currency_mobile.56d322002e0a53b3c3d27b215cf1bd03.svg",
     "static/media/lock.svg": "/Wallet/static/media/lock.1d16507f0efe48e5588da177d5685cd0.svg",
     "static/media/account.svg": "/Wallet/static/media/account.30aedeb966bb7866efa06bfd947a9914.svg",
@@ -54,12 +56,12 @@
     "static/media/close.svg": "/Wallet/static/media/close.6194a661e88e1e5113d28da2398b6404.svg",
     "static/media/minus.svg": "/Wallet/static/media/minus.c1930871236002c803c7b6a6c0b99024.svg",
     "main.81fcee2d.css.map": "/Wallet/static/css/main.81fcee2d.css.map",
-    "main.382ad5cc.js.map": "/Wallet/static/js/main.382ad5cc.js.map",
-    "821.baed144a.chunk.js.map": "/Wallet/static/js/821.baed144a.chunk.js.map",
-    "319.911c7934.chunk.js.map": "/Wallet/static/js/319.911c7934.chunk.js.map",
-    "652.49aeff4d.chunk.js.map": "/Wallet/static/js/652.49aeff4d.chunk.js.map",
+    "main.440ec0ef.js.map": "/Wallet/static/js/main.440ec0ef.js.map",
+    "821.fc7094d5.chunk.js.map": "/Wallet/static/js/821.fc7094d5.chunk.js.map",
+    "319.efcc0498.chunk.js.map": "/Wallet/static/js/319.efcc0498.chunk.js.map",
+    "652.126c46dc.chunk.js.map": "/Wallet/static/js/652.126c46dc.chunk.js.map",
     "367.c4a1a55b.chunk.js.map": "/Wallet/static/js/367.c4a1a55b.chunk.js.map",
-    "873.921ebfbd.chunk.js.map": "/Wallet/static/js/873.921ebfbd.chunk.js.map",
+    "873.9510af1e.chunk.js.map": "/Wallet/static/js/873.9510af1e.chunk.js.map",
     "668.87123755.chunk.js.map": "/Wallet/static/js/668.87123755.chunk.js.map",
     "183.1fc79230.chunk.css.map": "/Wallet/static/css/183.1fc79230.chunk.css.map",
     "183.e37db8dc.chunk.js.map": "/Wallet/static/js/183.e37db8dc.chunk.js.map",
@@ -69,6 +71,6 @@
   },
   "entrypoints": [
     "static/css/main.81fcee2d.css",
-    "static/js/main.382ad5cc.js"
+    "static/js/main.440ec0ef.js"
   ]
 }
