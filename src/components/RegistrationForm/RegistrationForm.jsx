@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { registration } from '../../redux/auth/auth-operations';
 import { useDispatch } from 'react-redux';
@@ -15,11 +15,10 @@ import {
   StyledLink,
   LogoSvg,
   TextError,
-  Bar,
 } from './RegistrationForm.styled.js';
 import { logo, email, lock, account, eyeClose, eye } from 'assets/media/icons';
 export const RegistrationForm = () => {
-   const [passwordShown, setPasswordShown] = useState(false)
+  const [passwordShown, setPasswordShown] = useState(false);
   const dispatch = useDispatch();
   const handelSubmit = ({ email, password, username }, { resetForm }) => {
     dispatch(registration({ email, password, username }));
@@ -78,14 +77,25 @@ export const RegistrationForm = () => {
             <Label>
               <Svg src={lock} width={30} height={28} title="Lock" />
               <Input
-                type={passwordShown ? "text" : "password"}
+                type={passwordShown ? 'text' : 'password'}
                 name="password"
                 value={values.password}
                 onChange={handleChange}
                 placeholder="Password"
               />
-               <Svg  src={passwordShown ? eye : eyeClose} width={30} height={28} title="Eye" onClick={() => setPasswordShown(!passwordShown)}/>
-               <PasswordStrengthBar password={values.password} barColors={['#e0e0e0', 'red', 'orange', '#4a56e2', '#24cca7']}  minLength={6}  maxLength={12}/>
+              <Svg
+                src={passwordShown ? eye : eyeClose}
+                width={30}
+                height={28}
+                title="Eye"
+                onClick={() => setPasswordShown(!passwordShown)}
+              />
+              <PasswordStrengthBar
+                password={values.password}
+                barColors={['#e0e0e0', 'red', 'orange', '#4a56e2', '#24cca7']}
+                minLength={6}
+                maxLength={12}
+              />
               {errors.password && touched.password ? (
                 <TextError>{errors.password}</TextError>
               ) : null}
@@ -93,21 +103,25 @@ export const RegistrationForm = () => {
             <Label>
               <Svg src={lock} width={30} height={28} title="Lock" />
               <Input
-                type={passwordShown ? "text" : "password"}
+                type={passwordShown ? 'text' : 'password'}
                 name="confirm"
                 value={values.confirm}
                 onChange={handleChange}
                 placeholder="Confirm password"
               />
 
-
               {/* <Bar
                 width={(confirm.length / password.length) * 100}
                 color={password.slice(0, confirm.length) === confirm.length}
               ></Bar> */}
-              <Svg  src={passwordShown ? eye : eyeClose} width={30} height={28} title="Eye" onClick={() => setPasswordShown(!passwordShown)}/>            
+              <Svg
+                src={passwordShown ? eye : eyeClose}
+                width={30}
+                height={28}
+                title="Eye"
+                onClick={() => setPasswordShown(!passwordShown)}
+              />
 
-             
               <PasswordStrengthBar
                 password={values.confirm}
                 barColors={['#e0e0e0', 'red', 'orange', '#4a56e2', '#24cca7']}
