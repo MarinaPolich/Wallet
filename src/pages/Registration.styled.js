@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 import { device } from 'stylesheet/breakpoints';
 
-export const Box = styled.div`
+export const Box = styled.section`
     height: 100vh;
   @media ${device.tablet} {
     padding: 60px 0 48px 0;
   }
   @media ${device.desktop} {
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
   }
 `;

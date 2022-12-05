@@ -41,6 +41,7 @@ export const Form = styled.form`
 `;
 export const Label = styled.label`
   margin-top: 32px;
+  position:relative;
   &:first-child {
     margin-top: 0;
   }
