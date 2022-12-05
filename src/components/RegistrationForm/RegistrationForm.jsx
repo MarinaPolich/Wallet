@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { registration } from '../../redux/auth/auth-operations';
 import { useDispatch } from 'react-redux';
@@ -15,15 +15,14 @@ import {
   StyledLink,
   LogoSvg,
   TextError,
-  Bar,
 } from './RegistrationForm.styled.js';
 import { logo, email, lock, account, eyeClose, eye } from 'assets/media/icons';
 export const RegistrationForm = () => {
-   const [passwordShown, setPasswordShown] = useState(false)
+  const [passwordShown, setPasswordShown] = useState(false);
   const dispatch = useDispatch();
   const handelSubmit = ({ email, password, username }, { resetForm }) => {
     dispatch(registration({ email, password, username }));
-    resetForm();
+    //resetForm();
   };
   const RegistrationSchema = Yup.object().shape({
     email: Yup.string().email().required('Enter email'),

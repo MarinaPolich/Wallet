@@ -13,7 +13,7 @@ import {
   Tr,
   Td,
   TableIcon,
-  Btn,
+  // Btn,
 } from './Currency.styled';
 import { CurrencyAllRate } from 'components/CurrencyAllRate/CurrencyAllRate';
 import { diagram, diagramTab, diagramMob } from 'assets/media/icons';
@@ -77,9 +77,9 @@ export const Currency = () => {
           )}
         </Tbody>
       </Table>
-      <Btn type="button" onClick={() => setMoreinfo(true)}>
+      {/* <Btn type="button" onClick={() => setMoreinfo(true)}>
         more info
-      </Btn>
+      </Btn> */}
       {moreinfo && <CurrencyAllRate closeFunck={setMoreinfo} />}
 
       <Mobile>

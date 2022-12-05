@@ -21,7 +21,7 @@ export const LoginForm = () => {
   const dispatch = useDispatch();
   const handelSubmit = ({ email, password }, { resetForm }) => {
     dispatch(logIn({ email, password }));
-    resetForm();
+    //resetForm();
   };
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Enter email'),

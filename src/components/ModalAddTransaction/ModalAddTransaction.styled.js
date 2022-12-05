@@ -3,10 +3,6 @@ import { device } from 'stylesheet/breakpoints';
 
 // const colorActiveLable = 'green';
 
-
-
-
-
 export const ModalHead = styled.h1`
   margin-top: 20px;
   margin-bottom: 40px;
@@ -18,8 +14,8 @@ export const ModalHead = styled.h1`
 
   color: var(--black);
   @media ${device.mobile} {
-    margin-top: 0;
-    margin-bottom: 20px;
+    margin-top: -55px;
+    margin-bottom: 40px;
   }
 `;
 

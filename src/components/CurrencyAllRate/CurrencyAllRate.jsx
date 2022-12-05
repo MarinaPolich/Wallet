@@ -21,8 +21,7 @@ import { createPortal } from 'react-dom';
 export const CurrencyAllRate = ({ closeFunck }) => {
   const currency = useSelector(selectCurrency);
   const [filter, setFilter] = useState(['', '', '']);
-  console.log(currency);
-  console.log(filter);
+
   let filteredCurreccy = [...currency];
   if (filter[0] !== '') {
     filteredCurreccy = currency.filter(el =>

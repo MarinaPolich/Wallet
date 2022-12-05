@@ -7,7 +7,6 @@ export const Wrap = styled.div`
   bottom: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  
 `;
 
 export const Box = styled.div`
@@ -16,29 +15,34 @@ export const Box = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   position: relative;
-  width: 280px;
-  border-radius: 3px;
+  width: 360px;
+  border-radius: 15px;
   max-height: 80vh;
   overflow-y: auto;
   @media ${device.tablet} {
-    width: 354px;
-    border-radius: 3px;
+    width: 394px;
   }
   @media ${device.desktop} {
-    width: 411px;
+    width: 451px;
   }
 `;
 export const Caption = styled.p`
   color: #fff;
   width: 100%;
-  font-size: 12px;
+  padding: 10px;
+  font-family: 'Poppins-Bold';
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.5;
+  text-transform: uppercase;
   background-color: var(--disable-bg-color);
 `;
 export const Table = styled.table`
- 
-  border-spacing: 20px solid var(--active-bg-color);
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
+  border-spacing: 0;
+
   overflow: hidden;
   background-color: var(--active-bg-color);
   color: var(--white);
@@ -47,43 +51,47 @@ export const Table = styled.table`
     rgba(255, 255, 255, 0.2) -8.67%,
     rgba(255, 255, 255, 0) 116.22%
   );
-
-  @media ${device.tablet} {
-    margin: 0;
-    border-bottom: 22px solid var(--active-bg-color);
-  }
-
-  @media ${device.desktop} {
-    margin: 0;
-
-    width: 393px;
-
-    border-spacing: 40px solid var(--active-bg-color);
-
-    border-bottom: 143px solid var(--active-bg-color);
-  }
 `;
 
 export const Thead = styled.thead`
+  font-family: 'Poppins-Regular';
   font-weight: 500;
   font-size: 14px;
+  line-height: 1.5;
+
   background-color: var(--disable-bg-color);
 `;
 
 export const Th = styled.th`
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 6px;
   text-align: center;
   width: ${props => `${props.width}px`};
-  @media ${device.tablet} {
-    padding-top: 6px;
-    padding-bottom: 6px;
-    width: ${props => `${props.width + 12}px`};
+
+  &:last-child {
+    padding-right: 6px;
   }
-  @media ${device.desktop} {
+
+  @media ${device.tablet} {
     padding-top: 8px;
     padding-bottom: 8px;
+    padding-left: 8px;
+    width: ${props => `${props.width + 12}px`};
+
+    &:last-child {
+      padding-right: 8px;
+    }
+  }
+  @media ${device.desktop} {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
     width: ${props => `${props.width + 20}px`};
+
+    &:last-child {
+      padding-right: 10px;
+    }
   }
 `;
 
@@ -93,29 +101,46 @@ export const Tbody = styled.tbody`
 `;
 
 export const Td = styled.td`
-  font-size: 12px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 4px;
   width: ${props => `${props.width}px`};
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 6px;
+
+  font-family: 'Poppins-Regular';
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+
   &:nth-child(1),
   &:nth-child(2),
   &:nth-child(3) {
     cursor: copy;
   }
 
-  @media ${device.tablet} {
-    padding-top: 6px;
-    padding-bottom: 6px;
-    padding-left: 6px;
-    width: ${props => `${props.width + 10}px`};
+  &:last-child {
+    padding-right: 6px;
   }
 
-  @media ${device.desktop} {
+  @media ${device.tablet} {
     padding-top: 8px;
     padding-bottom: 8px;
     padding-left: 8px;
+    width: ${props => `${props.width + 10}px`};
+
+    &:last-child {
+      padding-right: 8px;
+    }
+  }
+
+  @media ${device.desktop} {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
     width: ${props => `${props.width + 20}px`};
+
+    &:last-child {
+      padding-right: 10px;
+    }
   }
 `;
 

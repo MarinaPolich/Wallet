@@ -2,6 +2,15 @@ import { createSlice } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
 import { registration, logIn, logOut, refreshUser } from './auth-operations';
 
+const handlePending = state => {
+  state.isLoggedIn = false;
+  state.error = null;
+}
+const handleRejected = (state, { payload }) => {
+  state.isLoggedIn = false;
+  state.error = payload;
+}
+
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
@@ -13,38 +22,34 @@ const authSlice = createSlice({
   },
   extraReducers: builder =>
     builder
-      .addCase(registration.pending, state => {
-        state.isLoggedIn = true;
-      })
+      .addCase(registration.pending, handlePending)
       .addCase(registration.fulfilled, (state, { payload }) => {
         state.user = payload.user;
         state.token = payload.token;
         state.isLoggedIn = true;
       })
-      .addCase(registration.rejected, (state, { payload }) => {
-        state.error = payload;
-      })
-      .addCase(logIn.pending, state => {
-        state.isLoggedIn = true;
-      })
+      .addCase(registration.rejected,handleRejected)
+
+      .addCase(logIn.pending, handlePending)
       .addCase(logIn.fulfilled, (state, { payload }) => {
         state.user = payload.user;
         state.token = payload.token;
         state.isLoggedIn = true;
       })
-      .addCase(logOut.pending, state => {
-        state.isLoggedIn = true;
-      })
+      .addCase(logIn.rejected, handleRejected)
+
+      .addCase(logOut.pending, handlePending)
       .addCase(logOut.fulfilled, state => {
         state.user = { username: null, email: null };
         state.token = null;
         state.isLoggedIn = false;
       })
-      .addCase(logOut.rejected, (state, { payload }) => {
-        state.error = payload;
-      })
+      .addCase(logOut.rejected, handleRejected)
+
       .addCase(refreshUser.pending, state => {
+        state.isLoggedIn = true;
         state.isRefreshing = true;
+        state.error = null;
       })
       .addCase(refreshUser.fulfilled, (state, { payload }) => {
         state.user = payload;
@@ -53,6 +58,7 @@ const authSlice = createSlice({
       })
       .addCase(refreshUser.rejected, (state, { payload }) => {
         state.isRefreshing = false;
+        state.isLoggedIn = false;
         state.error = payload;
       }),
 });
