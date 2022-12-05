@@ -16,13 +16,7 @@ import {
   LogoSvg,
   TextError,
 } from './LoginForm.styled.js';
-export const LoginForm = () => {
-  const [passwordShown, setPasswordShown] = useState(false)
-  const dispatch = useDispatch();
-  const handelSubmit = ({ email, password }, { resetForm }) => {
-    dispatch(logIn({ email, password }));
-    //resetForm();
-  };
+
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Enter email'),
     password: Yup.string()
@@ -30,6 +24,15 @@ export const LoginForm = () => {
       .max(12, 'Password is too long, at maximum 12!')
       .required('Enter passworg'),
   });
+
+export const LoginForm = () => {
+  const [passwordShown, setPasswordShown] = useState(false)
+  const dispatch = useDispatch();
+  const handelSubmit = ({ email, password }, { resetForm }) => {
+    dispatch(logIn({ email, password }));
+    //resetForm();
+  };
+
   return (
     <Formik
       initialValues={{ email: '', password: '' }}

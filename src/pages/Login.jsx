@@ -10,6 +10,7 @@ import {
 } from '../assets/media/images/index.js';
 import { Tablet } from 'components/Container/Tablet';
 import { Desktop } from 'components/Container/Desktop';
+
 const Login = () => {
   return (
     <Box>
@@ -22,7 +23,7 @@ const Login = () => {
             alt="Finance"
             width="260"
             height="250"
-            srcSet={` ${frameManTab2x} 2x, ${frameManTab3x} 3x`}
+            srcSet={` ${frameManTab} 1x, ${frameManTab2x} 2x, ${frameManTab3x} 3x`}
           />
           <Title>Finance App</Title>
         </Tablet>
@@ -32,7 +33,7 @@ const Login = () => {
             alt="Finance"
             width="435"
             height="419"
-            srcSet={`${frameManDesk2x} 2x, ${frameManDesk3x} 3x`}
+            srcSet={`${frameManDesk} 1x, ${frameManDesk2x} 2x, ${frameManDesk3x} 3x`}
           />
           <Title>Finance App</Title>
         </Desktop>{' '}
