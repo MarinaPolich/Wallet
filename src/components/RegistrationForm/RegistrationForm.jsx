@@ -22,7 +22,7 @@ export const RegistrationForm = () => {
   const dispatch = useDispatch();
   const handelSubmit = ({ email, password, username }, { resetForm }) => {
     dispatch(registration({ email, password, username }));
-    resetForm();
+    //resetForm();
   };
   const RegistrationSchema = Yup.object().shape({
     email: Yup.string().email().required('Enter email'),
