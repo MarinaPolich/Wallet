@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { css } from 'styled-components';
 import { device } from 'stylesheet/breakpoints';
 
-
 const tableCss = css`
   display: table;
   width: 100%;
@@ -14,7 +13,6 @@ export const Section = styled.section`
     padding-left: 69px;
     padding-top: 46px;
   }
- 
 `;
 export const ActionContainer = styled.div`
   opacity: 0;
@@ -24,7 +22,7 @@ export const ActionContainer = styled.div`
 `;
 export const StyledInput = styled.input`
   height: 100%;
-  width: 100%;
+  width: 90%;
   border: 0;
   padding-left: 2px;
   text-align: left;
@@ -81,12 +79,10 @@ export const StyledTh = styled.th`
       background-color: var(--bg-color);
     }
   }
-
 `;
 export const CommentTh = styled(StyledTh)`
-  width: 25%
+  width: 25%;
 `;
-
 
 export const Btn = styled.button`
   position: absolute;
@@ -99,7 +95,6 @@ export const Btn = styled.button`
 export const ThRight = styled(StyledTh)`
   text-align: center;
   width: auto;
-
 `;
 
 export const Tbody = styled.tbody`
@@ -110,7 +105,6 @@ export const Tbody = styled.tbody`
 
   ${tableCss}
 
-  
   table-layout: fixed;
   display: block;
   overflow-y: auto;
@@ -120,9 +114,7 @@ export const Tbody = styled.tbody`
   }
   @media ${device.tablet} {
     max-height: calc(100vh - 410px);
-
   }
-
 `;
 
 export const StyledTd = styled.td`
@@ -136,7 +128,7 @@ export const StyledTd = styled.td`
 
 export const CommentTd = styled(StyledTd)`
   width: 25%;
-`
+`;
 
 export const TypeTd = styled.td`
   padding-top: 16px;
