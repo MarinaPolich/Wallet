@@ -18,14 +18,8 @@ import {
   Bar,
 } from './RegistrationForm.styled.js';
 import { logo, email, lock, account, eyeClose, eye } from 'assets/media/icons';
-export const RegistrationForm = () => {
-  const [passwordShown, setPasswordShown] = useState(false);
-  const dispatch = useDispatch();
-  const handelSubmit = ({ email, password, username }, { resetForm }) => {
-    dispatch(registration({ email, password, username }));
-    //resetForm();
-  };
-  const RegistrationSchema = Yup.object().shape({
+
+ const RegistrationSchema = Yup.object().shape({
     email: Yup.string().email().required('Enter email'),
     password: Yup.string()
       .min(6, 'Password is too short, at least 6!')
@@ -42,6 +36,15 @@ export const RegistrationForm = () => {
         'Your passwords are different, try harder!'
       ),
   });
+
+export const RegistrationForm = () => {
+  const [passwordShown, setPasswordShown] = useState(false);
+  const dispatch = useDispatch();
+  const handelSubmit = ({ email, password, username }, { resetForm }) => {
+    dispatch(registration({ email, password, username }));
+    //resetForm();
+  };
+ 
   return (
     <Formik
       initialValues={{ email: '', password: '', confirm: '', username: '' }}
@@ -110,13 +113,14 @@ export const RegistrationForm = () => {
                 onChange={handleChange}
                 placeholder="Confirm password"
               />
-              {console.log(
-                'values',
-                values.confirm.length,
-                values.password.length
-              )}
-
-              {values.password.length !== 0 && (
+              <Svg
+                src={passwordShown ? eye : eyeClose}
+                width={30}
+                height={28}
+                title="Eye"
+                onClick={() => setPasswordShown(!passwordShown)}
+              />
+{values.password.length !== 0 && (
                 <Bar
                   width={
                     values.confirm.length / values.password.length > 1
@@ -129,23 +133,14 @@ export const RegistrationForm = () => {
                   }
                 ></Bar>
               )}
-
-              <Svg
-                src={passwordShown ? eye : eyeClose}
-                width={30}
-                height={28}
-                title="Eye"
-                onClick={() => setPasswordShown(!passwordShown)}
-              />
-
-              <PasswordStrengthBar
+              {/*<PasswordStrengthBar
                 password={values.confirm}
                 barColors={['#e0e0e0', 'red', 'orange', '#4a56e2', '#24cca7']}
                 shortScoreWord={''}
                 scoreWords={[]}
                 minLength={6}
                 maxLength={12}
-              />
+                />*/}
 
               {errors.confirm && touched.confirm ? (
                 <TextError>{errors.confirm}</TextError>

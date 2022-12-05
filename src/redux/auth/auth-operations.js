@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 axios.defaults.baseURL = 'https://wallet.goit.ua/';
 const setAuthHeader = token => {
@@ -18,6 +19,12 @@ export const registration = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
+      if (error.response.status === 400) {
+        return Notify.failure('Validation error');
+      }
+      if (error.response.status === 409) {
+        return Notify.failure('User with such email already exists');
+      }
       return rejectWithValue(error.message);
     }
   }
@@ -30,6 +37,15 @@ export const logIn = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
+      if (error.response.status === 400) {
+        return Notify.failure('Validation error');
+      }
+      if (error.response.status === 403) {
+        return Notify.failure('Provided password is incorrect');
+      }
+      if (error.response.status === 404) {
+        return Notify.failure('User with such email not found');
+      }
       return rejectWithValue(error.message);
     }
   }
@@ -41,8 +57,7 @@ export const logOut = createAsyncThunk(
       await axios.delete('/api/auth/sign-out');
       clearAuthHeader();
     } catch (error) {
-     return  rejectWithValue(error.message);
-     
+      return rejectWithValue(error.message);
     }
   }
 );

@@ -132,7 +132,8 @@ export const StyledLink = styled(Link)`
 `;
 //selutin
 export const Bar = styled.div`
-  height: 3px;
+margin-top:5px;
   width: ${props => props.width}%;
-  background-color: ${props => props.color ? '#0f0' : '#f00'};
+  border: ${props => props.color ? ' 4px solid#24cca7' : '4px solid #f00'};
+  border-radius: 4px;
 `;
