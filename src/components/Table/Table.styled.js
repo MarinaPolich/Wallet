@@ -16,6 +16,25 @@ export const Section = styled.section`
   }
  
 `;
+export const ActionContainer = styled.div`
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  transition: all 250ms linear;
+`;
+export const StyledInput = styled.input`
+  height: 100%;
+  width: 100%;
+  border: 0;
+  padding-left: 2px;
+  text-align: left;
+  border-radius: 5px;
+  &:active,
+  &:focus {
+    outline: 1px solid var(--bg-color);
+    background-color: var(--bg-color);
+  }
+`;
 
 export const StyledTable = styled.table`
   width: 704px; // 704
@@ -40,19 +59,47 @@ export const THead = styled.thead`
 `;
 
 export const StyledTh = styled.th`
+  position: relative;
   padding-top: 16px;
   padding-bottom: 16px;
-
   text-align: center;
-  width: 14%
+  width: 14%;
+
+  &:first-child {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+  }
+  &:nth-child(3):hover,
+  &:nth-child(3):focus,
+  &:nth-child(4):hover,
+  &:nth-child(4):focus {
+    background-color: var(--bg-color);
+    ${ActionContainer} {
+      opacity: 1;
+    }
+    ${StyledInput} {
+      background-color: var(--bg-color);
+    }
+  }
+
 `;
 export const CommentTh = styled(StyledTh)`
   width: 25%
-`
+`;
+
+
+export const Btn = styled.button`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 0;
+  background-color: var(--bg-color);
+`;
 
 export const ThRight = styled(StyledTh)`
   text-align: center;
   width: auto;
+
 `;
 
 export const Tbody = styled.tbody`
@@ -164,13 +211,6 @@ export const ListText = styled.span`
 export const ListSum = styled.span`
   color: ${props =>
     props.income ? 'var(--btn-bg-color)' : 'var(--error-color)'};
-`;
-
-export const ActionContainer = styled.div`
-  opacity: 0;
-  position: absolute;
-  right: 0;
-  transition: all 250ms linear;
 `;
 
 export const StyledDelButton = styled.button`

@@ -14,7 +14,8 @@ import {
   Button,
   StyledLink,
   LogoSvg,
-  TextError
+  TextError,
+  Bar,
 } from './RegistrationForm.styled.js';
 import { logo, email, lock, account, eyeClose, eye } from 'assets/media/icons';
 export const RegistrationForm = () => {
@@ -22,7 +23,7 @@ export const RegistrationForm = () => {
   const dispatch = useDispatch();
   const handelSubmit = ({ email, password, username }, { resetForm }) => {
     dispatch(registration({ email, password, username }));
-    resetForm();
+    //resetForm();
   };
   const RegistrationSchema = Yup.object().shape({
     email: Yup.string().email().required('Enter email'),
@@ -98,14 +99,28 @@ export const RegistrationForm = () => {
                 onChange={handleChange}
                 placeholder="Confirm password"
               />
-               <Svg  src={passwordShown ? eye : eyeClose} width={30} height={28} title="Eye" onClick={() => setPasswordShown(!passwordShown)}/>
-              <PasswordStrengthBar password={values.confirm} barColors={['#e0e0e0', 'red', 'orange', '#4a56e2', '#24cca7']} shortScoreWord={''} scoreWords={[]} minLength={6}  maxLength={12}/>
+
+
+              {/* <Bar
+                width={(confirm.length / password.length) * 100}
+                color={password.slice(0, confirm.length) === confirm.length}
+              ></Bar> */}
+              <Svg  src={passwordShown ? eye : eyeClose} width={30} height={28} title="Eye" onClick={() => setPasswordShown(!passwordShown)}/>            
+
+             
+              <PasswordStrengthBar
+                password={values.confirm}
+                barColors={['#e0e0e0', 'red', 'orange', '#4a56e2', '#24cca7']}
+                shortScoreWord={''}
+                scoreWords={[]}
+                minLength={6}
+                maxLength={12}
+              />
+
               {errors.confirm && touched.confirm ? (
                 <TextError>{errors.confirm}</TextError>
               ) : null}
             </Label>
-           
-            
             <Label>
               <Svg src={account} width={30} height={28} title="Account" />
               <Input

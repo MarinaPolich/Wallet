@@ -20,7 +20,7 @@ export const Box = styled.div`
 
   @media ${device.tablet} {
     width: 336px;
-    height: 200px;
+    height: 210px;
   }
 
   @media ${device.desktop} {
@@ -102,13 +102,22 @@ export const Tr = styled.tr`
   border: 0;
 `;
 export const Btn = styled.button`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(20px, -5px);
   background-color: var(--disable-bg-color);
   border: 0;
   border-radius: 30px;
   padding: 5px 10px;
   color: #fff;
-  /* border-top-right-radius: 3px; */
   cursor: pointer;
+  @media ${device.tablet} {
+    transform: translate(20px, -10px);
+  }
+  @media ${device.desktop} {
+    transform: translate(20px, -20px);
+  }
 `;
 
 export const TableIcon = styled(SVG)`

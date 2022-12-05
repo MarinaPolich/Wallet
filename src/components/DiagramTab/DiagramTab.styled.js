@@ -9,6 +9,7 @@ export const Box = styled.div`
 
 export const Statistic = styled.div`
   display: flex;
+  align-items: flex-start;
   @media screen and (max-width: 768.99px) {
     flex-direction: column;
     align-items: center;
@@ -46,11 +47,11 @@ export const Balance = styled.div`
   font-weight: 700;
 
   @media screen and (min-width: 768.99px) {
-    top: 25%;
-    transform: translate(-50%, 75%);
+    top: 50%;
+    transform: translate(-50%, 0);
   }
   @media screen and (min-width: 1279.99px) {
-    top: 40%;
+    top: 50%;
     transform: translate(-50%, 0);
   }
 `;
