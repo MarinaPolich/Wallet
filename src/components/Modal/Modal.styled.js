@@ -13,6 +13,10 @@ export const ModalBox = styled.div`
   text-align: center;
   justify-content: center;
   animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  @media ${device.mobile} {
+    background-color: var(--white);
+    top: 8%;
+  }
 `;
 
 export const ModalContent = styled.div`
