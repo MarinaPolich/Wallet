@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { device } from 'stylesheet/breakpoints';
 
-export const Box = styled.div`
+export const Box = styled.section`
     height: 100vh;
   @media ${device.tablet} {
     padding: 60px 0 196px 0;
