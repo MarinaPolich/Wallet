@@ -109,11 +109,23 @@ export const RegistrationForm = () => {
                 onChange={handleChange}
                 placeholder="Confirm password"
               />
+              {console.log(
+                'values',
+                values.confirm.length,
+                values.password.length
+              )}
 
-              {/* <Bar
-                width={(confirm.length / password.length) * 100}
-                color={password.slice(0, confirm.length) === confirm.length}
-              ></Bar> */}
+          {values.password.length!==0  &&  <Bar
+                width={
+                  (values.confirm.length / (values.password.length)) > 1 ? 100 : (values.confirm.length / (values.password.length) *
+                  100)
+                }
+                color={
+                  values.password.slice(0, values.confirm.length) ===
+                  values.confirm
+                }
+              ></Bar>}
+
               <Svg
                 src={passwordShown ? eye : eyeClose}
                 width={30}
