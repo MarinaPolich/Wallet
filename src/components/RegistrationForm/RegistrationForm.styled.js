@@ -134,5 +134,5 @@ export const StyledLink = styled(Link)`
 export const Bar = styled.div`
   height: 3px;
   width: ${props => props.width}%;
-  background-color: ${props => (props.color ? '#0f0' : '#f00')};
+  background-color: ${props => props.color ? '#0f0' : '#f00'};
 `;

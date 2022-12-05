@@ -78,14 +78,25 @@ export const RegistrationForm = () => {
             <Label>
               <Svg src={lock} width={30} height={28} title="Lock" />
               <Input
-                type={passwordShown ? "text" : "password"}
+                type={passwordShown ? 'text' : 'password'}
                 name="password"
                 value={values.password}
                 onChange={handleChange}
                 placeholder="Password"
               />
-               <Svg  src={passwordShown ? eye : eyeClose} width={30} height={28} title="Eye" onClick={() => setPasswordShown(!passwordShown)}/>
-               <PasswordStrengthBar password={values.password} barColors={['#e0e0e0', 'red', 'orange', '#4a56e2', '#24cca7']}  minLength={6}  maxLength={12}/>
+              <Svg
+                src={passwordShown ? eye : eyeClose}
+                width={30}
+                height={28}
+                title="Eye"
+                onClick={() => setPasswordShown(!passwordShown)}
+              />
+              <PasswordStrengthBar
+                password={values.password}
+                barColors={['#e0e0e0', 'red', 'orange', '#4a56e2', '#24cca7']}
+                minLength={6}
+                maxLength={12}
+              />
               {errors.password && touched.password ? (
                 <TextError>{errors.password}</TextError>
               ) : null}
@@ -93,21 +104,37 @@ export const RegistrationForm = () => {
             <Label>
               <Svg src={lock} width={30} height={28} title="Lock" />
               <Input
-                type={passwordShown ? "text" : "password"}
+                type={passwordShown ? 'text' : 'password'}
                 name="confirm"
                 value={values.confirm}
                 onChange={handleChange}
                 placeholder="Confirm password"
               />
+              {console.log(
+                'values',
+                values.confirm.length,
+                values.password.length
+              )}
 
+          {values.password.length!==0  &&  <Bar
+                width={
+                  (values.confirm.length / (values.password.length)) > 1 ? 100 : (values.confirm.length / (values.password.length) *
+                  100)
+                }
+                color={
+                  values.password.slice(0, values.confirm.length) ===
+                  values.confirm
+                }
+              ></Bar>}
 
-              {/* <Bar
-                width={(confirm.length / password.length) * 100}
-                color={password.slice(0, confirm.length) === confirm.length}
-              ></Bar> */}
-              <Svg  src={passwordShown ? eye : eyeClose} width={30} height={28} title="Eye" onClick={() => setPasswordShown(!passwordShown)}/>            
+              <Svg
+                src={passwordShown ? eye : eyeClose}
+                width={30}
+                height={28}
+                title="Eye"
+                onClick={() => setPasswordShown(!passwordShown)}
+              />
 
-             
               <PasswordStrengthBar
                 password={values.confirm}
                 barColors={['#e0e0e0', 'red', 'orange', '#4a56e2', '#24cca7']}
