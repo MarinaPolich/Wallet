@@ -57,7 +57,6 @@ export default function Table() {
   const categories = useSelector(categoriesSelector);
   const searchCategoryName = id => {
     const category = categories.find(item => id === item.id);
-    // console.log('category', category);
     return category?.name;
   };
   const transactions = useSelector(transactionsSelector);

@@ -16,7 +16,7 @@ import {
 } from './DiagramTabMoreInfor.styled';
 
 export function DiagramTabMoreInfor({ showinfo, setShowinfo }) {
-  console.log('showinfo ======', showinfo);
+  // console.log('showinfo ======', showinfo);
 
   return createPortal(
     <Box>

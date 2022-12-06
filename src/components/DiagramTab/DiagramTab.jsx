@@ -56,9 +56,6 @@ const DiagramTab = () => {
   const yearNode = useRef();
   const monthNode = useRef();
   const transactions = useSelector(state => state.finance.transactions);
-  console.log(categories);
-  console.log(summary);
-  console.log(transactions);
   const years = new Set(transactions.map(el => el.transactionDate.slice(0, 4)));
   const monthes = new Set(
     transactions.map(el => el.transactionDate.slice(5, 7))
